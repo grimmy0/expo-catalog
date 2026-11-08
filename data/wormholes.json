@@ -1,0 +1,1022 @@
+[
+ {
+  "code": "Z971",
+  "type_id": 30579,
+  "target": "C1",
+  "target_class": 1,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 100000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "R943",
+  "type_id": 30583,
+  "target": "C2",
+  "target_class": 2,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "X702",
+  "type_id": 30584,
+  "target": "C3",
+  "target_class": 3,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "O128",
+  "type_id": 30642,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "N432",
+  "type_id": 30643,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "M555",
+  "type_id": 30644,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "B041",
+  "type_id": 30645,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 48.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "U319",
+  "type_id": 30646,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 48.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "B449",
+  "type_id": 30647,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "N944",
+  "type_id": 30648,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "S199",
+  "type_id": 30649,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "A641",
+  "type_id": 30657,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "R051",
+  "type_id": 30658,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "V283",
+  "type_id": 30659,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "H121",
+  "type_id": 30660,
+  "target": "C1",
+  "target_class": 1,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 500000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "C125",
+  "type_id": 30661,
+  "target": "C2",
+  "target_class": 2,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "O883",
+  "type_id": 30662,
+  "target": "C3",
+  "target_class": 3,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "M609",
+  "type_id": 30663,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "L614",
+  "type_id": 30664,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "S804",
+  "type_id": 30665,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "N110",
+  "type_id": 30666,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "J244",
+  "type_id": 30667,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "Z060",
+  "type_id": 30668,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "Z647",
+  "type_id": 30671,
+  "target": "C1",
+  "target_class": 1,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 500000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "D382",
+  "type_id": 30672,
+  "target": "C2",
+  "target_class": 2,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "O477",
+  "type_id": 30673,
+  "target": "C3",
+  "target_class": 3,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "Y683",
+  "type_id": 30674,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "N062",
+  "type_id": 30675,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "R474",
+  "type_id": 30676,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "B274",
+  "type_id": 30677,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "A239",
+  "type_id": 30678,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "E545",
+  "type_id": 30679,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "V301",
+  "type_id": 30680,
+  "target": "C1",
+  "target_class": 1,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 500000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "I182",
+  "type_id": 30681,
+  "target": "C2",
+  "target_class": 2,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "N968",
+  "type_id": 30682,
+  "target": "C3",
+  "target_class": 3,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "T405",
+  "type_id": 30683,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "N770",
+  "type_id": 30684,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "A982",
+  "type_id": 30685,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "S047",
+  "type_id": 30686,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "U210",
+  "type_id": 30687,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "K346",
+  "type_id": 30688,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "P060",
+  "type_id": 30689,
+  "target": "C1",
+  "target_class": 1,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 500000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "N766",
+  "type_id": 30690,
+  "target": "C2",
+  "target_class": 2,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "C247",
+  "type_id": 30691,
+  "target": "C3",
+  "target_class": 3,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "X877",
+  "type_id": 30692,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "H900",
+  "type_id": 30693,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "U574",
+  "type_id": 30694,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "D845",
+  "type_id": 30695,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 5000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "N290",
+  "type_id": 30696,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "K329",
+  "type_id": 30697,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "Y790",
+  "type_id": 30698,
+  "target": "C1",
+  "target_class": 1,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 500000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "D364",
+  "type_id": 30699,
+  "target": "C2",
+  "target_class": 2,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "M267",
+  "type_id": 30700,
+  "target": "C3",
+  "target_class": 3,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "E175",
+  "type_id": 30701,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "H296",
+  "type_id": 30702,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "V753",
+  "type_id": 30703,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "D792",
+  "type_id": 30704,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "C140",
+  "type_id": 30705,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "Z142",
+  "type_id": 30706,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "Q317",
+  "type_id": 30707,
+  "target": "C1",
+  "target_class": 1,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 500000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "G024",
+  "type_id": 30708,
+  "target": "C2",
+  "target_class": 2,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "L477",
+  "type_id": 30709,
+  "target": "C3",
+  "target_class": 3,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "Z457",
+  "type_id": 30710,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "V911",
+  "type_id": 30711,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "W237",
+  "type_id": 30712,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "B520",
+  "type_id": 30713,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 48.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "C391",
+  "type_id": 30714,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 48.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "C248",
+  "type_id": 30715,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3300000000.0,
+  "max_jump_mass_kg": 2000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "K162",
+  "type_id": 30831,
+  "target": "Exit side of any wormhole",
+  "target_class": null,
+  "lifetime_h": null,
+  "max_mass_kg": null,
+  "max_jump_mass_kg": null,
+  "regen_kg": null
+ },
+ {
+  "code": "E004",
+  "type_id": 34134,
+  "target": "C1",
+  "target_class": 1,
+  "lifetime_h": 4.5,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 5000000.0,
+  "regen_kg": 3000000000.0
+ },
+ {
+  "code": "L005",
+  "type_id": 34135,
+  "target": "C2",
+  "target_class": 2,
+  "lifetime_h": 4.5,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 5000000.0,
+  "regen_kg": 3000000000.0
+ },
+ {
+  "code": "Z006",
+  "type_id": 34136,
+  "target": "C3",
+  "target_class": 3,
+  "lifetime_h": 4.5,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 5000000.0,
+  "regen_kg": 3000000000.0
+ },
+ {
+  "code": "M001",
+  "type_id": 34137,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 4.5,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 5000000.0,
+  "regen_kg": 3000000000.0
+ },
+ {
+  "code": "C008",
+  "type_id": 34138,
+  "target": "C5",
+  "target_class": 5,
+  "lifetime_h": 4.5,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 5000000.0,
+  "regen_kg": 3000000000.0
+ },
+ {
+  "code": "G008",
+  "type_id": 34139,
+  "target": "C6",
+  "target_class": 6,
+  "lifetime_h": 4.5,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 5000000.0,
+  "regen_kg": 3000000000.0
+ },
+ {
+  "code": "Q003",
+  "type_id": 34140,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 4.5,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 5000000.0,
+  "regen_kg": 3000000000.0
+ },
+ {
+  "code": "T458",
+  "type_id": 34338,
+  "target": "Thera",
+  "target_class": 12,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 500000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "M164",
+  "type_id": 34366,
+  "target": "Thera",
+  "target_class": 12,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "L031",
+  "type_id": 34367,
+  "target": "Thera",
+  "target_class": 12,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "Q063",
+  "type_id": 34368,
+  "target": "High-sec",
+  "target_class": 7,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 500000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "V898",
+  "type_id": 34369,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 2000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "E587",
+  "type_id": 34370,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 1000000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "F353",
+  "type_id": 34371,
+  "target": "Thera",
+  "target_class": 12,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 100000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "F135",
+  "type_id": 34372,
+  "target": "Thera",
+  "target_class": 12,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "A009",
+  "type_id": 34439,
+  "target": "C13 (small-ship shattered)",
+  "target_class": 13,
+  "lifetime_h": 4.5,
+  "max_mass_kg": 3000000000.0,
+  "max_jump_mass_kg": 5000000.0,
+  "regen_kg": 3000000000.0
+ },
+ {
+  "code": "S877",
+  "type_id": 35650,
+  "target": "Sentinel (Drifter)",
+  "target_class": 14,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "B735",
+  "type_id": 35651,
+  "target": "Barbican (Drifter)",
+  "target_class": 15,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "V928",
+  "type_id": 35652,
+  "target": "Vidette (Drifter)",
+  "target_class": 16,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "C414",
+  "type_id": 35653,
+  "target": "Conflux (Drifter)",
+  "target_class": 17,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "R259",
+  "type_id": 35654,
+  "target": "Redoubt (Drifter)",
+  "target_class": 18,
+  "lifetime_h": 16.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "C729",
+  "type_id": 56026,
+  "target": "K-space exit (Pochven C729)",
+  "target_class": -1,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 410000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "X450",
+  "type_id": 56540,
+  "target": "Null-sec",
+  "target_class": 9,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "R081",
+  "type_id": 56541,
+  "target": "C4",
+  "target_class": 4,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "F216",
+  "type_id": 56542,
+  "target": "Pochven",
+  "target_class": 25,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "U372",
+  "type_id": 56544,
+  "target": "Pochven",
+  "target_class": 25,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "J377",
+  "type_id": 73749,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "J492",
+  "type_id": 87827,
+  "target": "Low-sec",
+  "target_class": 8,
+  "lifetime_h": 24.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "I078",
+  "type_id": 92287,
+  "target": "Pochven",
+  "target_class": 25,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "L687",
+  "type_id": 92288,
+  "target": "Pochven",
+  "target_class": 25,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "O546",
+  "type_id": 92289,
+  "target": "Pochven",
+  "target_class": 25,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 750000000.0,
+  "max_jump_mass_kg": 62000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "R327",
+  "type_id": 97881,
+  "target": "Pochven",
+  "target_class": 25,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ },
+ {
+  "code": "O753",
+  "type_id": 97882,
+  "target": "Pochven",
+  "target_class": 25,
+  "lifetime_h": 12.0,
+  "max_mass_kg": 1000000000.0,
+  "max_jump_mass_kg": 375000000.0,
+  "regen_kg": 0.0
+ }
+]

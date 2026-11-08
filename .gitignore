@@ -12,3 +12,6 @@ build/
 # Scratch / downloaded raw data
 .cache/
 *.log
+
+# Raw wiki cache (re-downloadable with `uv run python -m scraper.fetch`)
+data/raw/
