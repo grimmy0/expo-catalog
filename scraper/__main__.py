@@ -2,7 +2,7 @@
 
     uv run python -m scraper fetch            # wiki -> data/raw (git-ignored) + data/wiki_state.json
     uv run python -m scraper parse            # data/raw -> data/parsed_sites.json
-    uv run python -m scraper build [--out P]  # data/parsed_sites.json -> data/catalog.sqlite
+    uv run python -m scraper build [--out P]  # data/parsed_sites.json -> src/expo_catalog/data/catalog.sqlite
     uv run python -m scraper check [--json P] # compare the live wiki with data/wiki_state.json
     uv run python -m scraper refresh          # fetch -> parse -> build
 
@@ -14,6 +14,8 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
+
+OUT_HELP = "output SQLite path (default src/expo_catalog/data/catalog.sqlite, the catalog bundled with the package)"
 
 
 def cmd_fetch(_args: argparse.Namespace) -> int:
@@ -59,15 +61,15 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("fetch", help="download the wiki pages into data/raw").set_defaults(func=cmd_fetch)
     sub.add_parser("parse", help="parse data/raw into data/parsed_sites.json").set_defaults(func=cmd_parse)
-    p_build = sub.add_parser("build", help="build data/catalog.sqlite")
-    p_build.add_argument("--out", type=Path, default=None, help="output SQLite path (default data/catalog.sqlite)")
+    p_build = sub.add_parser("build", help="build src/expo_catalog/data/catalog.sqlite (the bundled catalog)")
+    p_build.add_argument("--out", type=Path, default=None, help=OUT_HELP)
     p_build.set_defaults(func=cmd_build)
     p_check = sub.add_parser("check", help="report wiki changes since the last fetch (exit 1 if any)")
     p_check.add_argument("--json", type=Path, default=None, help="also write the report as JSON")
     p_check.add_argument("--write-state", action="store_true", help="overwrite data/wiki_state.json afterwards")
     p_check.set_defaults(func=cmd_check)
     p_refresh = sub.add_parser("refresh", help="fetch, parse and build in one go")
-    p_refresh.add_argument("--out", type=Path, default=None, help="output SQLite path (default data/catalog.sqlite)")
+    p_refresh.add_argument("--out", type=Path, default=None, help=OUT_HELP)
     p_refresh.set_defaults(func=cmd_refresh)
     return parser
 

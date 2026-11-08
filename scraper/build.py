@@ -1,4 +1,4 @@
-"""Build ``data/catalog.sqlite`` from ``data/parsed_sites.json`` plus curated data.
+"""Build ``src/expo_catalog/data/catalog.sqlite`` from ``data/parsed_sites.json`` plus curated data.
 
     uv run python -m scraper.build [--out PATH]
 
@@ -298,7 +298,12 @@ def report(out: Path) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--out", type=Path, default=None, help="output SQLite path (default data/catalog.sqlite)")
+    parser.add_argument(
+        "--out",
+        type=Path,
+        default=None,
+        help="output SQLite path (default src/expo_catalog/data/catalog.sqlite, the catalog bundled with the package)",
+    )
     args = parser.parse_args(argv)
     out = build(args.out)
     report(out)

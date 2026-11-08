@@ -488,9 +488,9 @@ def _search_key(site: Site) -> str:
 def run(db_path: str | PathLike[str] | None = None) -> None:
     """Load the database and run the TUI.
 
-    ``db_path`` falls back to ``$EXPO_CATALOG_DB`` and then the bundled
-    ``data/catalog.sqlite``. Exits with status 1 and a hint on stderr when the
-    database is missing.
+    ``db_path`` falls back to ``$EXPO_CATALOG_DB`` and then the catalog bundled
+    with the package (:data:`expo_catalog.db.PACKAGE_DB_PATH`). Exits with
+    status 1 and a hint on stderr when the database is missing.
     """
     path = db.resolve_db_path(db_path)
     if not path.is_file():
@@ -526,22 +526,27 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--refresh",
         action="store_true",
-        help="rebuild the catalog first: runs `python -m scraper refresh` (fetch → parse → build) in the checkout",
+        help=(
+            "rebuild the catalog first: runs `python -m scraper refresh` (fetch → parse → build) "
+            "in the source checkout; needs an editable install or `uv run`, exits 2 otherwise"
+        ),
     )
     parser.add_argument("--version", action="version", version=f"%(prog)s {_package_version()}")
     return parser
 
 
 def refresh_catalog(repo_root: str | PathLike[str] | None = None) -> None:
-    """Run the scraper pipeline in ``repo_root`` (default: this checkout).
+    """Run the scraper pipeline in ``repo_root`` (default: :data:`expo_catalog.db.REPO_ROOT`).
 
-    Exits 2 when there is no ``scraper/`` package to run and 1 when the
-    pipeline itself fails.
+    Only works from a source checkout (``uv run`` or an editable install): the
+    pipeline writes the bundled database in place. Exits 2 when there is no
+    ``scraper/`` package to run and 1 when the pipeline itself fails.
     """
     root = Path(repo_root) if repo_root is not None else db.REPO_ROOT
     if not (root / "scraper" / "__init__.py").is_file():
         print(
-            f"Cannot refresh: no scraper/ package in {root} (is this an installed copy rather than a checkout?)",
+            f"Cannot refresh: {root} is not a source checkout (no scraper/ package). "
+            "Installed copies pick up new data when reinstalled: uv tool upgrade expo-catalog",
             file=sys.stderr,
         )
         raise SystemExit(2)

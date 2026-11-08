@@ -20,6 +20,7 @@ __all__ = [
     "DEFAULT_DB_PATH",
     "ENEMY_COLUMNS",
     "ENV_VAR",
+    "PACKAGE_DB_PATH",
     "REPO_ROOT",
     "SCAN_GROUPS",
     "SCHEMA",
@@ -41,13 +42,25 @@ __all__ = [
 ENV_VAR = "EXPO_CATALOG_DB"
 """Environment variable that overrides the default database location."""
 
-_PROJECT_DB_PATH = Path(__file__).resolve().parents[2] / "data" / "catalog.sqlite"
+PACKAGE_DB_PATH: Path = Path(__file__).resolve().parent / "data" / "catalog.sqlite"
+"""The catalog bundled with the package (``expo_catalog/data/catalog.sqlite``).
 
-REPO_ROOT: Path = _PROJECT_DB_PATH.parents[1]
-"""Checkout root (the directory holding ``scraper/`` and ``data/``)."""
+The file ships inside the package directory, so the path is valid for both
+editable installs (where it is ``src/expo_catalog/data/catalog.sqlite`` in the
+checkout) and regular installs (site-packages).
+"""
 
-DEFAULT_DB_PATH: Path = Path(os.environ.get(ENV_VAR) or _PROJECT_DB_PATH)
-"""``<project>/data/catalog.sqlite`` unless ``EXPO_CATALOG_DB`` is set."""
+REPO_ROOT: Path = Path(__file__).resolve().parents[2]
+"""Checkout root (the directory holding ``scraper/``, ``data/`` and ``src/``).
+
+Only meaningful when running from a source checkout (``uv run`` or an editable
+install); ``--refresh`` uses it to find the ``scraper/`` package. For a regular
+install it points at ``lib/pythonX.Y`` above site-packages, where there is no
+``scraper/`` package, so ``--refresh`` exits 2.
+"""
+
+DEFAULT_DB_PATH: Path = Path(os.environ.get(ENV_VAR) or PACKAGE_DB_PATH)
+""":data:`PACKAGE_DB_PATH` unless ``EXPO_CATALOG_DB`` is set."""
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS sites (
@@ -183,11 +196,11 @@ ENEMY_COLUMNS: tuple[str, ...] = (
 
 
 def resolve_db_path(path: str | os.PathLike[str] | None = None) -> Path:
-    """Return the DB path to use: explicit ``path`` > ``$EXPO_CATALOG_DB`` > default."""
+    """Return the DB path to use: explicit ``path`` > ``$EXPO_CATALOG_DB`` > :data:`PACKAGE_DB_PATH`."""
     if path is not None:
         return Path(path)
     env = os.environ.get(ENV_VAR)
-    return Path(env) if env else _PROJECT_DB_PATH
+    return Path(env) if env else PACKAGE_DB_PATH
 
 
 def connect(

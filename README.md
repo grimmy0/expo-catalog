@@ -14,7 +14,24 @@ smallest ship that can reasonably run it.
 - Python 3.15
 - [uv](https://docs.astral.sh/uv/)
 
+## Install
+
+The catalog database is bundled with the package, so an installed copy works
+without the checkout:
+
+```sh
+uv tool install git+ssh://git@github.com/grimmy0/expo-catalog.git   # from GitHub
+uv tool install -e .      # from a checkout; editable, so `git pull` and --refresh update the data in place
+expo-catalog              # now on PATH (~/.local/bin)
+uv tool upgrade expo-catalog   # pick up a refreshed catalog
+```
+
+If `~/.local/bin` is not on your PATH, run `uv tool update-shell` once and open
+a new shell.
+
 ## Run
+
+From a checkout, without installing:
 
 ```sh
 uv run expo-catalog                 # open the catalog
@@ -23,9 +40,13 @@ uv run expo-catalog --refresh       # re-fetch the wiki and rebuild the database
 uv run expo-catalog --version       # print the version and exit
 ```
 
-The database ships in `data/catalog.sqlite`. If the database is missing the
-command prints a hint and exits with status 1. `--refresh` runs
-`python -m scraper refresh` from the repository root (network access needed).
+The database ships inside the package as `src/expo_catalog/data/catalog.sqlite`
+(`expo_catalog/data/catalog.sqlite` once installed). If the database is missing
+the command prints a hint and exits with status 1. `--refresh` runs
+`python -m scraper refresh` from the repository root (network access needed), so
+it needs a source checkout: an editable install (`uv tool install -e .`) or
+`uv run`. From a regular install it exits with status 2; reinstall or
+`uv tool upgrade expo-catalog` to pick up a refreshed catalog instead.
 
 ### Keys
 
@@ -80,7 +101,7 @@ status, escalation, loot note, description, source URL and the enemy waves.
 ```sh
 uv run python -m scraper fetch   # refresh data/raw from the EVE University wiki API (git-ignored)
 uv run python -m scraper parse   # data/raw -> data/parsed_sites.json
-uv run python -m scraper build   # data/parsed_sites.json -> data/catalog.sqlite  (--out PATH)
+uv run python -m scraper build   # data/parsed_sites.json -> src/expo_catalog/data/catalog.sqlite  (--out PATH)
 uv run python -m scraper refresh # all three in one go
 ```
 
@@ -150,18 +171,19 @@ expo-catalog/
 │   ├── __init__.py   # `expo-catalog` entry point
 │   ├── app.py        # Textual app (table, filter, detail panel)
 │   ├── db.py         # SQLite schema + read/insert helpers
-│   └── fuzzy.py      # fzf-style matcher
+│   ├── fuzzy.py      # fzf-style matcher
+│   └── data/
+│       └── catalog.sqlite  # the bundled catalog (ships in the wheel)
 ├── scraper/
 │   ├── __main__.py   # `python -m scraper fetch|parse|build|check|refresh`
 │   ├── fetch.py      # download wiki pages into data/raw
 │   ├── parse.py      # wiki text -> data/parsed_sites.json
-│   ├── build.py      # parsed sites -> data/catalog.sqlite
+│   ├── build.py      # parsed sites -> src/expo_catalog/data/catalog.sqlite
 │   ├── check.py      # wiki change detection against data/wiki_state.json
 │   ├── curated.py    # hand-maintained site lists
 │   ├── rules.py      # classification / danger rules
 │   └── wiki.py       # MediaWiki API client
-├── data/
-│   ├── catalog.sqlite
+├── data/             # pipeline inputs and intermediates (not shipped)
 │   ├── parsed_sites.json
 │   ├── wiki_state.json  # revision snapshot used by `scraper check`
 │   ├── wormholes.json

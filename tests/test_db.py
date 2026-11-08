@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sqlite3
+from pathlib import Path
 
 import pytest
 
@@ -192,3 +193,28 @@ def test_resolve_db_path_env_override(monkeypatch, tmp_path):
     monkeypatch.setenv(db.ENV_VAR, str(tmp_path / "other.sqlite"))
     assert db.resolve_db_path() == tmp_path / "other.sqlite"
     assert db.resolve_db_path(tmp_path / "explicit.sqlite") == tmp_path / "explicit.sqlite"
+
+
+def test_package_db_path_is_bundled_with_the_package():
+    package_dir = Path(db.__file__).resolve().parent
+    assert db.PACKAGE_DB_PATH == package_dir / "data" / "catalog.sqlite"
+    assert db.PACKAGE_DB_PATH.parent.parent.name == "expo_catalog"
+    assert db.PACKAGE_DB_PATH.is_file(), "bundled catalog missing; run uv run python -m scraper build"
+
+
+def test_package_db_path_is_inside_src_tree():
+    # This test suite runs from the checkout, where the package lives under src/.
+    parts = db.PACKAGE_DB_PATH.parts
+    assert parts[-4:] == ("src", "expo_catalog", "data", "catalog.sqlite")
+
+
+def test_resolve_db_path_defaults_to_package_db(monkeypatch):
+    monkeypatch.delenv(db.ENV_VAR, raising=False)
+    assert db.resolve_db_path() == db.PACKAGE_DB_PATH
+    assert db.resolve_db_path(None) == db.PACKAGE_DB_PATH
+
+
+def test_repo_root_is_the_checkout_root():
+    assert db.REPO_ROOT == db.PACKAGE_DB_PATH.parents[3]
+    assert (db.REPO_ROOT / "scraper" / "__init__.py").is_file()
+    assert (db.REPO_ROOT / "src" / "expo_catalog" / "db.py").is_file()

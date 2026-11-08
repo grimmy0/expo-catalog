@@ -82,7 +82,7 @@ jobs:
           body-path: pr-body.md
           labels: data-refresh
           add-paths: |
-            data/catalog.sqlite
+            src/expo_catalog/data/catalog.sqlite
             data/parsed_sites.json
             data/wiki_state.json
 
