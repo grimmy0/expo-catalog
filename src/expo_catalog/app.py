@@ -117,11 +117,7 @@ def render_detail(site: Site, enemies: list[sqlite3.Row]) -> Text:
         out.append("\n")
 
     kind = _CATEGORY_LABELS.get(site.category, site.category.replace("_", " ").title())
-    probe = (
-        "Signature (must be probed down)"
-        if site.is_signature
-        else "Anomaly / beacon (shows on the scanner)"
-    )
+    probe = "Signature (must be probed down)" if site.is_signature else "Anomaly / beacon (shows on the scanner)"
     field("Type", kind)
     field("Scan group", site.scan_group)
     field("Probe", probe)
@@ -291,9 +287,7 @@ class CatalogApp(App[None]):
             table.add_row(*self._row_for(site), key=str(site.id))
         self._table_built = True
         table.move_cursor(row=0, column=0, scroll=True)
-        self.query_one("#status", Static).update(
-            f"{len(filtered)} / {len(self.sites)} sites"
-        )
+        self.query_one("#status", Static).update(f"{len(filtered)} / {len(self.sites)} sites")
         self._show_detail(0)
 
     def _show_detail(self, row_index: int) -> None:

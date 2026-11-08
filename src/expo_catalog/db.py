@@ -49,8 +49,8 @@ SCHEMA = """
 CREATE TABLE IF NOT EXISTS sites (
   id INTEGER PRIMARY KEY,
   name TEXT NOT NULL,            -- exact in-game site name
-  category TEXT NOT NULL,        -- combat_ded | combat_unrated | combat_anomaly | data | relic | gas | chemical_lab | ghost | sleeper_cache | wormhole_combat | wormhole_data | wormhole_relic | wormhole_gas | wormhole_ore | ore | ice | fw_complex | insurgency | homefront | pochven | drifter | event | wormhole_connection | other
-  scan_group TEXT NOT NULL,      -- probe-scanner group: Combat Site | Data Site | Relic Site | Gas Site | Wormhole | Ore Site | Combat Anomaly | Ore Anomaly | Ice Anomaly | Beacon
+  category TEXT NOT NULL,        -- one of CATEGORIES (combat_ded, data, wormhole_relic, ore, event, ...)
+  scan_group TEXT NOT NULL,      -- probe-scanner group, one of SCAN_GROUPS (Combat Site, Data Site, ... Beacon)
   is_signature INTEGER NOT NULL, -- 1 = must be probed down, 0 = anomaly/beacon
   space TEXT NOT NULL,           -- e.g. "High", "Low, Null", "C1-C4", "Pochven", "Thera", "Any"
   faction TEXT,                  -- NPC faction or NULL
@@ -226,11 +226,7 @@ def insert_site(conn: sqlite3.Connection, site: Site | Mapping[str, object]) -> 
     Accepts a :class:`Site` or a mapping with the ``sites`` column names. An
     ``id`` of ``None`` (or a missing key) lets SQLite assign one.
     """
-    data = (
-        {name: getattr(site, name) for name in SITE_COLUMNS}
-        if isinstance(site, Site)
-        else dict(site)
-    )
+    data = {name: getattr(site, name) for name in SITE_COLUMNS} if isinstance(site, Site) else dict(site)
     if data.get("id") is None:
         data.pop("id", None)
     columns = [c for c in SITE_COLUMNS if c in data]
@@ -243,9 +239,7 @@ def insert_site(conn: sqlite3.Connection, site: Site | Mapping[str, object]) -> 
     return cur.lastrowid
 
 
-def insert_enemy(
-    conn: sqlite3.Connection, site_id: int, enemy: Mapping[str, object]
-) -> int:
+def insert_enemy(conn: sqlite3.Connection, site_id: int, enemy: Mapping[str, object]) -> int:
     """Insert one ``site_enemies`` row for ``site_id`` and return its ``id``.
 
     ``enemy`` may contain any of :data:`ENEMY_COLUMNS`; ``ship_class`` is required.
@@ -254,8 +248,7 @@ def insert_enemy(
     data["site_id"] = site_id
     columns = ["site_id", *ENEMY_COLUMNS]
     cur = conn.execute(
-        f"INSERT INTO site_enemies ({', '.join(columns)}) "
-        f"VALUES ({', '.join(f':{c}' for c in columns)})",
+        f"INSERT INTO site_enemies ({', '.join(columns)}) VALUES ({', '.join(f':{c}' for c in columns)})",
         data,
     )
     assert cur.lastrowid is not None
@@ -265,18 +258,14 @@ def insert_enemy(
 def set_meta(conn: sqlite3.Connection, key: str, value: str) -> None:
     """Upsert one ``meta`` key/value pair."""
     conn.execute(
-        "INSERT INTO meta (key, value) VALUES (?, ?) "
-        "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+        "INSERT INTO meta (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value",
         (key, value),
     )
 
 
 def load_sites(conn: sqlite3.Connection) -> list[Site]:
     """All sites ordered by name (case-insensitive), then id."""
-    rows = conn.execute(
-        f"SELECT {', '.join(SITE_COLUMNS)} FROM sites "
-        "ORDER BY name COLLATE NOCASE, id"
-    ).fetchall()
+    rows = conn.execute(f"SELECT {', '.join(SITE_COLUMNS)} FROM sites ORDER BY name COLLATE NOCASE, id").fetchall()
     return [Site.from_row(row) for row in rows]
 
 
@@ -302,7 +291,4 @@ def load_all_enemies(conn: sqlite3.Connection) -> dict[int, list[sqlite3.Row]]:
 
 def load_meta(conn: sqlite3.Connection) -> dict[str, str]:
     """The ``meta`` table as a plain dict."""
-    return {
-        row["key"]: row["value"]
-        for row in conn.execute("SELECT key, value FROM meta ORDER BY key")
-    }
+    return {row["key"]: row["value"] for row in conn.execute("SELECT key, value FROM meta ORDER BY key")}

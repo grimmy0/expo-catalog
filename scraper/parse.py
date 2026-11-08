@@ -421,9 +421,7 @@ def parse_escalations(text: str) -> list[str]:
     section = re.search(r"==+\s*Escalations?\s*==+(.*?)(?:\n==|\Z)", text, re.S | re.I)
     if section:
         links += re.findall(r"\[\[([^\]|#]+)", section.group(1))
-    for m in re.finditer(
-        r"escalat\w*\s+(?:in)?to\s+(?:the\s+)?(?:\[\[[^\]]*\]\]\s*)*\[\[([^\]|#]+)", text, re.I
-    ):
+    for m in re.finditer(r"escalat\w*\s+(?:in)?to\s+(?:the\s+)?(?:\[\[[^\]]*\]\]\s*)*\[\[([^\]|#]+)", text, re.I):
         links.append(m.group(1))
     seen: list[str] = []
     for link in links:
@@ -539,9 +537,7 @@ def parse_all(wiki_dir: Path = WIKI_DIR) -> list[ParsedPage]:
 
 def main() -> None:
     pages = parse_all()
-    PARSED_FILE.write_text(
-        json.dumps([asdict(p) for p in pages], indent=1, ensure_ascii=False), encoding="utf-8"
-    )
+    PARSED_FILE.write_text(json.dumps([asdict(p) for p in pages], indent=1, ensure_ascii=False), encoding="utf-8")
     with_rows = sum(1 for p in pages if p.npc_rows)
     with_box = sum(1 for p in pages if p.infobox)
     neither = sum(1 for p in pages if not p.npc_rows and not p.infobox)

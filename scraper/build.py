@@ -65,11 +65,27 @@ def page_record(page: Mapping[str, Any]) -> dict[str, Any]:
     category, scan_group, is_sig = rules.classify(page)
     space = rules.space_of(page, category)
     faction = rules.faction_of(page)
-    combat = category in ("combat_ded", "combat_unrated", "combat_anomaly", "chemical_lab", "wormhole_combat",
-                          "wormhole_data", "wormhole_relic", "pochven", "incursion", "homefront", "drifter", "event")
+    combat = category in (
+        "combat_ded",
+        "combat_unrated",
+        "combat_anomaly",
+        "chemical_lab",
+        "wormhole_combat",
+        "wormhole_data",
+        "wormhole_relic",
+        "pochven",
+        "incursion",
+        "homefront",
+        "drifter",
+        "event",
+    )
     enemies, ewar, enemy_rows = rules.aggregate_enemies(page.get("npc_rows", []), faction, combat=combat)
-    if enemies == "Unknown":
+    if title in rules.ENEMIES_FALLBACK:
+        enemies = rules.ENEMIES_FALLBACK[title]  # hand-written prose beats a misleading table sum
+    elif enemies == "Unknown":
         enemies = rules.enemies_fallback(title, category) or enemies
+    elif enemies == "None" and category in ("data", "relic", "sleeper_cache", "ghost"):
+        enemies = rules.hazard_enemies(page) or enemies
     danger = rules.danger_of(page, category, space)
     min_ship = rules.min_ship_of(page, category, space, danger)
     status = rules.status_of(page, category)
@@ -122,9 +138,71 @@ def build_records(pages: dict[str, dict[str, Any]], events: list[dict[str, Any]]
         if title in curated.EXCLUDE_TITLES:
             continue
         rec = page_record(pages[title])
-        records.append(apply_overrides(rec, curated.OVERRIDES, ev_overrides))
+        # Event-JSON overrides first; hand-written curated overrides are authoritative.
+        records.append(apply_overrides(rec, ev_overrides, curated.OVERRIDES))
     records += curated.generated_sites(pages, events)
-    return dedupe(records)
+    records = dedupe(records)
+    reconcile(records)
+    return records
+
+
+# Categories where "min ship" is a hacking/mining hull rather than something that clears the site.
+NON_COMBAT_CATEGORIES = frozenset(
+    {
+        "data",
+        "relic",
+        "gas",
+        "ore",
+        "ice",
+        "ghost",
+        "sleeper_cache",
+        "wormhole_gas",
+        "wormhole_ore",
+        "wormhole_connection",
+    }
+)
+
+
+def consistency_issues(rec: Mapping[str, Any]) -> str | None:
+    """Return a description of a danger / min-ship mismatch, or None when consistent."""
+    if rec["category"] in NON_COMBAT_CATEGORIES or rec["scan_group"] == "Beacon" or rec["status"] == "unverified":
+        return None
+    danger = int(rec["danger"])
+    tier = rules.ship_tier(str(rec["min_ship"]))
+    if danger == 5 and tier < 6:
+        return "danger 5 needs marauder/fleet"
+    if danger == 4 and tier < 5:
+        return "danger 4 needs battleship/T3C/gang"
+    if danger == 2 and tier > 3:
+        return "danger 2 should need at most a cruiser"
+    if danger == 1 and tier > 0:
+        return "danger 1 should need a non-combat hull"
+    return None
+
+
+def reconcile(records: list[dict[str, Any]]) -> list[tuple[str, str, str]]:
+    """Fix danger/min-ship mismatches in place; returns (name, issue, action) for each change."""
+    changes: list[tuple[str, str, str]] = []
+    for rec in records:
+        issue = consistency_issues(rec)
+        if not issue:
+            continue
+        danger = int(rec["danger"])
+        tier = rules.ship_tier(str(rec["min_ship"]))
+        if danger >= 4:
+            rec["min_ship"] = rules.tier_phrase(6 if danger == 5 else 5, danger)
+            action = f"min_ship -> {rec['min_ship']}"
+        elif danger == 2:
+            rec["danger"] = 3 if tier <= 5 else 4
+            action = f"danger -> {rec['danger']}"
+        else:  # danger 1 with a combat hull: the site has rats, so it is at least Low
+            rec["danger"] = 2
+            action = "danger -> 2"
+        rec["danger_label"] = rules.DANGER_LABELS[int(rec["danger"])]
+        changes.append((rec["name"], issue, action))
+    records.sort(key=lambda r: (r["name"].lower(), r["space"].lower()))
+    reconcile.last_changes = changes  # type: ignore[attr-defined]
+    return changes
 
 
 def dedupe(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -164,7 +242,10 @@ def validate(records: list[dict[str, Any]]) -> None:
 
 
 def search_text(rec: Mapping[str, Any]) -> str:
-    parts = [rec.get(k) for k in ("name", "category", "scan_group", "space", "faction", "rating", "status", "enemies", "min_ship")]
+    parts = [
+        rec.get(k)
+        for k in ("name", "category", "scan_group", "space", "faction", "rating", "status", "enemies", "min_ship")
+    ]
     return " | ".join(str(p) for p in parts if p).lower()
 
 
@@ -208,6 +289,10 @@ def report(out: Path) -> None:
         print(f"{cat:22s} {n:5d}")
     status = Counter(dict(conn.execute("SELECT status, COUNT(*) FROM sites GROUP BY status").fetchall()))
     print("status:", dict(status))
+    changes = getattr(reconcile, "last_changes", [])
+    print(f"consistency fixes applied: {len(changes)}")
+    for name, issue, action in changes:
+        print(f"  {name}: {issue} -> {action}")
     conn.close()
 
 

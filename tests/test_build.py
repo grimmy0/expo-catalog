@@ -15,16 +15,38 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 
-def page(title: str, categories: list[str] | None = None, infobox: dict | None = None, rows: list[dict] | None = None,
-         flags: dict | None = None) -> dict:
-    return {"title": title, "categories": categories or [], "infobox": infobox or {}, "npc_rows": rows or [],
-            "flags": flags or {}, "escalations": [], "description": "", "blue_loot_isk": None}
+def page(
+    title: str,
+    categories: list[str] | None = None,
+    infobox: dict | None = None,
+    rows: list[dict] | None = None,
+    flags: dict | None = None,
+) -> dict:
+    return {
+        "title": title,
+        "categories": categories or [],
+        "infobox": infobox or {},
+        "npc_rows": rows or [],
+        "flags": flags or {},
+        "escalations": [],
+        "description": "",
+        "blue_loot_isk": None,
+    }
 
 
 def row(cls: str, lo: int | None, hi: int | None, name: str = "x", **kw) -> dict:
-    return {"section": kw.get("section"), "wave": kw.get("wave", "Wave 1"), "ship_class": cls, "count_min": lo,
-            "count_max": hi, "name": name, "tier": kw.get("tier"), "hostile": kw.get("hostile", True),
-            "ewar": kw.get("ewar", []), "trigger": None}
+    return {
+        "section": kw.get("section"),
+        "wave": kw.get("wave", "Wave 1"),
+        "ship_class": cls,
+        "count_min": lo,
+        "count_max": hi,
+        "name": name,
+        "tier": kw.get("tier"),
+        "hostile": kw.get("hostile", True),
+        "ewar": kw.get("ewar", []),
+        "trigger": None,
+    }
 
 
 # --------------------------------------------------------------------------- classify
@@ -63,8 +85,13 @@ def test_classify(title, cats, itype, expected):
 
 # --------------------------------------------------------------------------- aggregate_enemies
 def test_aggregate_sums_waves_and_pluralises():
-    rows = [row("frigate", 1, 2), row("frigate", 1, 3, wave="Wave 2"), row("cruiser", 1, 1), row("battleship", 1, 1, tier="commander"),
-            row("sentry", 10, 10)]
+    rows = [
+        row("frigate", 1, 2),
+        row("frigate", 1, 3, wave="Wave 2"),
+        row("cruiser", 1, 1),
+        row("battleship", 1, 1, tier="commander"),
+        row("sentry", 10, 10),
+    ]
     summary, ewar, enemy_rows = rules.aggregate_enemies(rows)
     assert summary == "2-5 frigates, 1 cruiser, 1 battleship, 10 sentries (incl. commander/overseer)"
     assert ewar is None
@@ -102,12 +129,121 @@ def test_aggregate_zero_dash_question_counts_are_unknown():
 
 
 def test_aggregate_collapses_alternate_pockets():
-    rows = [row("battleship", 8, 12, section="1st Pocket"),
-            row("battleship", 7, 10, section="3rd Pocket (Supply Depot)"),
-            row("battleship", 11, 11, section="3rd Pocket (Watchpost)"),
-            row("destroyer", 10, 10, section="3rd Pocket (Watchpost)")]
+    rows = [
+        row("battleship", 8, 12, section="1st Pocket"),
+        row("battleship", 7, 10, section="3rd Pocket (Supply Depot)"),
+        row("battleship", 11, 11, section="3rd Pocket (Watchpost)"),
+        row("destroyer", 10, 10, section="3rd Pocket (Watchpost)"),
+    ]
     summary, _, _ = rules.aggregate_enemies(rows)
     assert summary == "10 destroyers, 19-23 battleships (per variant)"
+
+
+def test_three_token_location_is_kept():
+    p = page(
+        "Serpentis Narcotic Warehouses",
+        ["DED Complexes"],
+        {"type": "ded", "rating": "3/10", "location": "High, Low, Null"},
+    )
+    assert rules.space_of(p, "combat_ded") == "High, Low, Null"
+    assert rules.normalise_space("Null and low") == "Low, Null"
+
+
+def test_guarded_gas_danger_and_ship_follow_the_aggregate():
+    guarded = page(
+        "Leopard Nebula",
+        ["Gas sites"],
+        {"type": "Cytoserocin", "is guarded": "Yes"},
+        rows=[row("frigate", 8, 8), row("cruiser", 2, 2), row("battleship", 19, 19), row("sentry", 8, 8)],
+    )
+    assert rules.danger_of(guarded, "gas", "Null") == 4
+    assert rules.min_ship_of(guarded, "gas", "Null", 4) == "Battleship to clear, then Venture"
+    cruisers = page(
+        "X Nebula", ["Gas sites"], {"type": "Cytoserocin", "is guarded": "Yes"}, rows=[row("cruiser", 3, 3)]
+    )
+    assert rules.danger_of(cruisers, "gas", "Null") == 3
+    assert rules.min_ship_of(cruisers, "gas", "Null", 3) == "Cruiser to clear, then Venture"
+    frigs = page("Y Nebula", ["Gas sites"], {"type": "Cytoserocin", "is guarded": "Yes"}, rows=[row("frigate", 4, 4)])
+    assert rules.danger_of(frigs, "gas", "Null") == 2
+    assert rules.min_ship_of(frigs, "gas", "Null", 2) == "Destroyer to clear, then Venture"
+    safe = page("Z Nebula", ["Gas sites"], {"type": "Mykoserocin", "is guarded": "No"})
+    assert rules.danger_of(safe, "gas", "High") == 1 and rules.min_ship_of(safe, "gas", "High", 1) == "Venture"
+
+
+def test_battleship_bump_applies_to_every_category():
+    p = page("Hidden Omber Deposit", ["Ore sites"], rows=[row("battleship", 1, 1)])
+    assert rules.danger_of(p, "ore", "Low") == 3
+
+
+@pytest.mark.parametrize(
+    "raw, expected",
+    [
+        ("Underworld Smugglers (pirate", "Underworld Smugglers"),
+        ("Guri Malakim (Guristas and Angel Cartel pirate", "Guri Malakim"),
+        ("Society of Conscious Thought, EDENCOM and", "Society of Conscious Thought"),
+        ("Rogue Drones (Type-A/B/C/D Anomalous variants", "Rogue Drones"),
+        ("SARO (CONCORD special forces", "CONCORD/SARO"),
+        ("Amarr slavers ('Irregular' NPCs", "Amarr slavers"),
+        ("Blood Raiders or Sansha (Amarr), Guristas", "Blood Raiders"),
+        ("Purity of the Throne (Amarr purists", "Purity of the Throne"),
+        ("unknown (page body is carried over)", None),
+        ("none", None),
+    ],
+)
+def test_canonical_faction(raw, expected):
+    out = rules.canonical_faction(raw)
+    assert out == expected
+    if out:
+        assert len(out) <= 40 and not out.endswith("(")
+
+
+@pytest.mark.parametrize(
+    "raw, danger, expected",
+    [
+        ("Clearly requires a Capital ship or at least a powerful", 5, "Fleet / capital ships"),
+        ("Can be completed in a destroyer tanked against", 3, "Destroyer"),
+        ("Battleship or Heavy Assault Cruiser (page's general advice", 4, "Battleship / HAC"),
+        ("Doable with a well fit Battlecruiser with application", 3, "Battlecruiser (Drake/Gnosis/Myrmidon)"),
+        ("Class 1: basic Tech I frigate", 2, "T1 frigate"),
+        ("Soloable with a challenge (patch-note quote)", 4, "Battleship / T3C"),
+        ("A T1 cruiser can run the site easily", 2, "T1 cruiser (Vexor/Caracal/Omen/Rupture)"),
+        ("Best run with a marauder", 5, "Marauder / Rattlesnake"),
+        ("At least 3 capsuleers in T1 frigates/destroyers", 3, "Small gang (3-5)"),
+        ("10+ capsuleer battleship fleet with logistics and EWAR", 5, "Fleet (10+, logi)"),
+        ("Speed tanking ideal in anything smaller than a battleship", 3, "Battleship (Dominix/Rattlesnake/Praxis)"),
+        ("", 1, "Any ship"),
+    ],
+)
+def test_normalise_min_ship(raw, danger, expected):
+    assert rules.normalise_min_ship(raw, danger) == expected
+
+
+def test_ship_tier_and_consistency_check():
+    assert rules.ship_tier("T1 explo frigate (Heron/Probe/Imicus/Magnate)") == 0
+    assert rules.ship_tier("Destroyer") == 2
+    assert rules.ship_tier("Battlecruiser / T3C") == 5
+    assert rules.ship_tier("Marauder; 2+ pilots recommended") == 6
+    bad = {
+        "category": "event",
+        "scan_group": "Combat Anomaly",
+        "status": "event",
+        "danger": 4,
+        "min_ship": "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+        "name": "x",
+        "space": "High",
+    }
+    assert build.consistency_issues(bad) == "danger 4 needs battleship/T3C/gang"
+    changes = build.reconcile([bad])
+    assert changes and bad["min_ship"] == "Battleship / T3C"
+    ok = dict(bad, danger=3)
+    assert build.consistency_issues(ok) is None
+
+
+def test_hazard_enemies():
+    p = page("Some Cache", ["Data sites"])
+    p["description"] = "Two sentry towers guard the cans and proximity mines explode when approached."
+    assert rules.hazard_enemies(p) == "No ships; sentry towers, proximity mines, exploding containers"
+    assert rules.hazard_enemies(page("Plain", ["Data sites"])) is None
 
 
 def test_enemies_fallback():
@@ -117,15 +253,29 @@ def test_enemies_fallback():
 
 
 # --------------------------------------------------------------------------- danger / min ship
-@pytest.mark.parametrize("rating, expected", [("1/10", 2), ("3/10", 2), ("4/10", 3), ("6/10", 3), ("7/10", 4), ("8/10", 4), ("10/10", 5)])
+@pytest.mark.parametrize(
+    "rating, expected", [("1/10", 2), ("3/10", 2), ("4/10", 3), ("6/10", 3), ("7/10", 4), ("8/10", 4), ("10/10", 5)]
+)
 def test_danger_ded_boundaries(rating, expected):
     p = page("X", ["DED Complexes"], {"type": "ded", "rating": rating})
     assert rules.danger_of(p, "combat_ded", "Null") == expected
 
 
-@pytest.mark.parametrize("title, expected", [("Angel Hideaway", 2), ("Angel Refuge", 2), ("Angel Den", 3), ("Angel Rally Point", 3),
-                                             ("Angel Port", 4), ("Angel Haven", 4), ("Angel Sanctum", 5), ("Serpentis Forsaken Sanctum", 5),
-                                             ("Drone Horde", 5), ("Drone Cluster", 2)])
+@pytest.mark.parametrize(
+    "title, expected",
+    [
+        ("Angel Hideaway", 2),
+        ("Angel Refuge", 2),
+        ("Angel Den", 3),
+        ("Angel Rally Point", 3),
+        ("Angel Port", 4),
+        ("Angel Haven", 4),
+        ("Angel Sanctum", 5),
+        ("Serpentis Forsaken Sanctum", 5),
+        ("Drone Horde", 5),
+        ("Drone Cluster", 2),
+    ],
+)
 def test_danger_anomaly_tiers(title, expected):
     assert rules.danger_of(page(title, ["Combat Anomalies"]), "combat_anomaly", "Null") == expected
 
@@ -141,7 +291,9 @@ def test_danger_wormhole_classes(space, expected):
 
 
 def test_min_ship_respects_gate_limit():
-    p = page("Serpentis Narcotic Warehouses", ["DED Complexes"], {"type": "ded", "rating": "3/10", "ship limit": "Cruisers"})
+    p = page(
+        "Serpentis Narcotic Warehouses", ["DED Complexes"], {"type": "ded", "rating": "3/10", "ship limit": "Cruisers"}
+    )
     assert "cruiser" in rules.min_ship_of(p, "combat_ded", "High", 2).lower()
     p2 = page("Angel Vigil", ["Unrated Complexes"], {"type": "unrated", "ship limit": "Battlecruiser"})
     assert rules.min_ship_of(p2, "combat_unrated", "High", 3).startswith("Battlecruiser")
@@ -188,11 +340,19 @@ def _site(conn, name, space=None):
 def test_catalog_size_and_integrity(catalog):
     total = catalog.execute("SELECT COUNT(*) FROM sites").fetchone()[0]
     assert total >= 900
-    assert catalog.execute("SELECT COUNT(*) FROM sites WHERE enemies = '' OR min_ship = '' OR space = ''").fetchone()[0] == 0
+    assert (
+        catalog.execute("SELECT COUNT(*) FROM sites WHERE enemies = '' OR min_ship = '' OR space = ''").fetchone()[0]
+        == 0
+    )
     labels = {0: "n/a", 1: "Safe", 2: "Low", 3: "Medium", 4: "High", 5: "Deadly"}
     for r in catalog.execute("SELECT danger, danger_label FROM sites"):
         assert labels[r["danger"]] == r["danger_label"]
-    assert catalog.execute("SELECT COUNT(*) FROM (SELECT name, space FROM sites GROUP BY name, space HAVING COUNT(*) > 1)").fetchone()[0] == 0
+    assert (
+        catalog.execute(
+            "SELECT COUNT(*) FROM (SELECT name, space FROM sites GROUP BY name, space HAVING COUNT(*) > 1)"
+        ).fetchone()[0]
+        == 0
+    )
     meta = dict(catalog.execute("SELECT key, value FROM meta").fetchall())
     assert int(meta["site_count"]) == total
 
@@ -222,6 +382,33 @@ def test_catalog_spot_checks(catalog):
     assert s["category"] == "wormhole_gas" and s["min_ship"].startswith("Venture")
 
     assert _site(catalog, "Quarantine Area")["space"] == "C5"
+    assert _site(catalog, "Serpentis Narcotic Warehouses")["space"] == "High, Low, Null"
+    s = _site(catalog, "Leopard Nebula")
+    assert s["danger"] == 4 and s["min_ship"] == "Battleship to clear, then Venture"
+    assert _site(catalog, "Limited Sleeper Cache")["enemies"].startswith("No ships")
+    assert _site(catalog, "Observatory Infiltration")["enemies"].startswith("8 Patient Eradicator")
+    assert _site(catalog, "Observatory Flashpoint")["enemies"].startswith("Waves of EDENCOM")
+    assert _site(catalog, "Deepflow Rift")["enemies"].startswith("Surge of")
+    cg = _site(catalog, "Crimson Gauntlet")
+    assert cg["danger"] == 3 and cg["min_ship"].startswith("Battlecruiser")
+    mc = _site(catalog, "Minor Conduit")
+    assert mc["status"] == "active" and mc["space"] == "Triglavian/EDENCOM minor-victory systems; Pochven"
+    assert _site(catalog, "Emerging Conduit")["status"] == "active"
+    assert _site(catalog, "Emerging Conduit (2019-2020 highsec version)")["status"] == "removed"
+    assert _site(catalog, "Wormhole K162")["rating"] == "K162 (exit)"
+    assert _site(catalog, "Wormhole B274")["rating"] == "→ High-sec"
+
+
+def test_catalog_vocabularies(catalog):
+    sentence = ("is ", "can ", " be ", "with a", "ideal", "requires", "recommendation", "quote", "doable", "advice")
+    for r in catalog.execute("SELECT name, min_ship, faction FROM sites"):
+        low = r["min_ship"].lower()
+        assert len(r["min_ship"]) <= 70, (r["name"], r["min_ship"])
+        assert not any(w in low for w in sentence), (r["name"], r["min_ship"])
+        if r["faction"]:
+            assert len(r["faction"]) <= 40 and not r["faction"].endswith("("), (r["name"], r["faction"])
+    for r in catalog.execute("SELECT * FROM sites"):
+        assert build.consistency_issues(dict(r)) is None, (r["name"], r["danger"], r["min_ship"])
     assert catalog.execute("SELECT COUNT(*) FROM sites WHERE name LIKE '%(updated)'").fetchone()[0] == 0
     assert _site(catalog, "Barbican")["category"] == "drifter"
     assert _site(catalog, "Guristas Stronghold")["danger"] == 5

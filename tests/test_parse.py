@@ -50,8 +50,17 @@ def test_normalise_class():
     assert normalise_class("Mining Frigate") == ("frigate", None, True)
     assert normalise_class("Tower") == ("sentry", None, True)
     assert normalise_class("Sentry") == ("sentry", None, True)
-    for structure in ("Structure", "Accl Gate", "Acceleration Gate", "Container", "Asteroid",
-                      "Hackable", "Gas Cloud", "Station", "Unknown"):
+    for structure in (
+        "Structure",
+        "Accl Gate",
+        "Acceleration Gate",
+        "Container",
+        "Asteroid",
+        "Hackable",
+        "Gas Cloud",
+        "Station",
+        "Unknown",
+    ):
         assert normalise_class(structure)[0] is None, structure
 
 
@@ -151,8 +160,10 @@ def test_parse_sleeper_rows():
 
 
 def test_strip_markup():
-    assert strip_markup("'''Angel Vigil''' is a [[combat site]] in [[High-sec|high security]]") == \
-        "Angel Vigil is a combat site in high security"
+    assert (
+        strip_markup("'''Angel Vigil''' is a [[combat site]] in [[High-sec|high security]]")
+        == "Angel Vigil is a combat site in high security"
+    )
     assert strip_markup("{{co|#9ef37c|(Faction)}} Mainframe<ref>x</ref>") == "(Faction) Mainframe"
     assert strip_markup("[[File:Icon.png|24px|link=]]Aridia<br>Curse") == "Aridia Curse"
     assert strip_markup("{{Damagetype|Th|Em}}") == "Th/Em"
@@ -160,7 +171,10 @@ def test_strip_markup():
 
 
 def test_parse_kv():
-    inner = "|name=Angel Vigil\n|type=unrated\n| ship limit = Battlecruiser\n|faction=[[Angel Cartel|Angel]]\n|empty=\n|location=High, Low"
+    inner = (
+        "|name=Angel Vigil\n|type=unrated\n| ship limit = Battlecruiser\n|faction=[[Angel "
+        "Cartel|Angel]]\n|empty=\n|location=High, Low"
+    )
     assert parse_kv(inner) == {
         "name": "Angel Vigil",
         "type": "unrated",

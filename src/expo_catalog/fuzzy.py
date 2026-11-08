@@ -205,9 +205,7 @@ def _fuzzy(pattern: str, text: str) -> tuple[int, list[int]] | None:
             consecutive_run = 0
             if prev[j - 1] > _NEG:
                 inherited = prev_run[j - 1]
-                consecutive = (
-                    prev[j - 1] + SCORE_MATCH + max(bonus, BONUS_CONSECUTIVE, inherited)
-                )
+                consecutive = prev[j - 1] + SCORE_MATCH + max(bonus, BONUS_CONSECUTIVE, inherited)
                 consecutive_run = inherited or _run_bonus(bonus)
             gapped = best_gap + SCORE_MATCH + bonus if best_gap > _NEG else _NEG
             if consecutive >= gapped:
@@ -285,9 +283,7 @@ def fuzzy_match(query: str, text: str) -> tuple[int, list[int]] | None:
     return _match_terms(terms, text)
 
 
-def rank(
-    query: str, items: Iterable[T], key: Callable[[T], str]
-) -> list[tuple[int, T]]:
+def rank[T](query: str, items: Iterable[T], key: Callable[[T], str]) -> list[tuple[int, T]]:
     """Filter and sort ``items`` by how well ``key(item)`` matches ``query``.
 
     Result is sorted by score descending; ties keep the input order (the sort is

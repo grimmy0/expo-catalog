@@ -83,14 +83,20 @@ def seed(conn: sqlite3.Connection) -> list[int]:
     db.insert_enemy(
         conn,
         ids[1],
-        {"wave": "1", "ship_class": "frigate", "count_min": 4, "count_max": 6,
-         "name": "Corelior Infantry", "tier": "T1", "ewar": "web"},
+        {
+            "wave": "1",
+            "ship_class": "frigate",
+            "count_min": 4,
+            "count_max": 6,
+            "name": "Corelior Infantry",
+            "tier": "T1",
+            "ewar": "web",
+        },
     )
     db.insert_enemy(
         conn,
         ids[1],
-        {"wave": "2", "ship_class": "battleship", "count_min": 2, "count_max": 2,
-         "name": "Core Admiral"},
+        {"wave": "2", "ship_class": "battleship", "count_min": 2, "count_max": 2, "name": "Core Admiral"},
     )
     db.set_meta(conn, "built_at", "2026-11-08T00:00:00Z")
     db.set_meta(conn, "source", "eve-university wiki")
@@ -99,10 +105,7 @@ def seed(conn: sqlite3.Connection) -> list[int]:
 
 
 def test_schema_creates_expected_tables(conn):
-    tables = {
-        row["name"]
-        for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
-    }
+    tables = {row["name"] for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
     assert {"sites", "site_enemies", "meta"} <= tables
     columns = [row["name"] for row in conn.execute("PRAGMA table_info(sites)")]
     assert tuple(columns) == db.SITE_COLUMNS
@@ -126,7 +129,7 @@ def test_load_sites_ordered_by_name(conn):
     assert phi.ewar == "web, scram, sensor damp"
     relic = sites[1]
     assert relic.faction == "Angel Cartel" and relic.rating is None and relic.ship_limit is None
-    with pytest.raises(Exception):  # frozen dataclass
+    with pytest.raises(AttributeError):  # frozen dataclass raises FrozenInstanceError
         phi.name = "x"  # type: ignore[misc]
 
 

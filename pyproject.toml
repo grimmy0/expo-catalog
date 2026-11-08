@@ -1,7 +1,7 @@
 [project]
 name = "expo-catalog"
 version = "0.1.0"
-description = "Add your description here"
+description = "TUI catalog of every EVE Online cosmic signature and anomaly with fzf-style filtering"
 authors = [
     { name = "grimmy0", email = "6683944+grimmy0@users.noreply.github.com" }
 ]
@@ -22,3 +22,9 @@ build-backend = "uv_build"
 dev = [
     "pytest>=9.2.0",
 ]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]

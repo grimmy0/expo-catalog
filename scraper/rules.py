@@ -51,67 +51,130 @@ PIRATE_FACTIONS = ("Angel", "Blood", "Guristas", "Gurista", "Sansha", "Serpentis
 
 # --------------------------------------------------------------------------- wormhole site lists
 WH_ANOMALIES: dict[str, str] = {
-    "Perimeter Ambush Point": "C1", "Perimeter Camp": "C1", "Phase Catalyst Node": "C1", "The Line": "C1",
-    "Perimeter Checkpoint": "C2", "Perimeter Hangar": "C2", "The Ruins of Enclave Cohort 27": "C2",
+    "Perimeter Ambush Point": "C1",
+    "Perimeter Camp": "C1",
+    "Phase Catalyst Node": "C1",
+    "The Line": "C1",
+    "Perimeter Checkpoint": "C2",
+    "Perimeter Hangar": "C2",
+    "The Ruins of Enclave Cohort 27": "C2",
     "Sleeper Data Sanctuary": "C2",
-    "Fortification Frontier Stronghold": "C3", "Outpost Frontier Stronghold": "C3", "Solar Cell": "C3",
+    "Fortification Frontier Stronghold": "C3",
+    "Outpost Frontier Stronghold": "C3",
+    "Solar Cell": "C3",
     "The Oruze Construct": "C3",
-    "Frontier Barracks": "C4", "Frontier Command Post": "C4", "Integrated Terminus": "C4",
+    "Frontier Barracks": "C4",
+    "Frontier Command Post": "C4",
+    "Integrated Terminus": "C4",
     "Sleeper Information Sanctum": "C4",
-    "Core Garrison": "C5", "Core Stronghold": "C5", "Oruze Osobnyk": "C5", "Quarantine Area": "C5",
-    "Core Citadel": "C6", "Core Bastion": "C6", "Strange Energy Readings": "C6", "The Mirror": "C6",
+    "Core Garrison": "C5",
+    "Core Stronghold": "C5",
+    "Oruze Osobnyk": "C5",
+    "Quarantine Area": "C5",
+    "Core Citadel": "C6",
+    "Core Bastion": "C6",
+    "Strange Energy Readings": "C6",
+    "The Mirror": "C6",
 }
 WH_DATA: dict[str, str] = {
-    "Unsecured Perimeter Amplifier": "C1", "Unsecured Perimeter Information Center": "C1",
-    "Unsecured Perimeter Comms Relay": "C2", "Unsecured Perimeter Transponder Farm": "C2",
-    "Unsecured Frontier Database": "C3", "Unsecured Frontier Receiver": "C3",
-    "Unsecured Frontier Digital Nexus": "C4", "Unsecured Frontier Trinary Hub": "C4",
-    "Unsecured Frontier Enclave Relay": "C5", "Unsecured Frontier Server Bank": "C5",
-    "Unsecured Core Backup Array": "C6", "Unsecured Core Emergence": "C6",
+    "Unsecured Perimeter Amplifier": "C1",
+    "Unsecured Perimeter Information Center": "C1",
+    "Unsecured Perimeter Comms Relay": "C2",
+    "Unsecured Perimeter Transponder Farm": "C2",
+    "Unsecured Frontier Database": "C3",
+    "Unsecured Frontier Receiver": "C3",
+    "Unsecured Frontier Digital Nexus": "C4",
+    "Unsecured Frontier Trinary Hub": "C4",
+    "Unsecured Frontier Enclave Relay": "C5",
+    "Unsecured Frontier Server Bank": "C5",
+    "Unsecured Core Backup Array": "C6",
+    "Unsecured Core Emergence": "C6",
 }
 WH_RELIC: dict[str, str] = {
-    "Forgotten Perimeter Coronation Platform": "C1", "Forgotten Perimeter Power Array": "C1",
-    "Forgotten Perimeter Gateway": "C2", "Forgotten Perimeter Habitation Coils": "C2",
-    "Forgotten Frontier Quarantine Outpost": "C3", "Forgotten Frontier Recursive Depot": "C3",
-    "Forgotten Frontier Conversion Module": "C4", "Forgotten Frontier Evacuation Center": "C4",
-    "Forgotten Core Data Field": "C5", "Forgotten Core Information Pen": "C5",
-    "Forgotten Core Assembly Hall": "C6", "Forgotten Core Circuitry Disassembler": "C6",
+    "Forgotten Perimeter Coronation Platform": "C1",
+    "Forgotten Perimeter Power Array": "C1",
+    "Forgotten Perimeter Gateway": "C2",
+    "Forgotten Perimeter Habitation Coils": "C2",
+    "Forgotten Frontier Quarantine Outpost": "C3",
+    "Forgotten Frontier Recursive Depot": "C3",
+    "Forgotten Frontier Conversion Module": "C4",
+    "Forgotten Frontier Evacuation Center": "C4",
+    "Forgotten Core Data Field": "C5",
+    "Forgotten Core Information Pen": "C5",
+    "Forgotten Core Assembly Hall": "C6",
+    "Forgotten Core Circuitry Disassembler": "C6",
 }
 WH_GAS: dict[str, str] = {
-    "Barren Perimeter Reservoir": "C1-C4", "Minor Perimeter Reservoir": "C1-C4",
-    "Ordinary Perimeter Reservoir": "C1-C4", "Sizeable Perimeter Reservoir": "C1-C4",
-    "Sizable Perimeter Reservoir": "C1-C4", "Token Perimeter Reservoir": "C1-C4",
-    "Bountiful Frontier Reservoir": "C3-C6", "Vast Frontier Reservoir": "C3-C6",
-    "Instrumental Core Reservoir": "C5-C6", "Vital Core Reservoir": "C5-C6",
+    "Barren Perimeter Reservoir": "C1-C4",
+    "Minor Perimeter Reservoir": "C1-C4",
+    "Ordinary Perimeter Reservoir": "C1-C4",
+    "Sizeable Perimeter Reservoir": "C1-C4",
+    "Sizable Perimeter Reservoir": "C1-C4",
+    "Token Perimeter Reservoir": "C1-C4",
+    "Bountiful Frontier Reservoir": "C3-C6",
+    "Vast Frontier Reservoir": "C3-C6",
+    "Instrumental Core Reservoir": "C5-C6",
+    "Vital Core Reservoir": "C5-C6",
 }
 WH_ORE: dict[str, str] = {
-    "Common Perimeter Deposit": "C1-C6", "Ordinary Perimeter Deposit": "C1-C6",
-    "Average Frontier Deposit": "C1-C6", "Unexceptional Frontier Deposit": "C1-C6",
-    "Exceptional Core Deposit": "C5-C6", "Infrequent Core Deposit": "C5-C6", "Isolated Core Deposit": "C5-C6",
-    "Rarified Core Deposit": "C5-C6", "Uncommon Core Deposit": "C5-C6", "Unusual Core Deposit": "C5-C6",
+    "Common Perimeter Deposit": "C1-C6",
+    "Ordinary Perimeter Deposit": "C1-C6",
+    "Average Frontier Deposit": "C1-C6",
+    "Unexceptional Frontier Deposit": "C1-C6",
+    "Exceptional Core Deposit": "C5-C6",
+    "Infrequent Core Deposit": "C5-C6",
+    "Isolated Core Deposit": "C5-C6",
+    "Rarified Core Deposit": "C5-C6",
+    "Uncommon Core Deposit": "C5-C6",
+    "Unusual Core Deposit": "C5-C6",
     "Shattered Debris Field": "Shattered",
 }
 
 # --------------------------------------------------------------------------- combat anomaly tiers
 ANOMALY_TIERS: dict[str, int] = {
-    "Hideaway": 1, "Burrow": 2, "Refuge": 3, "Den": 4, "Yard": 5, "Rally Point": 6,
-    "Port": 7, "Hub": 8, "Haven": 9, "Sanctum": 10,
+    "Hideaway": 1,
+    "Burrow": 2,
+    "Refuge": 3,
+    "Den": 4,
+    "Yard": 5,
+    "Rally Point": 6,
+    "Port": 7,
+    "Hub": 8,
+    "Haven": 9,
+    "Sanctum": 10,
 }
 DRONE_TIERS: dict[str, int] = {
-    "Drone Cluster": 1, "Drone Collection": 2, "Drone Assembly": 3, "Drone Gathering": 4,
-    "Drone Surveillance": 5, "Drone Menagerie": 6, "Drone Herd": 7, "Drone Squad": 8,
-    "Drone Patrol": 9, "Drone Horde": 10, "Teeming Drone Horde": 10,
+    "Drone Cluster": 1,
+    "Drone Collection": 2,
+    "Drone Assembly": 3,
+    "Drone Gathering": 4,
+    "Drone Surveillance": 5,
+    "Drone Menagerie": 6,
+    "Drone Herd": 7,
+    "Drone Squad": 8,
+    "Drone Patrol": 9,
+    "Drone Horde": 10,
+    "Teeming Drone Horde": 10,
 }
 # Where each anomaly tier spawns (from the "Combat site" overview table).
 ANOMALY_SPACE: dict[int, str] = {
-    1: "High, Low", 2: "High", 3: "High, Low", 4: "High, Low", 5: "Low", 6: "Low, Null",
-    7: "Low, Null", 8: "Low, Null", 9: "Null", 10: "Null",
+    1: "High, Low",
+    2: "High",
+    3: "High, Low",
+    4: "High, Low",
+    5: "Low",
+    6: "Low, Null",
+    7: "Low, Null",
+    8: "Low, Null",
+    9: "Null",
+    10: "Null",
 }
 ANOMALY_VARIANT_SPACE = {4: "Low, Null"}  # Hidden/Forsaken/Forlorn Dens are low/null only
 
 _ANOM_RE = re.compile(
     r"^(?P<faction>Angel|Blood Raider|Blood|Guristas|Gurista|Sansha's|Sansha|Serpentis)\s+"
-    r"(?P<variant>Hidden |Forsaken |Forlorn )?(?P<base>Hideaway|Burrow|Refuge|Den|Yard|Rally Point|Port|Hub|Haven|Sanctum)$"
+    r"(?P<variant>Hidden |Forsaken |Forlorn )?(?P<base>Hideaway|Burrow|Refuge|Den|Yard|Rally "
+    r"Point|Port|Hub|Haven|Sanctum)$"
 )
 
 # Unrated complex ladder: name suffix -> (space, danger, min-ship phrase)
@@ -131,14 +194,36 @@ UNRATED_RULES: list[tuple[re.Pattern[str], str, int, str]] = [
     (re.compile(r" Fleet Staging Point$"), "Null", 5, "Marauder; 2+ pilots recommended"),
     (re.compile(r"^Blood Raider Temple Complex$"), "Null", 5, "Fleet (5+, logi)"),
     # Rogue drone unrated complexes
-    (re.compile(r"^(Haunted Yard|Desolate Site|Chemical Yard)$"), "High, Low", 3, "T1 cruiser (Vexor/Caracal/Omen/Rupture)"),
+    (
+        re.compile(r"^(Haunted Yard|Desolate Site|Chemical Yard)$"),
+        "High, Low",
+        3,
+        "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+    ),
     (re.compile(r"^(Rogue Trial Yard|Dirty Site|Ruins)$"), "Low", 3, "Battlecruiser (Drake/Gnosis/Myrmidon)"),
     (re.compile(r"^(Independence|Radiance|Hierarchy)$"), "Null", 4, "Battleship (Dominix/Rattlesnake/Praxis)"),
-    (re.compile(r"^Federation Detention Facility$"), "High (Aokinen constellation)", 3, "Battlecruiser (Drake/Gnosis/Myrmidon)"),
-    (re.compile(r"^ISHAEKA Tactical Response HQ$"), "High (Monalaz constellation, Genesis)", 4, "Battleship (Dominix/Rattlesnake/Praxis)"),
+    (
+        re.compile(r"^Federation Detention Facility$"),
+        "High (Aokinen constellation)",
+        3,
+        "Battlecruiser (Drake/Gnosis/Myrmidon)",
+    ),
+    (
+        re.compile(r"^ISHAEKA Tactical Response HQ$"),
+        "High (Monalaz constellation, Genesis)",
+        4,
+        "Battleship (Dominix/Rattlesnake/Praxis)",
+    ),
 ]
 
-COMBAT_RELIC_RUINS = ("Ancient Ruins", "Bloated Ruins", "Festering Ruins", "Forgotten Ruins", "Hidden Ruins", "Wispy Ruins")
+COMBAT_RELIC_RUINS = (
+    "Ancient Ruins",
+    "Bloated Ruins",
+    "Festering Ruins",
+    "Forgotten Ruins",
+    "Hidden Ruins",
+    "Wispy Ruins",
+)
 
 INCURSION_TIERS: dict[str, tuple[str, int, str, str]] = {
     # title -> (tier, danger, min ship, pilots note)
@@ -152,8 +237,18 @@ INCURSION_TIERS: dict[str, tuple[str, int, str, str]] = {
     "Nation Consolidation Network": ("Assault", 5, "Fleet (10-20, logi)", "up to 20 (high) / 30 (low/null) pilots"),
     "Overwhelmed Civilian Facility": ("Assault", 5, "Fleet (10-20, logi)", "up to 20 (high) / 30 (low/null) pilots"),
     "Nation Rebirth Facility": ("Headquarters", 5, "Fleet (20-40, logi)", "20-40 (high) / 20-60 (low/null) pilots"),
-    "True Creations Research Center": ("Headquarters", 5, "Fleet (20-40, logi)", "20-40 (high) / 20-60 (low/null) pilots"),
-    "True Power Provisional Headquarters": ("Headquarters", 5, "Fleet (20-40, logi)", "20-40 (high) / 20-60 (low/null) pilots"),
+    "True Creations Research Center": (
+        "Headquarters",
+        5,
+        "Fleet (20-40, logi)",
+        "20-40 (high) / 20-60 (low/null) pilots",
+    ),
+    "True Power Provisional Headquarters": (
+        "Headquarters",
+        5,
+        "Fleet (20-40, logi)",
+        "20-40 (high) / 20-60 (low/null) pilots",
+    ),
     "The Kundalini Manifest": ("Mothership", 5, "Fleet (40-80)", "40-80 (high) / 40-120 (null) pilots; High/Null only"),
     "Uroborus": ("Mothership", 5, "Fleet (40-80)", "40-120 pilots; lowsec only"),
 }
@@ -181,14 +276,25 @@ POCHVEN_TITLES: dict[str, tuple[int, str, str]] = {
     "Stellar Observation Post": (4, "Cruiser fleet (5+, logi)", "Combat Anomaly"),
 }
 POCHVEN_FACTION: dict[str, str] = {
-    "Incipient Drone Swarm": "Rogue Drones", "Convocation Watchpost": "Triglavian Collective",
-    "EDENCOM Scout Fleet": "EDENCOM", "Torpid Sleeper Hive": "Sleepers", "World Ark Assault Flashpoint": "Triglavian Collective",
-    "World Ark Deployment Site": "Triglavian Collective", "Observatory Flashpoint": "EDENCOM",
-    "Stellar Fleet Deployment Site": "Triglavian Collective", "Vigilance Point": "Triglavian Collective",
-    "Overmind Nursery Grove": "Rogue Drones", "Observatory Infiltration": "Drifters", "Deepflow rifts": "Rogue Drones",
-    "Emerging Conduit": "Triglavian Collective", "Minor Conduit": "Triglavian Collective", "Major Conduit": "Triglavian Collective",
-    "EDENCOM Forward Post": "Triglavian Collective", "EDENCOM Staging Area": "Triglavian Collective",
-    "EDENCOM Field Base": "Triglavian Collective", "Stellar Observation Post": "EDENCOM",
+    "Incipient Drone Swarm": "Rogue Drones",
+    "Convocation Watchpost": "Triglavian Collective",
+    "EDENCOM Scout Fleet": "EDENCOM",
+    "Torpid Sleeper Hive": "Sleepers",
+    "World Ark Assault Flashpoint": "Triglavian Collective",
+    "World Ark Deployment Site": "Triglavian Collective",
+    "Observatory Flashpoint": "EDENCOM",
+    "Stellar Fleet Deployment Site": "Triglavian Collective",
+    "Vigilance Point": "Triglavian Collective",
+    "Overmind Nursery Grove": "Rogue Drones",
+    "Observatory Infiltration": "Drifters",
+    "Deepflow rifts": "Rogue Drones",
+    "Emerging Conduit": "Triglavian Collective",
+    "Minor Conduit": "Triglavian Collective",
+    "Major Conduit": "Triglavian Collective",
+    "EDENCOM Forward Post": "Triglavian Collective",
+    "EDENCOM Staging Area": "Triglavian Collective",
+    "EDENCOM Field Base": "Triglavian Collective",
+    "Stellar Observation Post": "EDENCOM",
 }
 # Fallback enemy summaries for pages whose wiki text has no NPC table.
 ENEMIES_FALLBACK: dict[str, str] = {
@@ -200,23 +306,62 @@ ENEMIES_FALLBACK: dict[str, str] = {
     "World Ark Assault Flashpoint": "Xordazh World Ark plus Triglavian fleet; fleet-only flashpoint",
     "Vigilance Point": "10 waves every 2 min, growing from frigates to battleships; very high DPS and heavy damps",
     "Stellar Observation Post": "EDENCOM / Triglavian cruiser-size waves (T1 cruiser gate)",
-    "Advanced Drone Outgrowth Colony": "Harder variant of the Rogue Drone Outgrowth Colony (frigate/destroyer waves, boss)",
-    "CHAIN Mindflood Production Facility": "Not documented; expect Blood Raider elite frigates, cruisers and battleships like other Production Facilities",
+    "Advanced Drone Outgrowth Colony": "Harder variant of the Rogue Drone Outgrowth Colony (frigate/destroyer waves, "
+    "boss)",
+    "Observatory Flashpoint": "Waves of EDENCOM navy ships (frigates to battleships) + 1 empire dreadnought "
+    "(siege/super-siege); fleet of up to 15",
+    "Deepflow rifts": "Surge of ~10-15 Rogue Drone frigates/destroyers only if too many tractor beams are cycled",
+    "Limited Sleeper Cache": "No ships; environmental hazards (gas clouds, proximity mines)",
+    "Standard Sleeper Cache": "Sentry towers + toxic-cloud alarm hazard; no ships",
+    "Superior Sleeper Cache": "Sentry towers (alpha ~4.5k), plasma chambers, shockwaves; no ships",
+    "Observatory Infiltration": "8 Patient Eradicator sentries (~600 DPS) + 1 jailer if lockdown triggers; no ships",
+    "Stellar Fleet Deployment Site": "Waves of Triglavian frigates to battleships (Kikimora deployables, Zorya's "
+    "ships) around the Dazh Liminality Locus; cruiser-gated",
+    "CHAIN Mindflood Production Facility": "Not documented; expect Blood Raider elite frigates, cruisers and "
+    "battleships like other Production Facilities",
+}
+
+# Invasion-era sites that still spawn in k-space Triglavian/EDENCOM minor-victory systems and in Pochven.
+MINOR_VICTORY_SITES = {
+    "Minor Conduit",
+    "Major Conduit",
+    "EDENCOM Forward Post",
+    "EDENCOM Staging Area",
+    "EDENCOM Field Base",
 }
 
 # Pochven-only (True) vs Triglavian-invasion-era sites that no longer spawn (False).
 POCHVEN_LIVE = {
-    "Incipient Drone Swarm", "Convocation Watchpost", "EDENCOM Scout Fleet", "Torpid Sleeper Hive",
-    "World Ark Assault Flashpoint", "Observatory Flashpoint", "Stellar Fleet Deployment Site", "Vigilance Point",
-    "Overmind Nursery Grove", "Observatory Infiltration", "Deepflow rifts",
+    "Incipient Drone Swarm",
+    "Convocation Watchpost",
+    "EDENCOM Scout Fleet",
+    "Torpid Sleeper Hive",
+    "World Ark Assault Flashpoint",
+    "Observatory Flashpoint",
+    "Stellar Fleet Deployment Site",
+    "Vigilance Point",
+    "Overmind Nursery Grove",
+    "Observatory Infiltration",
+    "Deepflow rifts",
 }
 
 EVENT_TITLES = {
-    "Wightstorm Anchorage", "Wightstorm Forward Base", "Wightstorm Muster Point", "Wightstorm Transit Site",
-    "Union Day Combat Challenge", "Union Day Elite Combat Challenge", "Crimson Gauntlet (2020)",
-    "Guri Malakim Survey Base", "SoCT Survey Expedition", "Smuggler Hideout", "Confiscated Smuggler Hideout",
-    "Warp Matrix Convergence", "Rogue Drone Outgrowth Colony", "Advanced Drone Outgrowth Colony",
+    "Wightstorm Anchorage",
+    "Wightstorm Forward Base",
+    "Wightstorm Muster Point",
+    "Wightstorm Transit Site",
+    "Union Day Combat Challenge",
+    "Union Day Elite Combat Challenge",
+    "Crimson Gauntlet (2020)",
+    "Guri Malakim Survey Base",
+    "SoCT Survey Expedition",
+    "Smuggler Hideout",
+    "Confiscated Smuggler Hideout",
+    "Warp Matrix Convergence",
+    "Rogue Drone Outgrowth Colony",
+    "Advanced Drone Outgrowth Colony",
 }
+
 
 # --------------------------------------------------------------------------- small helpers
 def _title(page: Mapping[str, Any]) -> str:
@@ -371,16 +516,74 @@ _SEC_WORDS = (
     (re.compile(r"\bnull", re.I), "Null"),
 )
 NULL_REGIONS = {
-    "catch", "delve", "vale of the silent", "vale", "tenal", "fountain", "cloud ring", "wicked creek", "feythabolis",
-    "curse", "insmother", "omist", "tenerifis", "detorid", "great wildlands", "immensea", "venal", "pure blind",
-    "syndicate", "outer passage", "the spire", "etherium reach", "perrigen falls", "malpais", "cobalt edge",
-    "providence", "stain", "esoteria", "paragon soul", "period basis", "querious", "deklein", "branch", "tribute",
-    "geminate", "scalding pass", "outer ring", "cache", "impass", "oasa", "kalevala expanse", "the kalevala expanse",
+    "catch",
+    "delve",
+    "vale of the silent",
+    "vale",
+    "tenal",
+    "fountain",
+    "cloud ring",
+    "wicked creek",
+    "feythabolis",
+    "curse",
+    "insmother",
+    "omist",
+    "tenerifis",
+    "detorid",
+    "great wildlands",
+    "immensea",
+    "venal",
+    "pure blind",
+    "syndicate",
+    "outer passage",
+    "the spire",
+    "etherium reach",
+    "perrigen falls",
+    "malpais",
+    "cobalt edge",
+    "providence",
+    "stain",
+    "esoteria",
+    "paragon soul",
+    "period basis",
+    "querious",
+    "deklein",
+    "branch",
+    "tribute",
+    "geminate",
+    "scalding pass",
+    "outer ring",
+    "cache",
+    "impass",
+    "oasa",
+    "kalevala expanse",
+    "the kalevala expanse",
 }
-LOW_REGIONS_HINT = {"aridia", "solitude", "placid", "molden heath", "heimatar", "derelik", "black rise", "lonetrek",
-                    "the forge", "genesis", "essence", "verge vendor", "sinq laison", "everyshore", "domain",
-                    "kador", "kor-azor", "khanid", "tash-murkon", "devoid", "the bleak lands", "metropolis",
-                    "the citadel"}
+LOW_REGIONS_HINT = {
+    "aridia",
+    "solitude",
+    "placid",
+    "molden heath",
+    "heimatar",
+    "derelik",
+    "black rise",
+    "lonetrek",
+    "the forge",
+    "genesis",
+    "essence",
+    "verge vendor",
+    "sinq laison",
+    "everyshore",
+    "domain",
+    "kador",
+    "kor-azor",
+    "khanid",
+    "tash-murkon",
+    "devoid",
+    "the bleak lands",
+    "metropolis",
+    "the citadel",
+}
 
 
 def normalise_space(raw: str) -> str:
@@ -426,11 +629,13 @@ def space_of(page: Mapping[str, Any], category: str) -> str:
             return "Low, Pochven"
         if title == "Deepflow rifts":
             return "High, Low, Null, Wormhole, Pochven"
-        if title in ("Stellar Fleet Deployment Site",):
-            return "Pochven"
-        if title in POCHVEN_LIVE:
-            return "Pochven"
-        return "Pochven (formerly Triglavian invasion systems)"
+        if title in MINOR_VICTORY_SITES:
+            return "Triglavian/EDENCOM minor-victory systems; Pochven"
+        if title == "Stellar Observation Post":
+            return "EDENCOM minor-victory systems"
+        if title == "Emerging Conduit":
+            return "High (2019-2020 version)"
+        return "Pochven"
     if category == "incursion":
         if title == "Uroborus":
             return "Incursion constellation (Low)"
@@ -467,15 +672,30 @@ def space_of(page: Mapping[str, Any], category: str) -> str:
                 return space
     if category == "combat_ded":
         norm = normalise_space(raw)
-        if norm and norm != raw:
+        if norm:
             return norm
         r = ded_rating(page)
         if r is not None:
-            return {1: "High, Low", 2: "High, Low", 3: "High, Low", 4: "High, Low", 5: "High, Low",
-                    6: "Low, Null", 7: "Null", 8: "Null", 10: "Null"}.get(r, "Unknown")
+            return {
+                1: "High, Low",
+                2: "High, Low",
+                3: "High, Low",
+                4: "High, Low",
+                5: "High, Low",
+                6: "Low, Null",
+                7: "Null",
+                8: "Null",
+                10: "Null",
+            }.get(r, "Unknown")
     if category == "relic" and title in COMBAT_RELIC_RUINS:
         norm = normalise_space(raw)
-        return norm if norm in ("Null", "Low, Null") else f"Null ({raw})" if raw and raw.lower() not in ("null",) else "Null"
+        return (
+            norm
+            if norm in ("Null", "Low, Null")
+            else f"Null ({raw})"
+            if raw and raw.lower() not in ("null",)
+            else "Null"
+        )
     if category == "ore":
         if "Sovereignty Hub ore deposits" in cats or "Cluster" in title:
             return "Null (sov hub upgrade)"
@@ -574,8 +794,11 @@ FACTION_ALIASES: list[tuple[re.Pattern[str], str]] = [
 
 
 CHEM_LAB_PREFIXES: list[tuple[str, str]] = [
-    ("CHAIN", "Blood Raiders"), ("Core Runner", "Serpentis"), ("Elohim", "Angel Cartel"),
-    ("H-PA Crew", "Guristas"), ("PDW-09FX", "Sansha's Nation"),
+    ("CHAIN", "Blood Raiders"),
+    ("Core Runner", "Serpentis"),
+    ("Elohim", "Angel Cartel"),
+    ("H-PA Crew", "Guristas"),
+    ("PDW-09FX", "Sansha's Nation"),
 ]
 
 
@@ -598,7 +821,11 @@ def faction_of(page: Mapping[str, Any]) -> str | None:
         return "Drifters"
     if title in INCURSION_TIERS:
         return "Sansha's Nation"
-    if title == "Rampant Drone Fabricator" or title.startswith("Abandoned Research Complex") or title == "Overmind Nursery Grove":
+    if (
+        title == "Rampant Drone Fabricator"
+        or title.startswith("Abandoned Research Complex")
+        or title == "Overmind Nursery Grove"
+    ):
         return "Rogue Drones"
     if title == "Stronghold":
         return "Guristas / Blood Raiders"
@@ -622,7 +849,9 @@ def faction_of(page: Mapping[str, Any]) -> str | None:
 
 
 # --------------------------------------------------------------------------- enemies
-_VARIANT_RE = re.compile(r"variant|\bor\b|^(amarr|caldari|gallente|minmatar)\b|highsec|lowsec|nullsec|4-bunker|turret ring", re.I)
+_VARIANT_RE = re.compile(
+    r"variant|\bor\b|^(amarr|caldari|gallente|minmatar)\b|highsec|lowsec|nullsec|4-bunker|turret ring", re.I
+)
 _EWAR_TOKENS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"scram", re.I), "scram"),
     (re.compile(r"\bweb|stasis", re.I), "web"),
@@ -648,7 +877,7 @@ def _fmt_range(lo: int | None, hi: int | None) -> str:
 
 
 def _plural(cls: str, count_hi: int | None, count_lo: int | None) -> str:
-    one = (count_hi == 1 and (count_lo in (0, 1, None)))
+    one = count_hi == 1 and (count_lo in (0, 1, None))
     if one:
         return cls
     return _PLURAL.get(cls, cls + "s")
@@ -720,13 +949,26 @@ def _sum_rows(rows: Iterable[Mapping[str, Any]]) -> dict[str, tuple[int | None, 
 
 
 def _weight(totals: Mapping[str, tuple[int | None, int | None, bool]]) -> int:
-    weights = {"frigate": 1, "destroyer": 2, "cruiser": 4, "battlecruiser": 6, "battleship": 10, "dreadnought": 40,
-               "carrier": 40, "supercarrier": 80, "titan": 120, "fighter": 2, "drone": 1, "sentry": 2}
+    weights = {
+        "frigate": 1,
+        "destroyer": 2,
+        "cruiser": 4,
+        "battlecruiser": 6,
+        "battleship": 10,
+        "dreadnought": 40,
+        "carrier": 40,
+        "supercarrier": 80,
+        "titan": 120,
+        "fighter": 2,
+        "drone": 1,
+        "sentry": 2,
+    }
     return sum(weights.get(c, 1) * ((hi if hi is not None else lo) or 1) for c, (lo, hi, _t) in totals.items())
 
 
-def aggregate_enemies(npc_rows: Iterable[Mapping[str, Any]], faction: str | None = None,
-                      combat: bool = True) -> tuple[str, str | None, list[dict[str, Any]]]:
+def aggregate_enemies(
+    npc_rows: Iterable[Mapping[str, Any]], faction: str | None = None, combat: bool = True
+) -> tuple[str, str | None, list[dict[str, Any]]]:
     """Summarise hostile NPC rows: ``(summary, ewar, enemy_rows)``.
 
     ``enemy_rows`` are the hostile rows normalised for the ``site_enemies`` table.
@@ -809,6 +1051,19 @@ def rating_of(page: Mapping[str, Any], category: str) -> str | None:
 
 # --------------------------------------------------------------------------- danger
 def danger_of(page: Mapping[str, Any], category: str, space: str) -> int:
+    """Danger 0-5; battleship-class hostiles always lift a site to at least Medium."""
+    d = _danger_base(page, category, space)
+    rows = page.get("npc_rows", [])
+    if (
+        category != "wormhole_connection"
+        and d < 3
+        and has_class(rows, "battleship", "dreadnought", "carrier", "supercarrier", "titan")
+    ):
+        d = 3
+    return d
+
+
+def _danger_base(page: Mapping[str, Any], category: str, space: str) -> int:
     title = _title(page)
     rows = page.get("npc_rows", [])
     hostile = [r for r in rows if r.get("hostile", True)]
@@ -857,6 +1112,10 @@ def danger_of(page: Mapping[str, Any], category: str, space: str) -> int:
     if category == "relic":
         return 2 if hostile else 1
     if category == "gas":
+        if has_bs:
+            return 4
+        if has_class(rows, "cruiser", "battlecruiser"):
+            return 3
         guarded = _ib(page, "is guarded").lower().startswith("y")
         damage = _ib(page, "cloud damage").lower() not in ("", "none", "?")
         return 2 if (guarded or damage or hostile) else 1
@@ -908,7 +1167,9 @@ def ship_limit_index(limit: str | None) -> int | None:
     if not limit:
         return None
     low = limit.lower()
-    if any(w in low for w in ("unrestricted", "unknown", "no limit", "ungated", "unverified", "tbc", "titan", "capital")):
+    if any(
+        w in low for w in ("unrestricted", "unknown", "no limit", "ungated", "unverified", "tbc", "titan", "capital")
+    ):
         return None
     idx: int | None = None
     if "battleship" in low:
@@ -947,16 +1208,28 @@ def cap_by_limit(phrase: str, limit: str | None) -> str:
 
 
 DED_SHIPS = {
-    1: "T1 frigate", 2: "Destroyer", 3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
-    4: "Battlecruiser (Drake/Gnosis/Myrmidon)", 5: "Battlecruiser / Battleship", 6: "Battleship / T3C",
-    7: "Battleship (Dominix/Rattlesnake/Praxis)", 8: "Marauder / Rattlesnake", 9: "Marauder; 2+ pilots recommended",
+    1: "T1 frigate",
+    2: "Destroyer",
+    3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+    4: "Battlecruiser (Drake/Gnosis/Myrmidon)",
+    5: "Battlecruiser / Battleship",
+    6: "Battleship / T3C",
+    7: "Battleship (Dominix/Rattlesnake/Praxis)",
+    8: "Marauder / Rattlesnake",
+    9: "Marauder; 2+ pilots recommended",
     10: "Marauder; 2+ pilots recommended",
 }
 TIER_SHIPS = {
-    1: "T1 frigate", 2: "Destroyer", 3: "Destroyer", 4: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
-    5: "T1 cruiser (Vexor/Caracal/Omen/Rupture)", 6: "Battlecruiser (Drake/Gnosis/Myrmidon)",
-    7: "Battlecruiser / Battleship", 8: "Battleship (Dominix/Rattlesnake/Praxis)",
-    9: "Battleship (Dominix/Rattlesnake/Praxis)", 10: "Marauder / Rattlesnake",
+    1: "T1 frigate",
+    2: "Destroyer",
+    3: "Destroyer",
+    4: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+    5: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+    6: "Battlecruiser (Drake/Gnosis/Myrmidon)",
+    7: "Battlecruiser / Battleship",
+    8: "Battleship (Dominix/Rattlesnake/Praxis)",
+    9: "Battleship (Dominix/Rattlesnake/Praxis)",
+    10: "Marauder / Rattlesnake",
 }
 _STEP_UP = {
     "T1 frigate": "Destroyer",
@@ -968,8 +1241,12 @@ _STEP_UP = {
     "Marauder / Rattlesnake": "Marauder; 2+ pilots recommended",
 }
 WH_SHIPS = {
-    1: "Cruiser / BC (Gnosis/Drake)", 2: "Battlecruiser / T3C", 3: "T3C / Rattlesnake / Marauder",
-    4: "Marauder / 2+ T3Cs", 5: "Marauder gang (dreadnought escalation)", 6: "Marauder/capital fleet",
+    1: "Cruiser / BC (Gnosis/Drake)",
+    2: "Battlecruiser / T3C",
+    3: "T3C / Rattlesnake / Marauder",
+    4: "Marauder / 2+ T3Cs",
+    5: "Marauder gang (dreadnought escalation)",
+    6: "Marauder/capital fleet",
 }
 EXPLO_FRIGATE = "T1 explo frigate (Heron/Probe/Imicus/Magnate)"
 
@@ -1002,11 +1279,15 @@ def min_ship_of(page: Mapping[str, Any], category: str, space: str, danger: int)
     if category == "relic" and title in COMBAT_RELIC_RUINS:
         return cap_by_limit("Battleship / T3C with relic analyzer", limit)
     if category == "chemical_lab":
-        return cap_by_limit("Battleship / T3C with data analyzer" if danger >= 4 else "Battlecruiser with data analyzer", limit)
+        return cap_by_limit(
+            "Battleship / T3C with data analyzer" if danger >= 4 else "Battlecruiser with data analyzer", limit
+        )
     if category == "sleeper_cache":
-        return {"Limited Sleeper Cache": "Tanked explo frigate / Astero (mobile depot, refits)",
-                "Standard Sleeper Cache": "Astero / Stratios (mobile depot, refits)",
-                "Superior Sleeper Cache": "Stratios / T3C (mobile depot, refits)"}.get(title, "Astero / Stratios")
+        return {
+            "Limited Sleeper Cache": "Tanked explo frigate / Astero (mobile depot, refits)",
+            "Standard Sleeper Cache": "Astero / Stratios (mobile depot, refits)",
+            "Superior Sleeper Cache": "Stratios / T3C (mobile depot, refits)",
+        }.get(title, "Astero / Stratios")
     if category == "data":
         if title == "SCC Secure Key Storage":
             return "Marauder + 2 hacking ships"
@@ -1020,7 +1301,17 @@ def min_ship_of(page: Mapping[str, Any], category: str, space: str, danger: int)
     if category == "relic":
         return EXPLO_FRIGATE if not hostile else "Tanked explo frigate / Astero"
     if category == "gas":
-        return "Venture (guarded; clear or avoid rats)" if danger >= 2 else "Venture"
+        if hostile:
+            if has_class(rows, "battleship"):
+                return "Battleship to clear, then Venture"
+            if has_class(rows, "cruiser", "battlecruiser"):
+                return "Cruiser to clear, then Venture"
+            return "Destroyer to clear, then Venture"
+        if _ib(page, "is guarded").lower().startswith("y"):
+            return "Destroyer to clear, then Venture"
+        if _ib(page, "cloud damage").lower() not in ("", "none", "?"):
+            return "Venture (clouds deal damage; tank it)"
+        return "Venture"
     if category == "wormhole_gas":
         return "Venture (warp out when Sleepers land)"
     if category == "wormhole_ore":
@@ -1045,8 +1336,11 @@ def min_ship_of(page: Mapping[str, Any], category: str, space: str, danger: int)
             return "Any ship (stay >50 km, leave if Drifters arrive)"
         return "Fleet (20-30, logi, tracking disruptors)"
     if category == "homefront":
-        return "Fleet of 3 T1 cruisers + logi" if title in ("Salvage Research", "Traffic Stop", "Stabilize Rift") \
+        return (
+            "Fleet of 3 T1 cruisers + logi"
+            if title in ("Salvage Research", "Traffic Stop", "Stabilize Rift")
             else "Fleet of 5 T1 cruisers + logi"
+        )
     if title == "Stronghold":
         return "Fleet (10+, logi)"
     if title == "Besieged Covert Research Facility":
@@ -1056,11 +1350,20 @@ def min_ship_of(page: Mapping[str, Any], category: str, space: str, danger: int)
     if title == "Hrada-Oki Bivouac":
         return "Any ship"
     if category == "combat_anomaly":
-        phrase = {2: "Destroyer", 3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)", 4: "Battleship / T3C",
-                  5: "Fleet (5+, logi)"}.get(danger, "Battlecruiser (Drake/Gnosis/Myrmidon)")
+        phrase = {
+            2: "Destroyer",
+            3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+            4: "Battleship / T3C",
+            5: "Fleet (5+, logi)",
+        }.get(danger, "Battlecruiser (Drake/Gnosis/Myrmidon)")
         return cap_by_limit(phrase, limit)
-    return {1: "Any ship", 2: "Destroyer", 3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
-            4: "Battleship / T3C", 5: "Fleet (5+, logi)"}.get(danger, "Unknown")
+    return {
+        1: "Any ship",
+        2: "Destroyer",
+        3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+        4: "Battleship / T3C",
+        5: "Fleet (5+, logi)",
+    }.get(danger, "Unknown")
 
 
 # --------------------------------------------------------------------------- status
@@ -1068,6 +1371,8 @@ def status_of(page: Mapping[str, Any], category: str) -> str:
     title = _title(page)
     flags = page.get("flags", {})
     cats = _cats(page)
+    if title in MINOR_VICTORY_SITES:
+        return "active"
     if flags.get("past_content"):
         return "removed"
     if title in POCHVEN_TITLES and title not in POCHVEN_LIVE:
@@ -1090,3 +1395,158 @@ def ship_limit_of(page: Mapping[str, Any]) -> str | None:
 
 def source_url(title: str) -> str:
     return "https://wiki.eveuniversity.org/" + title.replace(" ", "_")
+
+
+# --------------------------------------------------------------------------- controlled vocabularies
+CANONICAL_FACTIONS: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"soct|society of conscious", re.I), "Society of Conscious Thought"),
+    (re.compile(r"saro", re.I), "CONCORD/SARO"),
+    (re.compile(r"concord|\bded\b", re.I), "CONCORD/SCC"),
+    (re.compile(r"guri malakim", re.I), "Guri Malakim"),
+    (re.compile(r"order of tetrimon|tetrimon", re.I), "Order of Tetrimon"),
+    (re.compile(r"purity of the throne", re.I), "Purity of the Throne"),
+    (re.compile(r"underworld smuggler", re.I), "Underworld Smugglers"),
+    (re.compile(r"shining flame", re.I), "Shining Flame"),
+    (re.compile(r"ashes of turnur", re.I), "Ashes of Turnur"),
+    (re.compile(r"disciples of purity", re.I), "Disciples of Purity"),
+    (re.compile(r"gallentia primacy", re.I), "Gallentia Primacy"),
+    (re.compile(r"united champions", re.I), "United Champions of Freedom"),
+    (re.compile(r"nemesis", re.I), "Nemesis"),
+    (re.compile(r"aegis", re.I), "AEGIS"),
+    (re.compile(r"mordu", re.I), "Mordu's Legion"),
+    (re.compile(r"\bore\b", re.I), "ORE"),
+    (re.compile(r"upwell", re.I), "Upwell"),
+    (re.compile(r"deathless", re.I), "Deathless Circle"),
+    (re.compile(r"drifter|tyrannos|lancer", re.I), "Drifters"),
+    (re.compile(r"sleeper|hypnosian", re.I), "Sleepers"),
+    (re.compile(r"trig|raznaborg|zorya", re.I), "Triglavian Collective"),
+    (re.compile(r"edencom", re.I), "EDENCOM"),
+    (re.compile(r"rogue drone|\bdrone", re.I), "Rogue Drones"),
+    (re.compile(r"angel|gist|cartel", re.I), "Angel Cartel"),
+    (re.compile(r"blood|corp(ii|ior|um|atis|us)|crimson|covenant", re.I), "Blood Raiders"),
+    (re.compile(r"gurista|pith", re.I), "Guristas"),
+    (re.compile(r"sansha|centi", re.I), "Sansha's Nation"),
+    (re.compile(r"serpentis|corel", re.I), "Serpentis"),
+    (re.compile(r"amarr", re.I), "Amarr Navy"),
+    (re.compile(r"caldari", re.I), "Caldari Navy"),
+    (re.compile(r"gallente|federation", re.I), "Gallente Navy"),
+    (re.compile(r"minmatar|republic", re.I), "Minmatar Navy"),
+    (re.compile(r"empire|navy|mercenar", re.I), "Empire navies"),
+]
+
+
+def canonical_faction(raw: object) -> str | None:
+    """Short canonical faction label (<= 40 chars, never ends on an open parenthesis) or None."""
+    text = str(raw or "").strip()
+    if not text or text.lower().startswith(("unknown", "none", "n/a", "varies")):
+        return None
+    head = re.split(r"\s*\(|,|;| and | or |/", text, maxsplit=1)[0].strip()
+    if re.search(r"slaver", head, re.I):
+        return "Amarr slavers"
+    label = head
+    for pat, name in CANONICAL_FACTIONS:
+        if pat.search(head):
+            label = name
+            break
+    label = label.strip(" ,(/")
+    if len(label) > 40:
+        label = label[:40].rsplit(" ", 1)[0].rstrip(" ,(/")
+    return label or None
+
+
+SHIP_VOCAB_DEFAULT: dict[int, str] = {
+    0: "Unknown",
+    1: "Any ship",
+    2: "Destroyer",
+    3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+    4: "Battleship / T3C",
+    5: "Fleet (5+, logi)",
+}
+
+
+def normalise_min_ship(text: object, danger: int, scan_group: str | None = None) -> str:
+    """Map free-text ship advice onto the controlled min-ship vocabulary."""
+    raw = str(text or "").strip()
+    low = raw.lower()
+    if not raw:
+        if scan_group in ("Data Site", "Relic Site") and danger <= 2:
+            return EXPLO_FRIGATE
+        if scan_group in ("Ore Anomaly", "Ore Site", "Ice Anomaly"):
+            return "Venture / mining barge"
+        return SHIP_VOCAB_DEFAULT.get(danger, "Unknown")
+    m = re.search(r"(\d+)\s*\+?\s*(?:capsuleer|pilot|player|ship)", low)
+    if "marauder" in low:
+        return "Marauder / Rattlesnake"
+    if re.search(r"capital|dread|titan|carrier", low):
+        return "Fleet / capital ships"
+    if m:
+        n = int(m.group(1))
+        return "Small gang (3-5)" if n <= 5 else f"Fleet ({n}+, logi)"
+    if "fleet" in low or "gang" in low:
+        return "Fleet (5+, logi)"
+    if "hac" in low.split() or "heavy assault" in low:
+        return "Battleship / HAC"
+    if "battleship" in low:
+        return "Battleship (Dominix/Rattlesnake/Praxis)"
+    if "battlecruiser" in low:
+        return "Battlecruiser (Drake/Gnosis/Myrmidon)"
+    if "cruiser" in low:
+        return "T1 cruiser (Vexor/Caracal/Omen/Rupture)"
+    if "destroyer" in low:
+        return "Destroyer"
+    if re.search(r"explo|hacking|analyzer|cov-?ops|heron|probe|imicus|magnate", low):
+        return EXPLO_FRIGATE
+    if "frigate" in low:
+        return "T1 frigate"
+    if re.search(r"venture|mining|barge|procurer", low):
+        return "Venture / mining barge"
+    return SHIP_VOCAB_DEFAULT.get(danger, "Unknown")
+
+
+# Ship tiers for the danger/min-ship consistency check (0 = non-combat hull).
+_TIER_PATTERNS: list[tuple[re.Pattern[str], int]] = [
+    (re.compile(r"fleet|gang|marauder|capital|dreadnought|2\+ pilots|2\+ t3c", re.I), 6),
+    (re.compile(r"battleship|t3c|hac|gila|stealth bomber|rattlesnake|stratios|praxis", re.I), 5),
+    (re.compile(r"battlecruiser|\bbc\b|drake|gnosis", re.I), 4),
+    (re.compile(r"cruiser", re.I), 3),
+    (re.compile(r"destroyer", re.I), 2),
+    (re.compile(r"t1 frigate|fast frigate|frigate with", re.I), 1),
+]
+
+
+def ship_tier(min_ship: str) -> int:
+    """0 non-combat, 1 frigate, 2 destroyer, 3 cruiser, 4 battlecruiser, 5 battleship/T3C, 6 marauder/gang/fleet."""
+    for pat, tier in _TIER_PATTERNS:
+        if pat.search(min_ship):
+            return tier
+    return 0
+
+
+def tier_phrase(tier: int, danger: int) -> str:
+    if tier >= 6:
+        return "Marauder / Rattlesnake" if danger == 5 else "Small gang (3-5) or Marauder"
+    return {
+        5: "Battleship / T3C",
+        4: "Battlecruiser (Drake/Gnosis/Myrmidon)",
+        3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+        2: "Destroyer",
+        1: "T1 frigate",
+    }.get(tier, "Any ship")
+
+
+def hazard_enemies(page: Mapping[str, Any]) -> str | None:
+    """'No ships; <hazard>' for hacking sites whose description mentions hazards but has no NPC table."""
+    desc = str(page.get("description") or "")
+    hazards: list[str] = []
+    for pat, label in (
+        (r"sentr", "sentry towers"),
+        (r"\bmine", "proximity mines"),
+        (r"explod|explosi", "exploding containers"),
+        (r"gas cloud|toxic", "toxic clouds"),
+        (r"timer", "despawn timer"),
+    ):
+        if re.search(pat, desc, re.I):
+            hazards.append(label)
+    if hazards:
+        return "No ships; " + ", ".join(hazards)
+    return None

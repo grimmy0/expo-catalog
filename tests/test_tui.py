@@ -123,14 +123,35 @@ FIXTURE_SITES = [
 
 FIXTURE_ENEMIES = {
     "Forgotten Perimeter Gateway": [
-        {"wave": "1", "ship_class": "frigate", "count_min": 2, "count_max": 3,
-         "name": "Emergent Patroller", "tier": None, "ewar": None},
-        {"wave": "2", "ship_class": "cruiser", "count_min": 1, "count_max": 1,
-         "name": "Sleepless Guardian", "tier": None, "ewar": "neut, scram"},
+        {
+            "wave": "1",
+            "ship_class": "frigate",
+            "count_min": 2,
+            "count_max": 3,
+            "name": "Emergent Patroller",
+            "tier": None,
+            "ewar": None,
+        },
+        {
+            "wave": "2",
+            "ship_class": "cruiser",
+            "count_min": 1,
+            "count_max": 1,
+            "name": "Sleepless Guardian",
+            "tier": None,
+            "ewar": "neut, scram",
+        },
     ],
     "Angel Hidden Hideaway": [
-        {"wave": None, "ship_class": "frigate", "count_min": 6, "count_max": 9,
-         "name": "Gistii Hunter", "tier": "T1", "ewar": "web"},
+        {
+            "wave": None,
+            "ship_class": "frigate",
+            "count_min": 6,
+            "count_max": 9,
+            "name": "Gistii Hunter",
+            "tier": "T1",
+            "ewar": "web",
+        },
     ],
 }
 
@@ -179,7 +200,10 @@ def test_rows_render_sorted_with_status_and_detail(db_path):
             await pilot.pause()
             table = app.query_one("#table", DataTable)
             assert [str(c.label) for c in table.ordered_columns] == [
-                "Name", "Danger", "Enemies", "Min ship",
+                "Name",
+                "Danger",
+                "Enemies",
+                "Min ship",
             ]
             assert table.row_count == 5
             assert table_names(table) == NAMES_SORTED
