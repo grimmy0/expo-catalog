@@ -2,15 +2,23 @@
 
 from __future__ import annotations
 
+import argparse
+import re
 import sqlite3
+import subprocess
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass
+from importlib import metadata
 from os import PathLike
+from pathlib import Path
 
 from rich.text import Text
+from textual import events
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import VerticalScroll
+from textual.timer import Timer
 from textual.widgets import DataTable, Footer, Header, Input, Static
 
 from expo_catalog import db
@@ -18,19 +26,28 @@ from expo_catalog.db import Site
 from expo_catalog.fuzzy import rank
 
 __all__ = [
-    "Catalog",
-    "CatalogApp",
     "COLUMNS",
     "PLACEHOLDER",
+    "Catalog",
+    "CatalogApp",
+    "ColumnWidths",
+    "build_parser",
+    "compute_widths",
     "danger_cell",
     "load_catalog",
+    "main",
+    "refresh_catalog",
     "render_detail",
     "run",
+    "space_label",
+    "type_label",
 ]
 
 PLACEHOLDER = "Type to filter… (fzf-style: space = AND, 'exact, !exclude, ^prefix)"
-COLUMNS: tuple[str, ...] = ("Name", "Danger", "Enemies", "Min ship")
+COLUMNS: tuple[str, ...] = ("Name", "Type", "Space", "Danger", "Enemies", "Min ship")
 BUILD_COMMAND = "uv run python -m scraper.build"
+REFRESH_COMMAND: tuple[str, ...] = ("-m", "scraper", "refresh")
+"""Arguments passed to ``sys.executable`` by ``--refresh`` (fetch → parse → build)."""
 
 HELP_TEXT = (
     "Type to filter (fzf syntax: space = AND, 'exact, !exclude, ^prefix, suffix$).\n"
@@ -74,14 +91,105 @@ _CATEGORY_LABELS: dict[str, str] = {
     "other": "Other",
 }
 
-_NAME_WIDTH = 44
-_ENEMIES_WIDTH = 44
-_SHIP_WIDTH = 36
+# Short labels for the Type column (≤ TYPE_WIDTH chars). combat_ded and
+# combat_anomaly are derived from the rating instead, see type_label().
+_TYPE_LABELS: dict[str, str] = {
+    "combat_unrated": "Unrated",
+    "data": "Data",
+    "relic": "Relic",
+    "gas": "Gas",
+    "chemical_lab": "Chem lab",
+    "ghost": "Ghost",
+    "sleeper_cache": "Sleeper",
+    "wormhole_combat": "WH combat",
+    "wormhole_data": "WH data",
+    "wormhole_relic": "WH relic",
+    "wormhole_gas": "WH gas",
+    "wormhole_ore": "WH ore",
+    "ore": "Ore",
+    "ice": "Ice",
+    "fw_complex": "FW plex",
+    "insurgency": "Insurgency",
+    "homefront": "Homefront",
+    "pochven": "Pochven",
+    "drifter": "Drifter",
+    "incursion": "Incursion",
+    "event": "Event",
+    "wormhole_connection": "Wormhole",
+    "other": "Other",
+}
+_DED_RATING = re.compile(r"\b(\d{1,2}/10)\b")
+_TIER_RATING = re.compile(r"\btier\s*(\d+)\b", re.IGNORECASE)
+
+TYPE_WIDTH = 12
+SPACE_WIDTH = 14
+_DANGER_WIDTH = 12  # "▮▮▮▮▮ Medium"
+_CELL_PADDING = 2  # DataTable default cell_padding=1 on both sides
+_TABLE_CHROME = 4  # 1-col margin on each side + vertical scrollbar
+_NAME_MIN = 34
+_NAME_MAX = 49  # longest in-game site name
+
+
+@dataclass(frozen=True, slots=True)
+class ColumnWidths:
+    """Clip widths for the content-sized columns at the current terminal width."""
+
+    name: int
+    enemies: int
+    min_ship: int
+
+
+def compute_widths(terminal_width: int) -> ColumnWidths:
+    """Split the terminal width between Name, Enemies and Min ship.
+
+    Type, Space and Danger are fixed; Name takes ~42% of what is left but
+    never fewer than 34 columns, Enemies gets a bit more of the rest than
+    Min ship. Below ~120 columns the table scrolls horizontally rather than
+    squeezing Name further.
+    """
+    fixed = TYPE_WIDTH + SPACE_WIDTH + _DANGER_WIDTH + _CELL_PADDING * len(COLUMNS) + _TABLE_CHROME
+    usable = terminal_width - fixed
+    name = max(_NAME_MIN, min(_NAME_MAX, round(usable * 0.42)))
+    rest = max(usable - name, 24)
+    enemies = max(12, round(rest * 0.55))
+    min_ship = max(10, rest - enemies)
+    return ColumnWidths(name, enemies, min_ship)
 
 
 def _clip(text: str, width: int) -> str:
     text = " ".join(text.split())
     return text if len(text) <= width else text[: width - 1].rstrip() + "…"
+
+
+def type_label(site: Site) -> str:
+    """Compact Type cell: ``DED 3/10``, ``Unrated``, ``Anom T4``, ``WH relic`` ..."""
+    rating = site.rating or ""
+    if site.category == "combat_ded":
+        match = _DED_RATING.search(rating)
+        return f"DED {match.group(1)}" if match else "DED"
+    if site.category == "combat_anomaly":
+        match = _TIER_RATING.search(rating)
+        return f"Anom T{match.group(1)}" if match else "Anomaly"
+    label = _TYPE_LABELS.get(site.category)
+    if label is None:
+        label = site.category.replace("_", " ").capitalize()
+    return _clip(label, TYPE_WIDTH)
+
+
+def space_label(space: str, width: int = SPACE_WIDTH) -> str:
+    """Space cell: as-is when it fits, else ``High/Low/Null`` style, else clipped."""
+    text = " ".join(space.split())
+    if len(text) <= width:
+        return text
+    compact = text.replace(", ", "/")
+    if len(compact) <= width:
+        return compact
+    return _clip(text, width)
+
+
+def _cell(text: str, style: str = "") -> Text:
+    """Plain (markup-free) single-line cell."""
+    return Text(text, style=style, no_wrap=True, overflow="ellipsis", end="")
 
 
 def danger_cell(danger: int, label: str) -> Text:
@@ -235,8 +343,11 @@ class CatalogApp(App[None]):
         self.sites: list[Site] = catalog.sites
         self.filtered: list[Site] = list(catalog.sites)
         self._table_built = False
-        self._row_cache: dict[int, tuple[str, Text, str, str]] = {}
+        self._widths = compute_widths(120)
+        self._resize_timer: Timer | None = None
+        self._row_cache: dict[int, tuple[Text, ...]] = {}
         self._danger_cache: dict[tuple[int, str], Text] = {}
+        self._type_cache: dict[str, Text] = {}
         built = catalog.meta.get("built_at") or catalog.meta.get("generated_at")
         self.sub_title = f"{len(self.sites)} sites" + (f" · built {built}" if built else "")
 
@@ -253,24 +364,37 @@ class CatalogApp(App[None]):
 
     def on_mount(self) -> None:
         table = self.query_one("#table", DataTable)
-        table.add_columns(*COLUMNS)
+        table.add_column("Name", key="name")
+        table.add_column("Type", width=TYPE_WIDTH, key="type")
+        table.add_column("Space", width=SPACE_WIDTH, key="space")
+        table.add_column("Danger", key="danger")
+        table.add_column("Enemies", key="enemies")
+        table.add_column("Min ship", key="min_ship")
+        self._widths = compute_widths(self.size.width or 120)
         self._apply_filter("")
         self.query_one("#filter", Input).focus()
 
     # -- data -------------------------------------------------------------
 
-    def _row_for(self, site: Site) -> tuple[str, Text, str, str]:
+    def _row_for(self, site: Site) -> tuple[Text, ...]:
         cached = self._row_cache.get(site.id)
         if cached is None:
             key = (site.danger, site.danger_label)
             danger = self._danger_cache.get(key)
             if danger is None:
                 danger = self._danger_cache[key] = danger_cell(*key)
+            kind = type_label(site)
+            kind_cell = self._type_cache.get(kind)
+            if kind_cell is None:
+                kind_cell = self._type_cache[kind] = _cell(kind, "dim")
+            widths = self._widths
             cached = self._row_cache[site.id] = (
-                _clip(site.name, _NAME_WIDTH),
+                _cell(_clip(site.name, widths.name)),
+                kind_cell,
+                _cell(space_label(site.space), "dim"),
                 danger,
-                _clip(site.enemies, _ENEMIES_WIDTH),
-                _clip(site.min_ship, _SHIP_WIDTH),
+                _cell(_clip(site.enemies, widths.enemies)),
+                _cell(_clip(site.min_ship, widths.min_ship)),
             )
         return cached
 
@@ -307,6 +431,25 @@ class CatalogApp(App[None]):
 
     def on_data_table_row_highlighted(self, event: DataTable.RowHighlighted) -> None:
         self._show_detail(event.cursor_row)
+
+    def on_resize(self, event: events.Resize) -> None:
+        # Debounce: terminals emit a burst of resizes while dragging.
+        if self._resize_timer is not None:
+            self._resize_timer.stop()
+        self._resize_timer = self.set_timer(0.15, self._fit_columns)
+
+    def _fit_columns(self) -> None:
+        """Re-clip the content columns if the terminal width changed."""
+        self._resize_timer = None
+        widths = compute_widths(self.size.width or 120)
+        if widths == self._widths or not self._table_built:
+            return
+        self._widths = widths
+        self._row_cache.clear()
+        table = self.query_one("#table", DataTable)
+        row = table.cursor_row
+        self._apply_filter(self.query_one("#filter", Input).value, force=True)
+        table.move_cursor(row=row, column=0)
 
     # -- actions ----------------------------------------------------------
 
@@ -345,12 +488,10 @@ def _search_key(site: Site) -> str:
 def run(db_path: str | PathLike[str] | None = None) -> None:
     """Load the database and run the TUI.
 
-    Exits with status 1 and a hint on stderr when the database is missing.
-    A path given on the command line (``expo-catalog path/to.sqlite``) is used
-    when ``db_path`` is not passed explicitly.
+    ``db_path`` falls back to ``$EXPO_CATALOG_DB`` and then the bundled
+    ``data/catalog.sqlite``. Exits with status 1 and a hint on stderr when the
+    database is missing.
     """
-    if db_path is None and len(sys.argv) > 1 and not sys.argv[1].startswith("-"):
-        db_path = sys.argv[1]
     path = db.resolve_db_path(db_path)
     if not path.is_file():
         print(
@@ -359,3 +500,61 @@ def run(db_path: str | PathLike[str] | None = None) -> None:
         )
         raise SystemExit(1)
     CatalogApp(load_catalog(path)).run()
+
+
+# -- command line -------------------------------------------------------------
+
+
+def _package_version() -> str:
+    try:
+        return metadata.version("expo-catalog")
+    except metadata.PackageNotFoundError:
+        return "unknown"
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """Argument parser for the ``expo-catalog`` entry point."""
+    parser = argparse.ArgumentParser(
+        prog="expo-catalog",
+        description="Browse every EVE Online cosmic signature and anomaly with fzf-style filtering.",
+    )
+    parser.add_argument(
+        "--db",
+        metavar="PATH",
+        help=f"SQLite catalog to open (default: ${db.ENV_VAR} if set, else {db.DEFAULT_DB_PATH})",
+    )
+    parser.add_argument(
+        "--refresh",
+        action="store_true",
+        help="rebuild the catalog first: runs `python -m scraper refresh` (fetch → parse → build) in the checkout",
+    )
+    parser.add_argument("--version", action="version", version=f"%(prog)s {_package_version()}")
+    return parser
+
+
+def refresh_catalog(repo_root: str | PathLike[str] | None = None) -> None:
+    """Run the scraper pipeline in ``repo_root`` (default: this checkout).
+
+    Exits 2 when there is no ``scraper/`` package to run and 1 when the
+    pipeline itself fails.
+    """
+    root = Path(repo_root) if repo_root is not None else db.REPO_ROOT
+    if not (root / "scraper" / "__init__.py").is_file():
+        print(
+            f"Cannot refresh: no scraper/ package in {root} (is this an installed copy rather than a checkout?)",
+            file=sys.stderr,
+        )
+        raise SystemExit(2)
+    print("Refreshing catalog (fetch → parse → build)…", file=sys.stderr)
+    result = subprocess.run([sys.executable, *REFRESH_COMMAND], cwd=root)
+    if result.returncode != 0:
+        print(f"Refresh failed: scraper exited with code {result.returncode}", file=sys.stderr)
+        raise SystemExit(1)
+
+
+def main(argv: Sequence[str] | None = None) -> None:
+    """Entry point: parse flags, optionally refresh, then launch the TUI."""
+    args = build_parser().parse_args(argv)
+    if args.refresh:
+        refresh_catalog()
+    run(args.db)

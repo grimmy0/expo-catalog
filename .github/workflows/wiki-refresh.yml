@@ -1,0 +1,96 @@
+name: Wiki refresh
+
+# Once a week, compare the EVE University wiki with data/wiki_state.json (metadata only, no page
+# downloads). If anything changed, re-fetch, rebuild the catalog and open/update a pull request.
+on:
+  schedule:
+    - cron: "17 6 * * 1" # Mondays 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: wiki-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.3.3
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Check the wiki for changes
+        id: check
+        run: |
+          set +e
+          uv run python -m scraper check --json check.json | tee check.txt
+          code=${PIPESTATUS[0]}
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" = "2" ]; then
+            echo "::error::wiki check failed (API error)"; exit 2
+          fi
+          changed=$(uv run python -c "import json; r=json.load(open('check.json')); print(len(r['changed']))")
+          new=$(uv run python -c "import json; r=json.load(open('check.json')); print(len(r['new']))")
+          removed=$(uv run python -c "import json; r=json.load(open('check.json')); print(len(r['removed']))")
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "new=$new" >> "$GITHUB_OUTPUT"
+          echo "removed=$removed" >> "$GITHUB_OUTPUT"
+
+      - name: Refresh the catalog
+        if: steps.check.outputs.exit_code == '1'
+        run: uv run python -m scraper refresh
+
+      - name: Tests
+        if: steps.check.outputs.exit_code == '1'
+        run: uv run pytest -q
+
+      - name: Write the pull request body
+        if: steps.check.outputs.exit_code == '1'
+        run: |
+          {
+            echo "Automated weekly refresh from the [EVE University wiki](https://wiki.eveuniversity.org)."
+            echo
+            echo "Pages: **${{ steps.check.outputs.changed }} changed**, **${{ steps.check.outputs.new }} new**, **${{ steps.check.outputs.removed }} removed**."
+            echo
+            echo "Review the flagged overrides in \`scraper/curated.py\` before merging; new pages may need classification rules."
+            echo
+            echo '```'
+            cat check.txt
+            echo '```'
+          } > pr-body.md
+
+      - name: Open or update the pull request
+        if: steps.check.outputs.exit_code == '1'
+        id: pr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: auto/wiki-refresh
+          delete-branch: true
+          commit-message: "Wiki refresh: ${{ steps.check.outputs.changed }} changed / ${{ steps.check.outputs.new }} new pages"
+          title: "Wiki refresh: ${{ steps.check.outputs.changed }} changed / ${{ steps.check.outputs.new }} new pages"
+          body-path: pr-body.md
+          labels: data-refresh
+          add-paths: |
+            data/catalog.sqlite
+            data/parsed_sites.json
+            data/wiki_state.json
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "exit code: ${{ steps.check.outputs.exit_code }}" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f check.txt ]; then { echo '```'; cat check.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"; fi
+          if [ -n "${{ steps.pr.outputs.pull-request-url }}" ]; then
+            echo "PR: ${{ steps.pr.outputs.pull-request-url }} (${{ steps.pr.outputs.pull-request-operation }})" >> "$GITHUB_STEP_SUMMARY"
+          fi

@@ -17,12 +17,15 @@ smallest ship that can reasonably run it.
 ## Run
 
 ```sh
-uv run expo-catalog
+uv run expo-catalog                 # open the catalog
+uv run expo-catalog --db PATH       # use another SQLite file (also: EXPO_CATALOG_DB=PATH)
+uv run expo-catalog --refresh       # re-fetch the wiki and rebuild the database, then open it
+uv run expo-catalog --version       # print the version and exit
 ```
 
-The database ships in `data/catalog.sqlite`. Set `EXPO_CATALOG_DB` to point at
-a different file. If the database is missing the command prints a hint and
-exits with status 1.
+The database ships in `data/catalog.sqlite`. If the database is missing the
+command prints a hint and exits with status 1. `--refresh` runs
+`python -m scraper refresh` from the repository root (network access needed).
 
 ### Keys
 
@@ -53,6 +56,10 @@ alphabetical order.
 ### Columns
 
 - **Name**: exact in-game site name.
+- **Type**: short category/rating label, e.g. `DED 3/10`, `Relic`, `WH gas`,
+  `Anomaly T6`, `FW plex`.
+- **Space**: where the site spawns (`High, Low`, `C3`, `Pochven`, …), truncated
+  in the table and shown in full in the detail panel.
 - **Danger**: a 0–5 bar coloured green to red.
   - `n/a` (0): no rating applies, e.g. wormhole connections.
   - `Safe` (1): no NPCs.
@@ -71,10 +78,40 @@ status, escalation, loot note, description, source URL and the enemy waves.
 ## Data pipeline
 
 ```sh
-uv run python -m scraper.fetch   # refresh data/raw from the EVE University wiki API (git-ignored)
-uv run python -m scraper.parse   # data/raw -> data/parsed_sites.json
-uv run python -m scraper.build   # data/parsed_sites.json -> data/catalog.sqlite
+uv run python -m scraper fetch   # refresh data/raw from the EVE University wiki API (git-ignored)
+uv run python -m scraper parse   # data/raw -> data/parsed_sites.json
+uv run python -m scraper build   # data/parsed_sites.json -> data/catalog.sqlite  (--out PATH)
+uv run python -m scraper refresh # all three in one go
 ```
+
+The per-stage modules (`python -m scraper.fetch`, `.parse`, `.build`) still
+work as well.
+
+### Keeping the catalog up to date
+
+The wiki changes slowly but steadily. `data/wiki_state.json` records the
+revision of every page the catalog was built from, so changes can be detected
+without re-downloading anything:
+
+```sh
+uv run python -m scraper check              # exit 0: nothing changed, 1: changes, 2: API error
+uv run python -m scraper check --json r.json
+uv run python -m scraper refresh            # fetch -> parse -> build (also rewrites wiki_state.json)
+uv run expo-catalog --refresh               # the same, then open the TUI
+```
+
+`check` lists NEW pages (in a tracked category but not yet in the catalog),
+REMOVED pages and CHANGED pages with a link to the wiki diff; changed pages that
+have a hand-written entry in `scraper/curated.py` (`OVERRIDES`) are flagged so
+the override can be re-reviewed.
+
+The `Wiki refresh` GitHub Actions workflow (`.github/workflows/wiki-refresh.yml`)
+runs `check` every Monday at 06:17 UTC (and on demand). When something changed
+it runs `refresh` and the tests, then opens or updates a pull request on the
+`auto/wiki-refresh` branch titled "Wiki refresh: N changed / M new pages" whose
+body is the check report. Merge it after a glance at the flagged overrides.
+The workflow needs "Allow GitHub Actions to create pull requests" enabled in
+the repository settings.
 
 Sources:
 
@@ -115,16 +152,20 @@ expo-catalog/
 │   ├── db.py         # SQLite schema + read/insert helpers
 │   └── fuzzy.py      # fzf-style matcher
 ├── scraper/
+│   ├── __main__.py   # `python -m scraper fetch|parse|build|check|refresh`
 │   ├── fetch.py      # download wiki pages into data/raw
 │   ├── parse.py      # wiki text -> data/parsed_sites.json
 │   ├── build.py      # parsed sites -> data/catalog.sqlite
+│   ├── check.py      # wiki change detection against data/wiki_state.json
 │   ├── curated.py    # hand-maintained site lists
 │   ├── rules.py      # classification / danger rules
 │   └── wiki.py       # MediaWiki API client
 ├── data/
 │   ├── catalog.sqlite
 │   ├── parsed_sites.json
+│   ├── wiki_state.json  # revision snapshot used by `scraper check`
 │   ├── wormholes.json
 │   └── raw/          # git-ignored wiki cache
+├── .github/workflows/   # ci.yml, wiki-refresh.yml (weekly refresh PR)
 └── tests/
 ```

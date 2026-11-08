@@ -20,6 +20,7 @@ __all__ = [
     "DEFAULT_DB_PATH",
     "ENEMY_COLUMNS",
     "ENV_VAR",
+    "REPO_ROOT",
     "SCAN_GROUPS",
     "SCHEMA",
     "SITE_COLUMNS",
@@ -41,6 +42,9 @@ ENV_VAR = "EXPO_CATALOG_DB"
 """Environment variable that overrides the default database location."""
 
 _PROJECT_DB_PATH = Path(__file__).resolve().parents[2] / "data" / "catalog.sqlite"
+
+REPO_ROOT: Path = _PROJECT_DB_PATH.parents[1]
+"""Checkout root (the directory holding ``scraper/`` and ``data/``)."""
 
 DEFAULT_DB_PATH: Path = Path(os.environ.get(ENV_VAR) or _PROJECT_DB_PATH)
 """``<project>/data/catalog.sqlite`` unless ``EXPO_CATALOG_DB`` is set."""
@@ -107,6 +111,7 @@ CATEGORIES: tuple[str, ...] = (
     "homefront",
     "pochven",
     "drifter",
+    "incursion",
     "event",
     "wormhole_connection",
     "other",

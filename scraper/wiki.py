@@ -22,6 +22,8 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "data" / "raw"
 WIKI_DIR = RAW_DIR / "wiki"
 CATEGORY_FILE = RAW_DIR / "category_members.tsv"
+STATE_FILE = ROOT / "data" / "wiki_state.json"
+"""Committed snapshot of the last fetched revision of every tracked page (see ``scraper.check``)."""
 
 # Categories whose main-namespace members are candidate sites.
 SITE_CATEGORIES: tuple[str, ...] = (
@@ -114,8 +116,56 @@ def category_members(category: str) -> list[str]:
         time.sleep(REQUEST_DELAY_S)
 
 
-def fetch_pages(titles: Iterable[str], out_dir: Path = WIKI_DIR) -> dict[str, str | None]:
-    """Download wikitext for ``titles``; returns {requested title: resolved title or None}."""
+def _resolve_titles(chunk: list[str], query: dict) -> dict[str, str]:
+    """Map each requested title to the title the API actually returned (normalisation + redirects)."""
+    redirects = {r["from"]: r["to"] for r in query.get("redirects", [])}
+    normalized = {n["from"]: n["to"] for n in query.get("normalized", [])}
+    out: dict[str, str] = {}
+    for title in chunk:
+        target = normalized.get(title, title)
+        out[title] = redirects.get(target, target)
+    return out
+
+
+def page_metadata(titles: Iterable[str]) -> dict[str, dict]:
+    """Latest ``revid``/``timestamp`` for ``titles`` without downloading content.
+
+    Returns {requested title: {"revid": int, "timestamp": str, "title": resolved title}}; pages
+    missing on the wiki are left out.
+    """
+    titles = list(dict.fromkeys(titles))
+    meta: dict[str, dict] = {}
+    for i in range(0, len(titles), 50):
+        chunk = titles[i : i + 50]
+        data = api(
+            {
+                "action": "query",
+                "prop": "revisions",
+                "rvprop": "ids|timestamp",
+                "titles": "|".join(chunk),
+                "redirects": "1",
+            }
+        )
+        query = data.get("query", {})
+        found = {p["title"]: p for p in query.get("pages", []) if not p.get("missing") and p.get("revisions")}
+        for title, target in _resolve_titles(chunk, query).items():
+            page = found.get(target)
+            if page is None:
+                continue
+            rev = page["revisions"][0]
+            meta[title] = {"revid": int(rev["revid"]), "timestamp": str(rev.get("timestamp", "")), "title": target}
+        if i + 50 < len(titles):
+            time.sleep(REQUEST_DELAY_S)
+    return meta
+
+
+def fetch_pages(
+    titles: Iterable[str], out_dir: Path = WIKI_DIR, state: dict[str, dict] | None = None
+) -> dict[str, str | None]:
+    """Download wikitext for ``titles``; returns {requested title: resolved title or None}.
+
+    When ``state`` is given it is filled with ``{requested title: {"revid", "timestamp"}}``.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
     titles = list(dict.fromkeys(titles))
     resolved: dict[str, str | None] = {}
@@ -125,35 +175,56 @@ def fetch_pages(titles: Iterable[str], out_dir: Path = WIKI_DIR) -> dict[str, st
             {
                 "action": "query",
                 "prop": "revisions",
-                "rvprop": "content",
+                "rvprop": "content|ids|timestamp",
                 "rvslots": "main",
                 "titles": "|".join(chunk),
                 "redirects": "1",
             }
         )
         query = data.get("query", {})
-        redirects = {r["from"]: r["to"] for r in query.get("redirects", [])}
-        normalized = {n["from"]: n["to"] for n in query.get("normalized", [])}
-        found: dict[str, str] = {}
+        found: dict[str, dict] = {}
         for page in query.get("pages", []):
-            if page.get("missing"):
+            if page.get("missing") or not page.get("revisions"):
                 continue
-            found[page["title"]] = page["revisions"][0]["slots"]["main"]["content"]
-        for title in chunk:
-            target = normalized.get(title, title)
-            target = redirects.get(target, target)
-            if target in found:
-                text = f"<!-- TITLE: {target} -->\n" + found[target]
-                (out_dir / (safe_filename(title) + ".wiki")).write_text(text, encoding="utf-8")
-                resolved[title] = target
-            else:
+            found[page["title"]] = page["revisions"][0]
+        for title, target in _resolve_titles(chunk, query).items():
+            rev = found.get(target)
+            if rev is None:
                 resolved[title] = None
+                continue
+            text = f"<!-- TITLE: {target} -->\n" + rev["slots"]["main"]["content"]
+            (out_dir / (safe_filename(title) + ".wiki")).write_text(text, encoding="utf-8")
+            resolved[title] = target
+            if state is not None and "revid" in rev:
+                state[title] = {"revid": int(rev["revid"]), "timestamp": str(rev.get("timestamp", ""))}
         time.sleep(REQUEST_DELAY_S)
     return resolved
 
 
+def tracked_titles(rows: Iterable[tuple[str, str]]) -> dict[str, list[str]]:
+    """{title: sorted categories} for every category member plus the EXTRA_PAGES (empty category list)."""
+    cats: dict[str, set[str]] = {}
+    for category, title in rows:
+        cats.setdefault(title, set()).add(category)
+    for title in EXTRA_PAGES:
+        cats.setdefault(title, set())
+    return {t: sorted(c) for t, c in sorted(cats.items())}
+
+
+def load_state(path: Path = STATE_FILE) -> dict[str, dict]:
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def save_state(state: dict[str, dict], path: Path = STATE_FILE) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    ordered = {t: state[t] for t in sorted(state)}
+    path.write_text(json.dumps(ordered, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 def fetch_all() -> None:
-    """Refresh the whole raw cache: category lists, every member page, needed templates."""
+    """Refresh the whole raw cache: category lists, every member page, needed templates, wiki state."""
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     rows: list[tuple[str, str]] = []
     for category in SITE_CATEGORIES:
@@ -161,11 +232,19 @@ def fetch_all() -> None:
             rows.append((category, title))
         time.sleep(REQUEST_DELAY_S)
     CATEGORY_FILE.write_text("".join(f"{c}\t{t}\n" for c, t in rows), encoding="utf-8")
-    titles = sorted({t for _, t in rows} | set(EXTRA_PAGES))
-    resolved = fetch_pages(titles)
+    tracked = tracked_titles(rows)
+    revisions: dict[str, dict] = {}
+    resolved = fetch_pages(list(tracked), state=revisions)
     fetch_pages(TEMPLATE_PAGES, out_dir=RAW_DIR)
+    state = {
+        t: {"revid": revisions[t]["revid"], "timestamp": revisions[t]["timestamp"], "categories": tracked[t]}
+        for t in tracked
+        if t in revisions
+    }
+    save_state(state)
     missing = [t for t, r in resolved.items() if r is None]
-    print(f"fetched {len(titles) - len(missing)} pages, {len(missing)} missing: {missing}")
+    print(f"fetched {len(tracked) - len(missing)} pages, {len(missing)} missing: {missing}")
+    print(f"wrote {STATE_FILE.relative_to(ROOT)} ({len(state)} tracked pages)")
 
 
 def load_category_index() -> dict[str, set[str]]:

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import asyncio
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -11,7 +13,16 @@ from textual.widgets import DataTable, Input, Static
 
 from expo_catalog import app as app_module
 from expo_catalog import db
-from expo_catalog.app import CatalogApp, danger_cell, load_catalog
+from expo_catalog.app import (
+    CatalogApp,
+    ColumnWidths,
+    compute_widths,
+    danger_cell,
+    load_catalog,
+    space_label,
+    type_label,
+)
+from expo_catalog.db import Site
 
 FIXTURE_SITES = [
     dict(
@@ -178,7 +189,17 @@ def run_async(coro):
 
 
 def table_names(table: DataTable) -> list[str]:
-    return [table.get_row_at(i)[0] for i in range(table.row_count)]
+    return [table.get_row_at(i)[0].plain for i in range(table.row_count)]
+
+
+def table_column(table: DataTable, index: int) -> list[str]:
+    return [table.get_row_at(i)[index].plain for i in range(table.row_count)]
+
+
+def make_site(**overrides) -> Site:
+    base = dict(FIXTURE_SITES[1], id=1)
+    base.update(overrides)
+    return Site(**base)
 
 
 def detail_text(app: CatalogApp) -> str:
@@ -201,18 +222,38 @@ def test_rows_render_sorted_with_status_and_detail(db_path):
             table = app.query_one("#table", DataTable)
             assert [str(c.label) for c in table.ordered_columns] == [
                 "Name",
+                "Type",
+                "Space",
                 "Danger",
                 "Enemies",
                 "Min ship",
             ]
+            # Type and Space have fixed widths, the rest size to content
+            by_key = {str(c.key.value): c for c in table.ordered_columns}
+            assert (by_key["type"].width, by_key["type"].auto_width) == (12, False)
+            assert (by_key["space"].width, by_key["space"].auto_width) == (14, False)
+            assert by_key["name"].auto_width is True
             assert table.row_count == 5
             assert table_names(table) == NAMES_SORTED
             assert table.cursor_row == 0
+            # Type column derived from category + rating
+            assert dict(zip(table_names(table), table_column(table, 1), strict=True)) == {
+                "Angel Hidden Hideaway": "DED 1/10",
+                "Forgotten Perimeter Gateway": "WH relic",
+                "Local Serpentis Mainframe": "Data",
+                "Ruined Angel Crystal Quarry": "Relic",
+                "Serpentis Phi-Outpost": "DED 7/10",
+            }
+            # Space column: as-is, dim
+            phi = NAMES_SORTED.index("Serpentis Phi-Outpost")
+            assert table.get_row_at(phi)[2].plain == "Low, Null"
+            assert table.get_row_at(phi)[1].style == "dim"
+            assert table.get_row_at(phi)[2].style == "dim"
             # danger cell for the first row (Angel Hidden Hideaway, danger 2)
-            assert table.get_row_at(0)[1].plain == "▮▮▯▯▯ Low"
+            assert table.get_row_at(0)[3].plain == "▮▮▯▯▯ Low"
             # n/a row for the data site
             idx = NAMES_SORTED.index("Local Serpentis Mainframe")
-            assert table.get_row_at(idx)[1].plain == "n/a"
+            assert table.get_row_at(idx)[3].plain == "n/a"
             assert app.query_one("#status", Static).content == "5 / 5 sites"
             assert isinstance(app.focused, Input)
             text = detail_text(app)
@@ -329,3 +370,149 @@ def test_run_with_missing_db_exits_with_hint(tmp_path, capsys):
     err = capsys.readouterr().err
     assert f"Database not found at {missing}" in err
     assert "uv run python -m scraper.build" in err
+
+
+# -- Type / Space labels ------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("category", "rating", "expected"),
+    [
+        ("combat_ded", "3/10", "DED 3/10"),
+        ("combat_ded", "10/10", "DED 10/10"),
+        ("combat_ded", None, "DED"),
+        ("combat_unrated", "Unrated", "Unrated"),
+        ("combat_anomaly", "Tier 4", "Anom T4"),
+        ("combat_anomaly", "tier 10", "Anom T10"),
+        ("combat_anomaly", None, "Anomaly"),
+        ("data", "Scan difficulty III", "Data"),
+        ("relic", None, "Relic"),
+        ("gas", None, "Gas"),
+        ("chemical_lab", "Unrated", "Chem lab"),
+        ("ghost", "Ghost site", "Ghost"),
+        ("sleeper_cache", None, "Sleeper"),
+        ("wormhole_combat", "C5", "WH combat"),
+        ("wormhole_data", "C3", "WH data"),
+        ("wormhole_relic", "C1", "WH relic"),
+        ("wormhole_gas", "C1-C4", "WH gas"),
+        ("wormhole_ore", "C5-C6", "WH ore"),
+        ("ore", None, "Ore"),
+        ("ice", None, "Ice"),
+        ("fw_complex", "Small plex", "FW plex"),
+        ("insurgency", None, "Insurgency"),
+        ("homefront", "Homefront (5 pilots)", "Homefront"),
+        ("pochven", None, "Pochven"),
+        ("drifter", None, "Drifter"),
+        ("incursion", "Vanguard", "Incursion"),
+        ("event", "Crimson Harvest (2023-2026)", "Event"),
+        ("wormhole_connection", "→ C5", "Wormhole"),
+        ("other", None, "Other"),
+        ("brand_new_category_xyz", None, "Brand new c…"),
+    ],
+)
+def test_type_label(category, rating, expected):
+    label = type_label(make_site(category=category, rating=rating))
+    assert label == expected
+    assert len(label) <= 12
+
+
+def test_space_label_truncates_to_14_with_ellipsis():
+    assert space_label("High") == "High"
+    assert space_label("Low, Null") == "Low, Null"
+    # compacts separators before clipping
+    assert space_label("High, Low, Null") == "High/Low/Null"
+    long = "Drifter wormhole J110145 (Liberated Barbican, Cataclysmic Variable)"
+    assert space_label(long) == "Drifter wormh…"
+    assert len(space_label(long)) == 14
+    assert space_label("Incursion constellation (High, Low, Null)", width=20) == "Incursion constella…"
+
+
+def test_compute_widths_fits_terminal_and_keeps_name_wide():
+    fixed = 12 + 14 + 12 + 2 * 6 + 4  # Type, Space, Danger, cell padding, margins + scrollbar
+    for cols in (120, 160, 200):
+        widths = compute_widths(cols)
+        assert widths.name >= 34
+        assert widths.name + widths.enemies + widths.min_ship + fixed <= cols
+    assert compute_widths(120) == ColumnWidths(name=34, enemies=18, min_ship=14)
+    assert compute_widths(160) == ColumnWidths(name=45, enemies=34, min_ship=27)
+    assert compute_widths(200).name == 49  # never wider than the longest site name
+    assert compute_widths(80).name == 34  # narrow terminals scroll instead of squeezing Name
+
+
+def test_space_column_truncated_in_table_but_full_in_detail(db_path):
+    long_space = "Drifter wormhole J110145 (Liberated Barbican, Cataclysmic Variable)"
+    conn = db.connect(db_path, readonly=False)
+    conn.execute("UPDATE sites SET space = ? WHERE name = 'Angel Hidden Hideaway'", (long_space,))
+    conn.commit()
+    conn.close()
+
+    async def main():
+        app = CatalogApp(load_catalog(db_path))
+        async with app.run_test(size=(160, 40)) as pilot:
+            await pilot.pause()
+            table = app.query_one("#table", DataTable)
+            assert table.get_row_at(0)[2].plain == "Drifter wormh…"
+            assert long_space in detail_text(app)
+            assert app._widths == compute_widths(160)
+
+    run_async(main())
+
+
+# -- command line ---------------------------------------------------------------
+
+
+def test_cli_db_flag_is_passed_to_run(monkeypatch, tmp_path):
+    seen: list[object] = []
+    monkeypatch.setattr(app_module, "run", lambda db_path=None: seen.append(db_path))
+    app_module.main(["--db", str(tmp_path / "x.sqlite")])
+    assert seen == [str(tmp_path / "x.sqlite")]
+    app_module.main([])
+    assert seen[-1] is None
+
+
+def test_cli_refresh_runs_scraper_then_launches(monkeypatch, tmp_path):
+    (tmp_path / "scraper").mkdir()
+    (tmp_path / "scraper" / "__init__.py").write_text("")
+    monkeypatch.setattr(app_module.db, "REPO_ROOT", tmp_path)
+    calls: list[tuple[list[str], object]] = []
+
+    def fake_run(cmd, cwd=None, **kwargs):
+        calls.append((cmd, cwd))
+        return subprocess.CompletedProcess(cmd, 0)
+
+    monkeypatch.setattr(app_module.subprocess, "run", fake_run)
+    launched: list[object] = []
+    monkeypatch.setattr(app_module, "run", lambda db_path=None: launched.append(db_path))
+
+    app_module.main(["--refresh", "--db", "custom.sqlite"])
+    assert calls == [([sys.executable, "-m", "scraper", "refresh"], tmp_path)]
+    assert launched == ["custom.sqlite"]
+
+
+def test_cli_refresh_reports_scraper_failure(monkeypatch, tmp_path, capsys):
+    (tmp_path / "scraper").mkdir()
+    (tmp_path / "scraper" / "__init__.py").write_text("")
+    monkeypatch.setattr(app_module.db, "REPO_ROOT", tmp_path)
+    monkeypatch.setattr(app_module.subprocess, "run", lambda cmd, **kw: subprocess.CompletedProcess(cmd, 3))
+    monkeypatch.setattr(app_module, "run", lambda db_path=None: pytest.fail("TUI must not launch"))
+    with pytest.raises(SystemExit) as excinfo:
+        app_module.main(["--refresh"])
+    assert excinfo.value.code == 1
+    assert "exited with code 3" in capsys.readouterr().err
+
+
+def test_cli_refresh_without_scraper_package_exits_2(monkeypatch, tmp_path, capsys):
+    monkeypatch.setattr(app_module.db, "REPO_ROOT", tmp_path)
+    monkeypatch.setattr(app_module.subprocess, "run", lambda *a, **kw: pytest.fail("subprocess must not run"))
+    with pytest.raises(SystemExit) as excinfo:
+        app_module.main(["--refresh"])
+    assert excinfo.value.code == 2
+    err = capsys.readouterr().err
+    assert "no scraper/ package" in err and str(tmp_path) in err
+
+
+def test_cli_version(capsys):
+    with pytest.raises(SystemExit) as excinfo:
+        app_module.main(["--version"])
+    assert excinfo.value.code == 0
+    assert capsys.readouterr().out.startswith("expo-catalog ")

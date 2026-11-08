@@ -1,0 +1,4044 @@
+{
+ "AEGIS Capital Ship Security Facility": {
+  "revid": 231424,
+  "timestamp": "2026-06-06T04:59:03Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Abandoned Research Complex DA005": {
+  "revid": 221756,
+  "timestamp": "2025-03-12T00:46:10Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Abandoned Research Complex DA015": {
+  "revid": 221751,
+  "timestamp": "2025-03-12T00:38:19Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Abandoned Research Complex DA025": {
+  "revid": 230223,
+  "timestamp": "2026-03-30T00:50:18Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Abandoned Research Complex DC007": {
+  "revid": 221973,
+  "timestamp": "2025-03-16T00:56:09Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Abandoned Research Complex DC035": {
+  "revid": 221972,
+  "timestamp": "2025-03-16T00:53:30Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Abandoned Research Complex DG003": {
+  "revid": 184842,
+  "timestamp": "2022-04-30T07:32:12Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Abandoned Research Complex DG018": {
+  "revid": 221758,
+  "timestamp": "2025-03-12T00:46:59Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Abyssal Artifact Recovery": {
+  "revid": 231976,
+  "timestamp": "2026-07-23T13:02:10Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Advanced Drone Outgrowth Colony": {
+  "revid": 186320,
+  "timestamp": "2022-05-17T21:52:30Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Ancient Ruins": {
+  "revid": 203292,
+  "timestamp": "2023-05-12T22:49:30Z",
+  "categories": [
+   "Relic_sites",
+   "Unrated_Complexes"
+  ]
+ },
+ "Angel Annex": {
+  "revid": 166067,
+  "timestamp": "2021-01-01T22:17:34Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Angel Burrow": {
+  "revid": 225133,
+  "timestamp": "2025-08-14T11:32:22Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Cartel Occupied Mining Colony": {
+  "revid": 230594,
+  "timestamp": "2026-04-19T04:54:35Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Angel Chemical Lab": {
+  "revid": 159368,
+  "timestamp": "2020-08-11T18:44:26Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Angel Creo-Corp Mining": {
+  "revid": 220827,
+  "timestamp": "2024-12-30T22:40:10Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Angel Den": {
+  "revid": 225134,
+  "timestamp": "2025-08-14T11:32:22Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Forlorn Den": {
+  "revid": 225136,
+  "timestamp": "2025-08-14T11:32:24Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Forlorn Hideaway": {
+  "revid": 200801,
+  "timestamp": "2023-02-25T17:55:54Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Forlorn Hub": {
+  "revid": 226717,
+  "timestamp": "2025-09-04T23:30:30Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Forlorn Rally Point": {
+  "revid": 225153,
+  "timestamp": "2025-08-14T11:32:30Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Forsaken Den": {
+  "revid": 225174,
+  "timestamp": "2025-08-14T11:32:42Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Forsaken Hideaway": {
+  "revid": 225149,
+  "timestamp": "2025-08-14T11:32:30Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Forsaken Hub": {
+  "revid": 223723,
+  "timestamp": "2025-06-09T17:55:55Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Forsaken Rally Point": {
+  "revid": 227264,
+  "timestamp": "2025-10-09T13:18:08Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Gas Processing Site": {
+  "revid": 159369,
+  "timestamp": "2020-08-11T18:46:09Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Angel Haven": {
+  "revid": 228883,
+  "timestamp": "2026-01-11T07:13:19Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Hidden Den": {
+  "revid": 225157,
+  "timestamp": "2025-08-14T11:32:31Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Hidden Hideaway": {
+  "revid": 140511,
+  "timestamp": "2019-01-26T11:52:32Z",
+  "categories": [
+   "Combat_Anomalies",
+   "Unrated_Complexes"
+  ]
+ },
+ "Angel Hidden Hub": {
+  "revid": 222389,
+  "timestamp": "2025-04-12T08:32:25Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Hidden Rally Point": {
+  "revid": 225191,
+  "timestamp": "2025-08-14T11:34:41Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Hideaway": {
+  "revid": 226040,
+  "timestamp": "2025-08-25T21:53:04Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Hideout": {
+  "revid": 225139,
+  "timestamp": "2025-08-14T11:32:26Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Hub": {
+  "revid": 228830,
+  "timestamp": "2026-01-10T08:01:17Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Lookout": {
+  "revid": 225137,
+  "timestamp": "2025-08-14T11:32:25Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Military Complex": {
+  "revid": 208588,
+  "timestamp": "2023-10-07T13:19:35Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Angel Military Operations Complex": {
+  "revid": 232350,
+  "timestamp": "2026-09-25T09:54:45Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Angel Outpost": {
+  "revid": 223057,
+  "timestamp": "2025-05-22T18:08:15Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Angel Port": {
+  "revid": 225145,
+  "timestamp": "2025-08-14T11:32:29Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Provincial HQ": {
+  "revid": 231838,
+  "timestamp": "2026-07-01T06:32:17Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Angel Rally Point": {
+  "revid": 228511,
+  "timestamp": "2026-01-01T14:24:30Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Refuge": {
+  "revid": 212608,
+  "timestamp": "2024-02-07T10:01:45Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Repurposed Outpost": {
+  "revid": 216227,
+  "timestamp": "2024-06-07T09:02:46Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Angel Sanctum": {
+  "revid": 225189,
+  "timestamp": "2025-08-14T11:33:40Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel Vigil": {
+  "revid": 225093,
+  "timestamp": "2025-08-14T11:07:27Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Angel Watch": {
+  "revid": 222397,
+  "timestamp": "2025-04-13T20:59:44Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Angel Yard": {
+  "revid": 229628,
+  "timestamp": "2026-02-23T07:42:13Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Angel's Red Light District": {
+  "revid": 231859,
+  "timestamp": "2026-07-04T01:03:43Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Arctic Fox Nebula": {
+  "revid": 208592,
+  "timestamp": "2023-10-07T13:19:43Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Arithmos Tyrannos": {
+  "revid": 221759,
+  "timestamp": "2025-03-12T00:53:30Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Asteroid Belt Remnants": {
+  "revid": 228127,
+  "timestamp": "2025-12-13T02:53:26Z",
+  "categories": []
+ },
+ "Average Arkonor and Bistot Deposit": {
+  "revid": 216993,
+  "timestamp": "2024-06-30T14:12:46Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Average Crokite and Dark Ochre Deposit": {
+  "revid": 215251,
+  "timestamp": "2024-04-25T06:41:15Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Average Dark Ochre and Gneiss Deposit": {
+  "revid": 215184,
+  "timestamp": "2024-04-24T11:43:40Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Average Frontier Deposit": {
+  "revid": 224549,
+  "timestamp": "2025-07-15T08:44:58Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Average Gneiss Deposit": {
+  "revid": 226730,
+  "timestamp": "2025-09-04T23:31:15Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Average Hedbergite, Hemorphite and Jaspet Deposit": {
+  "revid": 215228,
+  "timestamp": "2024-04-25T05:32:40Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Average Hemorphite, Jaspet and Kernite Deposit": {
+  "revid": 224550,
+  "timestamp": "2025-07-15T08:46:43Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Average Jaspet Deposit": {
+  "revid": 229281,
+  "timestamp": "2026-01-23T08:10:37Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Average Jaspet, Kernite and Omber Deposit": {
+  "revid": 224129,
+  "timestamp": "2025-06-29T14:15:29Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Average Kernite and Omber Deposit": {
+  "revid": 224130,
+  "timestamp": "2025-06-29T14:37:10Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Average Mercoxit Deposit": {
+  "revid": 224856,
+  "timestamp": "2025-07-24T11:21:37Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Average Omber Deposit": {
+  "revid": 227852,
+  "timestamp": "2025-11-29T08:03:31Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Average Omber, Dark Ochre and Gneiss Deposit": {
+  "revid": 229428,
+  "timestamp": "2026-02-06T18:07:40Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Average Spodumain, Crokite and Dark Ochre Deposit": {
+  "revid": 215441,
+  "timestamp": "2024-04-30T16:46:42Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Bandit Nebula": {
+  "revid": 208599,
+  "timestamp": "2023-10-07T13:19:57Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Barren Perimeter Reservoir": {
+  "revid": 229856,
+  "timestamp": "2026-03-18T21:48:37Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Besieged Covert Research Facility": {
+  "revid": 230947,
+  "timestamp": "2026-05-18T20:56:14Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blackeye Nebula": {
+  "revid": 232238,
+  "timestamp": "2026-09-02T06:19:47Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Bloated Ruins": {
+  "revid": 195866,
+  "timestamp": "2022-10-01T13:56:00Z",
+  "categories": [
+   "Relic_sites"
+  ]
+ },
+ "Blood Burrow": {
+  "revid": 225142,
+  "timestamp": "2025-08-14T11:32:28Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Den": {
+  "revid": 225122,
+  "timestamp": "2025-08-14T11:25:21Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Forlorn Den": {
+  "revid": 199974,
+  "timestamp": "2023-01-15T18:37:24Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Forlorn Hideaway": {
+  "revid": 225116,
+  "timestamp": "2025-08-14T11:25:18Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Forlorn Hub": {
+  "revid": 225162,
+  "timestamp": "2025-08-14T11:32:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Forlorn Rally Point": {
+  "revid": 225175,
+  "timestamp": "2025-08-14T11:32:43Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Forsaken Den": {
+  "revid": 225169,
+  "timestamp": "2025-08-14T11:32:38Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Forsaken Hideaway": {
+  "revid": 225125,
+  "timestamp": "2025-08-14T11:25:23Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Forsaken Hub": {
+  "revid": 222889,
+  "timestamp": "2025-05-15T12:25:11Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Forsaken Rally Point": {
+  "revid": 225128,
+  "timestamp": "2025-08-14T11:32:21Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Haven": {
+  "revid": 225188,
+  "timestamp": "2025-08-14T11:33:40Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Hidden Den": {
+  "revid": 200556,
+  "timestamp": "2023-02-11T03:00:31Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Hidden Hideaway": {
+  "revid": 225105,
+  "timestamp": "2025-08-14T11:25:10Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Hidden Hub": {
+  "revid": 171364,
+  "timestamp": "2021-05-26T17:04:35Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Hidden Rally Point": {
+  "revid": 225129,
+  "timestamp": "2025-08-14T11:32:21Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Hideaway": {
+  "revid": 225113,
+  "timestamp": "2025-08-14T11:25:16Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Hideout": {
+  "revid": 200785,
+  "timestamp": "2023-02-24T12:00:15Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Hub": {
+  "revid": 225148,
+  "timestamp": "2025-08-14T11:32:29Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Lookout": {
+  "revid": 186939,
+  "timestamp": "2022-05-25T17:56:11Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Military Complex": {
+  "revid": 214043,
+  "timestamp": "2024-03-17T11:14:25Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Port": {
+  "revid": 230338,
+  "timestamp": "2026-04-03T11:06:54Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Provincial HQ": {
+  "revid": 157586,
+  "timestamp": "2020-07-06T18:38:22Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Raider Base": {
+  "revid": 213462,
+  "timestamp": "2024-03-07T12:26:29Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Raider Chemical Lab": {
+  "revid": 170835,
+  "timestamp": "2021-05-01T12:05:02Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Blood Raider Coordination Center": {
+  "revid": 221585,
+  "timestamp": "2025-02-20T17:42:40Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Blood Raider Fortress": {
+  "revid": 157853,
+  "timestamp": "2020-07-12T15:40:59Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Raider Human Farm": {
+  "revid": 226713,
+  "timestamp": "2025-09-04T23:30:27Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Blood Raider Intelligence Collection Point": {
+  "revid": 231340,
+  "timestamp": "2026-05-28T21:15:17Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Blood Raider Naval Shipyard": {
+  "revid": 156299,
+  "timestamp": "2020-06-10T23:38:59Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Blood Raider Outpost": {
+  "revid": 221441,
+  "timestamp": "2025-02-10T12:57:43Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Raider Prison Camp": {
+  "revid": 209829,
+  "timestamp": "2023-11-16T00:25:24Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Blood Raider Psychotropics Depot": {
+  "revid": 226742,
+  "timestamp": "2025-09-04T23:31:26Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Blood Raider Rally Point": {
+  "revid": 225171,
+  "timestamp": "2025-08-14T11:32:39Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Raider Temple Complex": {
+  "revid": 167404,
+  "timestamp": "2021-02-04T15:29:55Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Rally Point": {
+  "revid": 225172,
+  "timestamp": "2025-08-14T11:32:40Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Refuge": {
+  "revid": 212610,
+  "timestamp": "2024-02-07T10:08:59Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Sanctum": {
+  "revid": 225185,
+  "timestamp": "2025-08-14T11:33:37Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blood Vigil": {
+  "revid": 231195,
+  "timestamp": "2026-05-22T01:35:33Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Watch": {
+  "revid": 205087,
+  "timestamp": "2023-06-17T13:49:22Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Blood Yard": {
+  "revid": 225179,
+  "timestamp": "2025-08-14T11:33:34Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Blue Ice Belt": {
+  "revid": 214734,
+  "timestamp": "2024-04-09T05:38:37Z",
+  "categories": [
+   "Ice_belts"
+  ]
+ },
+ "Boisterous Nebula": {
+  "revid": 212177,
+  "timestamp": "2024-01-27T14:21:17Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Bountiful Frontier Reservoir": {
+  "revid": 229860,
+  "timestamp": "2026-03-18T21:51:46Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Bright Nebula": {
+  "revid": 223488,
+  "timestamp": "2025-05-28T15:54:42Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "CHAIN Mindflood Distribution Base": {
+  "revid": 167481,
+  "timestamp": "2021-02-04T15:54:08Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "CHAIN Mindflood Production Facility": {
+  "revid": 157400,
+  "timestamp": "2020-07-04T17:32:49Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Calabash Nebula": {
+  "revid": 223489,
+  "timestamp": "2025-05-28T15:58:42Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Cardinal Nebula": {
+  "revid": 228036,
+  "timestamp": "2025-12-08T13:12:48Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Centus Assembly T.P. Co.": {
+  "revid": 229141,
+  "timestamp": "2026-01-17T09:32:13Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Cheetah Nebula": {
+  "revid": 177798,
+  "timestamp": "2021-11-20T17:34:44Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Chemical Yard": {
+  "revid": 215044,
+  "timestamp": "2024-04-20T11:44:42Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Clear Icicle Belt": {
+  "revid": 214740,
+  "timestamp": "2024-04-09T06:18:45Z",
+  "categories": [
+   "Ice_belts"
+  ]
+ },
+ "Cobra Nebula": {
+  "revid": 207524,
+  "timestamp": "2023-09-02T10:59:28Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Colossal Asteroid Cluster": {
+  "revid": 216936,
+  "timestamp": "2024-06-29T15:29:25Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Common Perimeter Deposit": {
+  "revid": 224142,
+  "timestamp": "2025-06-30T07:43:24Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Confiscated Smuggler Hideout": {
+  "revid": 186377,
+  "timestamp": "2022-05-18T21:19:25Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Contested Covert Research Facilities": {
+  "revid": 228670,
+  "timestamp": "2026-01-05T10:30:43Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Convocation Watchpost": {
+  "revid": 197002,
+  "timestamp": "2022-10-30T16:03:03Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Core Bastion": {
+  "revid": 199901,
+  "timestamp": "2023-01-15T18:21:45Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Core Citadel": {
+  "revid": 199902,
+  "timestamp": "2023-01-15T18:21:55Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Core Garrison": {
+  "revid": 216427,
+  "timestamp": "2024-06-12T23:28:30Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Core Runner Drop Distribution": {
+  "revid": 215899,
+  "timestamp": "2024-05-19T09:06:30Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Core Runner Drop Production Facility": {
+  "revid": 157424,
+  "timestamp": "2020-07-04T19:16:16Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Core Runner Exile Distribution Base": {
+  "revid": 229517,
+  "timestamp": "2026-02-15T15:04:11Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Core Runner Exile Production Facility": {
+  "revid": 157421,
+  "timestamp": "2020-07-04T19:12:27Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Core Stronghold": {
+  "revid": 216429,
+  "timestamp": "2024-06-12T23:29:10Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Crab Spider Nebula": {
+  "revid": 229376,
+  "timestamp": "2026-01-31T15:09:03Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Crimson Gauntlet (2020)": {
+  "revid": 208763,
+  "timestamp": "2023-10-08T10:57:43Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Crimson Hand Supply Depot": {
+  "revid": 230240,
+  "timestamp": "2026-03-31T04:51:11Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Crimson Nebula": {
+  "revid": 223490,
+  "timestamp": "2025-05-28T15:59:29Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Crystal Nebula": {
+  "revid": 227444,
+  "timestamp": "2025-10-31T15:25:09Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Deepflow rifts": {
+  "revid": 231852,
+  "timestamp": "2026-07-02T09:56:22Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Desolate Site": {
+  "revid": 230628,
+  "timestamp": "2026-04-22T12:35:58Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Dewy Nebula": {
+  "revid": 208612,
+  "timestamp": "2023-10-07T13:20:23Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Diablo Nebula": {
+  "revid": 225239,
+  "timestamp": "2025-08-15T09:50:04Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Diamond Nebula": {
+  "revid": 203471,
+  "timestamp": "2023-05-16T15:53:36Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Digital Circuitry": {
+  "revid": 195769,
+  "timestamp": "2022-10-01T08:49:02Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Digital Complex": {
+  "revid": 223364,
+  "timestamp": "2025-05-28T11:58:15Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Digital Compound": {
+  "revid": 211250,
+  "timestamp": "2024-01-02T08:05:46Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Digital Convolution": {
+  "revid": 195770,
+  "timestamp": "2022-10-01T08:49:41Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Digital Matrix": {
+  "revid": 217228,
+  "timestamp": "2024-07-08T20:04:48Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Digital Network": {
+  "revid": 135323,
+  "timestamp": "2018-05-17T12:38:16Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Digital Plexus": {
+  "revid": 198007,
+  "timestamp": "2022-11-23T18:20:15Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Digital Tessellation": {
+  "revid": 168757,
+  "timestamp": "2021-02-25T22:58:10Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Dirty Site": {
+  "revid": 230498,
+  "timestamp": "2026-04-12T05:39:48Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Distress Beacon": {
+  "revid": 223788,
+  "timestamp": "2025-06-13T15:36:59Z",
+  "categories": []
+ },
+ "Dread Assault": {
+  "revid": 232232,
+  "timestamp": "2026-09-01T14:20:52Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Dread Guristas Fleet Staging Point": {
+  "revid": 222643,
+  "timestamp": "2025-05-03T08:05:23Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Drifter Hive Anomaly": {
+  "revid": 170545,
+  "timestamp": "2021-04-22T02:24:44Z",
+  "categories": []
+ },
+ "Drifter Hive(Barbican)": {
+  "revid": 199905,
+  "timestamp": "2023-01-15T18:22:25Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Drone Assembly": {
+  "revid": 225182,
+  "timestamp": "2025-08-14T11:33:34Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Cluster": {
+  "revid": 225183,
+  "timestamp": "2025-08-14T11:33:36Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Collection": {
+  "revid": 225180,
+  "timestamp": "2025-08-14T11:33:34Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Gathering": {
+  "revid": 225190,
+  "timestamp": "2025-08-14T11:33:40Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Herd": {
+  "revid": 228940,
+  "timestamp": "2026-01-12T09:31:06Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Horde": {
+  "revid": 225115,
+  "timestamp": "2025-08-14T11:25:16Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Infested Mine": {
+  "revid": 230491,
+  "timestamp": "2026-04-11T08:07:08Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Drone Menagerie": {
+  "revid": 225118,
+  "timestamp": "2025-08-14T11:25:19Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Patrol": {
+  "revid": 231245,
+  "timestamp": "2026-05-24T10:12:12Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Squad": {
+  "revid": 232384,
+  "timestamp": "2026-10-04T06:03:37Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Drone Surveillance": {
+  "revid": 225110,
+  "timestamp": "2025-08-14T11:25:12Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Duo Nebula": {
+  "revid": 232596,
+  "timestamp": "2026-10-23T19:40:09Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "EDENCOM Field Base": {
+  "revid": 163498,
+  "timestamp": "2020-10-29T13:36:38Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "EDENCOM Forward Post": {
+  "revid": 214446,
+  "timestamp": "2024-04-01T09:19:35Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "EDENCOM Scout Fleet": {
+  "revid": 174116,
+  "timestamp": "2021-09-15T05:07:30Z",
+  "categories": []
+ },
+ "EDENCOM Staging Area": {
+  "revid": 163458,
+  "timestamp": "2020-10-28T21:20:08Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Eagle Nebula": {
+  "revid": 224135,
+  "timestamp": "2025-06-29T23:44:59Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Elohim Sooth Sayer Distribution Base": {
+  "revid": 228235,
+  "timestamp": "2025-12-17T11:46:55Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Elohim Sooth Sayer Production Facility": {
+  "revid": 228236,
+  "timestamp": "2025-12-17T11:48:10Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Elohim X-Instinct Distribution Base": {
+  "revid": 229713,
+  "timestamp": "2026-03-06T08:49:39Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Elohim X-Instinct Production Facility": {
+  "revid": 171564,
+  "timestamp": "2021-06-02T14:45:21Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Emerald Nebula": {
+  "revid": 223492,
+  "timestamp": "2025-05-28T16:01:03Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Emergency Aid": {
+  "revid": 231979,
+  "timestamp": "2026-07-23T13:07:21Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Emergent Ruins": {
+  "revid": 229776,
+  "timestamp": "2026-03-11T07:54:00Z",
+  "categories": [
+   "Relic_sites"
+  ]
+ },
+ "Emerging Conduit": {
+  "revid": 163317,
+  "timestamp": "2020-10-26T21:41:26Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Empire Border Rare Asteroids": {
+  "revid": 231728,
+  "timestamp": "2026-06-18T11:19:28Z",
+  "categories": [
+   "Ore_sites",
+   "Rare_ore_sites"
+  ]
+ },
+ "Enormous Asteroid Cluster": {
+  "revid": 217098,
+  "timestamp": "2024-07-02T13:23:54Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Enormous Mercoxit Deposit": {
+  "revid": 224858,
+  "timestamp": "2025-07-24T11:29:19Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Enriched Clear Icicle Belt": {
+  "revid": 214739,
+  "timestamp": "2024-04-09T06:17:14Z",
+  "categories": [
+   "Ice_belts"
+  ]
+ },
+ "Epicenter": {
+  "revid": 199906,
+  "timestamp": "2023-01-15T18:22:35Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Exceptional Core Deposit": {
+  "revid": 224143,
+  "timestamp": "2025-06-30T07:47:44Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Federation Detention Facility": {
+  "revid": 231663,
+  "timestamp": "2026-06-16T04:43:42Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Festering Ruins": {
+  "revid": 177306,
+  "timestamp": "2021-11-14T19:49:57Z",
+  "categories": [
+   "Relic_sites",
+   "Unrated_Complexes"
+  ]
+ },
+ "Flame Nebula": {
+  "revid": 190221,
+  "timestamp": "2022-08-12T08:20:45Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Flowing Nebula": {
+  "revid": 222150,
+  "timestamp": "2025-03-23T22:37:03Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Fluttering Nebula": {
+  "revid": 183233,
+  "timestamp": "2022-04-06T15:32:39Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Foggy Nebula": {
+  "revid": 208624,
+  "timestamp": "2023-10-07T13:20:47Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Forgotten Core Assembly Hall": {
+  "revid": 199908,
+  "timestamp": "2023-01-15T18:22:55Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Core Circuitry Disassembler": {
+  "revid": 199909,
+  "timestamp": "2023-01-15T18:23:05Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Core Data Field": {
+  "revid": 199911,
+  "timestamp": "2023-01-15T18:23:15Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Core Information Pen": {
+  "revid": 199912,
+  "timestamp": "2023-01-15T18:23:25Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Frontier Conversion Module": {
+  "revid": 199913,
+  "timestamp": "2023-01-15T18:23:35Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Frontier Evacuation Center": {
+  "revid": 199914,
+  "timestamp": "2023-01-15T18:23:45Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Frontier Quarantine Outpost": {
+  "revid": 199915,
+  "timestamp": "2023-01-15T18:23:56Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Frontier Recursive Depot": {
+  "revid": 199916,
+  "timestamp": "2023-01-15T18:24:06Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Nebula": {
+  "revid": 230653,
+  "timestamp": "2026-04-27T11:55:07Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Forgotten Perimeter Coronation Platform": {
+  "revid": 199917,
+  "timestamp": "2023-01-15T18:24:16Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Perimeter Gateway": {
+  "revid": 216708,
+  "timestamp": "2024-06-23T15:11:34Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Perimeter Habitation Coils": {
+  "revid": 216947,
+  "timestamp": "2024-06-29T16:33:30Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Perimeter Power Array": {
+  "revid": 199920,
+  "timestamp": "2023-01-15T18:24:46Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forgotten Ruins": {
+  "revid": 203048,
+  "timestamp": "2023-04-29T11:18:26Z",
+  "categories": [
+   "Relic_sites",
+   "Unrated_Complexes"
+  ]
+ },
+ "Fortification Frontier Stronghold": {
+  "revid": 221682,
+  "timestamp": "2025-03-07T11:13:30Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Forward Reconnaissance Outpost": {
+  "revid": 223795,
+  "timestamp": "2025-06-14T11:59:57Z",
+  "categories": []
+ },
+ "Frontier Barracks": {
+  "revid": 199922,
+  "timestamp": "2023-01-15T18:25:06Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Frontier Command Post": {
+  "revid": 199923,
+  "timestamp": "2023-01-15T18:25:16Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Frosty Nebula": {
+  "revid": 223495,
+  "timestamp": "2025-05-28T16:03:47Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Gaseous Nebula": {
+  "revid": 208630,
+  "timestamp": "2023-10-07T13:20:59Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Ghost Nebula": {
+  "revid": 229451,
+  "timestamp": "2026-02-11T06:35:16Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Ghost Sites": {
+  "revid": 229730,
+  "timestamp": "2026-03-08T01:23:23Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Glacial Mass Belt": {
+  "revid": 229716,
+  "timestamp": "2026-03-06T19:36:04Z",
+  "categories": [
+   "Ice_belts"
+  ]
+ },
+ "Glass Nebula": {
+  "revid": 223212,
+  "timestamp": "2025-05-27T21:08:30Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Glistening Nebula": {
+  "revid": 227775,
+  "timestamp": "2025-11-22T13:41:40Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Goose Nebula": {
+  "revid": 223496,
+  "timestamp": "2025-05-28T16:04:15Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Griemeer Deposit": {
+  "revid": 224843,
+  "timestamp": "2025-07-24T10:09:46Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Guri Malakim Survey Base": {
+  "revid": 205795,
+  "timestamp": "2023-07-19T11:36:15Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Gurista Base": {
+  "revid": 223350,
+  "timestamp": "2025-05-28T11:54:53Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Gurista Fortress": {
+  "revid": 227271,
+  "timestamp": "2025-10-11T05:29:45Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Gurista Hideout": {
+  "revid": 214807,
+  "timestamp": "2024-04-10T23:26:13Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Gurista Lookout": {
+  "revid": 224907,
+  "timestamp": "2025-07-30T00:16:46Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Gurista Military Operations Complex": {
+  "revid": 214778,
+  "timestamp": "2024-04-10T06:45:32Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Gurista Outpost": {
+  "revid": 227329,
+  "timestamp": "2025-10-21T01:00:45Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Gurista Provincial HQ": {
+  "revid": 217500,
+  "timestamp": "2024-07-17T09:32:46Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Guristas Annex": {
+  "revid": 230738,
+  "timestamp": "2026-05-04T12:26:46Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Guristas Burrow": {
+  "revid": 219344,
+  "timestamp": "2024-10-21T13:07:09Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Chemical Lab": {
+  "revid": 232391,
+  "timestamp": "2026-10-05T23:58:47Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Guristas Den": {
+  "revid": 225103,
+  "timestamp": "2025-08-14T11:25:06Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Forlorn Den": {
+  "revid": 225102,
+  "timestamp": "2025-08-14T11:25:06Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Forlorn Hideaway": {
+  "revid": 225163,
+  "timestamp": "2025-08-14T11:32:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Forlorn Hub": {
+  "revid": 231657,
+  "timestamp": "2026-06-15T14:42:58Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Forlorn Rally Point": {
+  "revid": 157599,
+  "timestamp": "2020-07-06T23:16:24Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Forsaken Den": {
+  "revid": 225099,
+  "timestamp": "2025-08-14T11:25:04Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Forsaken Hideaway": {
+  "revid": 225158,
+  "timestamp": "2025-08-14T11:32:32Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Forsaken Hub": {
+  "revid": 215305,
+  "timestamp": "2024-04-27T12:31:28Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Forsaken Rally Point": {
+  "revid": 227850,
+  "timestamp": "2025-11-28T21:23:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Gas Processing Site": {
+  "revid": 232392,
+  "timestamp": "2026-10-05T23:59:35Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Guristas Guerilla Grounds": {
+  "revid": 216142,
+  "timestamp": "2024-06-01T16:48:46Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Guristas Hallucinogen Supply Waypoint": {
+  "revid": 231533,
+  "timestamp": "2026-06-10T04:51:38Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Guristas Haven": {
+  "revid": 225160,
+  "timestamp": "2025-08-14T11:32:32Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Hidden Den": {
+  "revid": 213982,
+  "timestamp": "2024-03-15T13:21:31Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Hidden Hideaway": {
+  "revid": 225131,
+  "timestamp": "2025-08-14T11:32:21Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Hidden Hub": {
+  "revid": 194744,
+  "timestamp": "2022-09-07T09:09:17Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Hidden Rally Point": {
+  "revid": 230627,
+  "timestamp": "2026-04-22T07:34:18Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Hideaway": {
+  "revid": 225168,
+  "timestamp": "2025-08-14T11:32:36Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Hub": {
+  "revid": 201804,
+  "timestamp": "2023-03-30T01:51:06Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Military Complex": {
+  "revid": 230806,
+  "timestamp": "2026-05-13T00:24:21Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Guristas Port": {
+  "revid": 225170,
+  "timestamp": "2025-08-14T11:32:38Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Rally Point": {
+  "revid": 157533,
+  "timestamp": "2020-07-05T18:59:54Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Refuge": {
+  "revid": 225166,
+  "timestamp": "2025-08-14T11:32:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Sanctum": {
+  "revid": 225164,
+  "timestamp": "2025-08-14T11:32:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Guristas Scout Outpost": {
+  "revid": 231931,
+  "timestamp": "2026-07-15T13:57:51Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Guristas Troop Reinvigoration Camp": {
+  "revid": 231797,
+  "timestamp": "2026-06-26T03:21:07Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Guristas Vigil": {
+  "revid": 203036,
+  "timestamp": "2023-04-28T15:49:27Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Guristas Watch": {
+  "revid": 222655,
+  "timestamp": "2025-05-03T13:41:55Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Guristas Yard": {
+  "revid": 225143,
+  "timestamp": "2025-08-14T11:32:29Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "H-PA Crew Blue Pill Distribution Base": {
+  "revid": 214906,
+  "timestamp": "2024-04-15T19:56:12Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "H-PA Crew Crash Production Facility": {
+  "revid": 207630,
+  "timestamp": "2023-09-08T10:12:33Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Haunted Yard": {
+  "revid": 229986,
+  "timestamp": "2026-03-20T01:27:08Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Hazy Nebula": {
+  "revid": 198840,
+  "timestamp": "2022-12-21T15:07:44Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Helix Nebula": {
+  "revid": 232235,
+  "timestamp": "2026-09-01T15:23:41Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Hezorime Deposit": {
+  "revid": 224840,
+  "timestamp": "2025-07-24T10:01:28Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Hidden Crokite, Dark Ochre and Gneiss Deposit": {
+  "revid": 230815,
+  "timestamp": "2026-05-13T08:09:30Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Hidden Dark Ochre and Gneiss Deposit": {
+  "revid": 230814,
+  "timestamp": "2026-05-13T08:08:38Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Hidden Gneiss Deposit": {
+  "revid": 230813,
+  "timestamp": "2026-05-13T08:08:02Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Hidden Nebula": {
+  "revid": 215224,
+  "timestamp": "2024-04-24T20:55:39Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Hidden Omber Deposit": {
+  "revid": 229629,
+  "timestamp": "2026-02-23T07:48:45Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Hidden Ruins": {
+  "revid": 203652,
+  "timestamp": "2023-05-22T16:46:16Z",
+  "categories": [
+   "Relic_sites",
+   "Unrated_Complexes"
+  ]
+ },
+ "Hierarchy": {
+  "revid": 173922,
+  "timestamp": "2021-09-08T10:18:32Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Hrada-Oki Bivouac": {
+  "revid": 228358,
+  "timestamp": "2025-12-27T10:59:06Z",
+  "categories": []
+ },
+ "ISHAEKA Tactical Response HQ": {
+  "revid": 157117,
+  "timestamp": "2020-07-01T17:12:06Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Icy Nebula": {
+  "revid": 232197,
+  "timestamp": "2026-08-22T21:55:45Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Incipient Drone Swarm": {
+  "revid": 229455,
+  "timestamp": "2026-02-11T06:45:20Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Independence": {
+  "revid": 217302,
+  "timestamp": "2024-07-12T01:48:20Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Infrequent Core Deposit": {
+  "revid": 224144,
+  "timestamp": "2025-06-30T07:52:36Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Instrumental Core Reservoir": {
+  "revid": 229862,
+  "timestamp": "2026-03-18T21:52:38Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Integrated Terminus": {
+  "revid": 199926,
+  "timestamp": "2023-01-15T18:25:46Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Interrupted Expedition": {
+  "revid": 232590,
+  "timestamp": "2026-10-22T16:22:32Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Interstitial Ore Deposit": {
+  "revid": 228498,
+  "timestamp": "2026-01-01T09:29:19Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Isolated Core Deposit": {
+  "revid": 224145,
+  "timestamp": "2025-06-30T07:56:33Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Jove Observatory": {
+  "revid": 229157,
+  "timestamp": "2026-01-18T07:41:15Z",
+  "categories": []
+ },
+ "Kylixium Deposit": {
+  "revid": 224844,
+  "timestamp": "2025-07-24T10:11:32Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Large Arkonor and Bistot Deposit": {
+  "revid": 217076,
+  "timestamp": "2024-07-01T15:23:37Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Large Asteroid Cluster": {
+  "revid": 216881,
+  "timestamp": "2024-06-28T13:03:10Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Large Bistot Deposit": {
+  "revid": 217000,
+  "timestamp": "2024-06-30T14:42:09Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Large Crokite, Dark Ochre and Gneiss Deposit": {
+  "revid": 215253,
+  "timestamp": "2024-04-25T07:35:25Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Large Dark Ochre and Gneiss Deposit": {
+  "revid": 148200,
+  "timestamp": "2019-11-08T16:55:34Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Large Gneiss Deposit": {
+  "revid": 215172,
+  "timestamp": "2024-04-24T08:31:05Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Large Griemeer Deposit": {
+  "revid": 224845,
+  "timestamp": "2025-07-24T10:14:23Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Large Hedbergite, Hemorphite and Jaspet Deposit": {
+  "revid": 229393,
+  "timestamp": "2026-02-02T07:36:19Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Large Hemorphite, Jaspet and Kernite Deposit": {
+  "revid": 224146,
+  "timestamp": "2025-06-30T08:00:59Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Large Hezorime Deposit": {
+  "revid": 224839,
+  "timestamp": "2025-07-24T09:58:01Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Large Jaspet, Kernite and Omber Deposit": {
+  "revid": 224147,
+  "timestamp": "2025-06-30T08:05:57Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Large Kernite and Omber Deposit": {
+  "revid": 224148,
+  "timestamp": "2025-06-30T08:11:37Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Large Kylixium Deposit": {
+  "revid": 224842,
+  "timestamp": "2025-07-24T10:06:43Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Large Mercoxit Deposit": {
+  "revid": 224857,
+  "timestamp": "2025-07-24T11:24:45Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Large Mordunium Deposit": {
+  "revid": 225244,
+  "timestamp": "2025-08-15T10:17:18Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Large Omber Deposit": {
+  "revid": 224149,
+  "timestamp": "2025-06-30T08:14:21Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Large Ueganite Deposit": {
+  "revid": 224841,
+  "timestamp": "2025-07-24T10:04:22Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Large Veldspar Deposit": {
+  "revid": 224847,
+  "timestamp": "2025-07-24T10:18:05Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Leopard Nebula": {
+  "revid": 223497,
+  "timestamp": "2025-05-28T16:04:59Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Limited Sleeper Cache": {
+  "revid": 229102,
+  "timestamp": "2026-01-15T02:12:47Z",
+  "categories": [
+   "Data_sites",
+   "Relic_sites"
+  ]
+ },
+ "Lion Nebula": {
+  "revid": 208651,
+  "timestamp": "2023-10-07T13:21:41Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "List of data and relic sites": {
+  "revid": 230366,
+  "timestamp": "2026-04-07T15:30:57Z",
+  "categories": [
+   "Data_sites",
+   "Relic_sites"
+  ]
+ },
+ "Major Conduit": {
+  "revid": 206939,
+  "timestamp": "2023-08-15T10:42:23Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Massive Nebula": {
+  "revid": 203495,
+  "timestamp": "2023-05-17T12:19:36Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Medium Arkonor and Bistot Deposit": {
+  "revid": 216997,
+  "timestamp": "2024-06-30T14:25:59Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Medium Asteroid Cluster": {
+  "revid": 216878,
+  "timestamp": "2024-06-28T12:56:46Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Metaliminal Meteoroid": {
+  "revid": 231980,
+  "timestamp": "2026-07-23T13:07:33Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Minmatar Contracted Bio-Farm": {
+  "revid": 211593,
+  "timestamp": "2024-01-08T00:50:15Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Minor Angel Annex": {
+  "revid": 157233,
+  "timestamp": "2020-07-04T10:34:31Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Minor Blood Annex": {
+  "revid": 216635,
+  "timestamp": "2024-06-20T10:55:17Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Minor Conduit": {
+  "revid": 206940,
+  "timestamp": "2023-08-15T10:45:13Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Minor Guristas Annex": {
+  "revid": 222652,
+  "timestamp": "2025-05-03T13:28:53Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Minor Perimeter Reservoir": {
+  "revid": 231121,
+  "timestamp": "2026-05-21T10:29:45Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Minor Sansha Annex": {
+  "revid": 231537,
+  "timestamp": "2026-06-10T05:08:20Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Minor Serpentis Annex": {
+  "revid": 171679,
+  "timestamp": "2021-06-05T20:50:24Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Mordunium Deposit": {
+  "revid": 227861,
+  "timestamp": "2025-11-30T08:02:37Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Mul-Zatah Monastery": {
+  "revid": 230596,
+  "timestamp": "2026-04-19T05:01:57Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Murky Nebula": {
+  "revid": 207532,
+  "timestamp": "2023-09-03T00:39:49Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Nation Commander Outpost": {
+  "revid": 223797,
+  "timestamp": "2025-06-14T12:30:01Z",
+  "categories": []
+ },
+ "Nation Commander Stronghold": {
+  "revid": 223882,
+  "timestamp": "2025-06-17T22:01:39Z",
+  "categories": []
+ },
+ "Nation Consolidation Network": {
+  "revid": 223881,
+  "timestamp": "2025-06-17T21:37:49Z",
+  "categories": []
+ },
+ "Nation Mining Colony": {
+  "revid": 223863,
+  "timestamp": "2025-06-16T11:22:57Z",
+  "categories": []
+ },
+ "Nation Rebirth Facility": {
+  "revid": 223884,
+  "timestamp": "2025-06-18T09:34:20Z",
+  "categories": []
+ },
+ "Nocxite Deposit": {
+  "revid": 224849,
+  "timestamp": "2025-07-24T10:34:15Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Nullsec Blue A0 Rare Asteroids": {
+  "revid": 231426,
+  "timestamp": "2026-06-06T06:50:30Z",
+  "categories": [
+   "Rare_ore_sites"
+  ]
+ },
+ "Nullsec Border Rare Asteroids": {
+  "revid": 231445,
+  "timestamp": "2026-06-06T12:43:33Z",
+  "categories": [
+   "Ore_sites",
+   "Rare_ore_sites"
+  ]
+ },
+ "Observatory Flashpoint": {
+  "revid": 230051,
+  "timestamp": "2026-03-22T00:57:06Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Observatory Infiltration": {
+  "revid": 229299,
+  "timestamp": "2026-01-24T09:24:54Z",
+  "categories": []
+ },
+ "Old Meanie - Cultivation Center": {
+  "revid": 175909,
+  "timestamp": "2021-10-23T08:04:09Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Ordinary Perimeter Deposit": {
+  "revid": 225196,
+  "timestamp": "2025-08-14T14:52:01Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Ordinary Perimeter Reservoir": {
+  "revid": 231569,
+  "timestamp": "2026-06-10T16:49:50Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Original Drifter Combat Anomalies": {
+  "revid": 224888,
+  "timestamp": "2025-07-27T19:29:14Z",
+  "categories": []
+ },
+ "Oruze Osobnyk": {
+  "revid": 199932,
+  "timestamp": "2023-01-15T18:26:46Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Outgrowth Rogue Drone Hive (10/10)": {
+  "revid": 229386,
+  "timestamp": "2026-02-01T09:41:06Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Outgrowth Rogue Drone Hive (5/10)": {
+  "revid": 228846,
+  "timestamp": "2026-01-10T10:46:50Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Outpost Frontier Stronghold": {
+  "revid": 199933,
+  "timestamp": "2023-01-15T18:26:56Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Overmind Nursery Grove": {
+  "revid": 232690,
+  "timestamp": "2026-10-30T11:31:57Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Override Transfer Array": {
+  "revid": 223864,
+  "timestamp": "2025-06-16T12:14:32Z",
+  "categories": []
+ },
+ "Overwhelmed Civilian Facility": {
+  "revid": 223883,
+  "timestamp": "2025-06-18T09:26:08Z",
+  "categories": []
+ },
+ "PDW-09FX Frentix Distribution Base": {
+  "revid": 171141,
+  "timestamp": "2021-05-14T01:56:20Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "PDW-09FX Frentix Production Facility": {
+  "revid": 221821,
+  "timestamp": "2025-03-12T21:40:31Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Pale Nebula": {
+  "revid": 228014,
+  "timestamp": "2025-12-06T15:34:56Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Peacock Nebula": {
+  "revid": 213677,
+  "timestamp": "2024-03-10T22:43:45Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Perimeter Ambush Point": {
+  "revid": 199934,
+  "timestamp": "2023-01-15T18:27:06Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Perimeter Camp": {
+  "revid": 221683,
+  "timestamp": "2025-03-07T11:14:13Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Perimeter Checkpoint": {
+  "revid": 221687,
+  "timestamp": "2025-03-07T21:49:40Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Perimeter Hangar": {
+  "revid": 199937,
+  "timestamp": "2023-01-15T18:27:36Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Phase Catalyst Node": {
+  "revid": 199938,
+  "timestamp": "2023-01-15T18:27:46Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Phased Asteroid Field": {
+  "revid": 230587,
+  "timestamp": "2026-04-18T15:43:28Z",
+  "categories": []
+ },
+ "Phoenix Nebula": {
+  "revid": 206711,
+  "timestamp": "2023-08-07T18:38:43Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Pipe Nebula": {
+  "revid": 223499,
+  "timestamp": "2025-05-28T16:06:15Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Pith Merchant Depot": {
+  "revid": 157301,
+  "timestamp": "2020-07-04T13:51:47Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Pith's Penal Complex": {
+  "revid": 222287,
+  "timestamp": "2025-03-31T17:13:49Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Pith-Robux Asteroid Mining Co.": {
+  "revid": 221212,
+  "timestamp": "2025-01-18T23:11:46Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Polar Bear Nebula": {
+  "revid": 203920,
+  "timestamp": "2023-06-01T12:39:10Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Pristine White Glaze Belt": {
+  "revid": 215460,
+  "timestamp": "2024-04-30T19:47:03Z",
+  "categories": [
+   "Ice_belts"
+  ]
+ },
+ "Profiteer Nebula": {
+  "revid": 206594,
+  "timestamp": "2023-08-05T08:51:35Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Propaganda Cluster": {
+  "revid": 223861,
+  "timestamp": "2025-06-16T10:36:13Z",
+  "categories": []
+ },
+ "Provisional Angel Outpost": {
+  "revid": 173368,
+  "timestamp": "2021-08-22T15:25:00Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Provisional Blood Outpost": {
+  "revid": 230593,
+  "timestamp": "2026-04-19T03:49:35Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Provisional Gurista Outpost": {
+  "revid": 216322,
+  "timestamp": "2024-06-11T12:55:12Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Provisional Sansha Outpost": {
+  "revid": 174588,
+  "timestamp": "2021-09-27T12:37:10Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Provisional Serpentis Outpost": {
+  "revid": 230515,
+  "timestamp": "2026-04-13T17:13:15Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Quarantine Area": {
+  "revid": 199939,
+  "timestamp": "2023-01-15T18:27:56Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Quarantine Area (updated)": {
+  "revid": 199940,
+  "timestamp": "2023-01-15T18:28:06Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Radiance": {
+  "revid": 204988,
+  "timestamp": "2023-06-15T04:38:54Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Raid": {
+  "revid": 231981,
+  "timestamp": "2026-07-23T13:07:45Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Rampant Drone Fabricator": {
+  "revid": 232184,
+  "timestamp": "2026-08-20T11:34:23Z",
+  "categories": []
+ },
+ "Rapture Nebula": {
+  "revid": 223500,
+  "timestamp": "2025-05-28T16:06:47Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Rarified Core Deposit": {
+  "revid": 224151,
+  "timestamp": "2025-06-30T08:23:42Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Red Dragonfly Nebula": {
+  "revid": 208673,
+  "timestamp": "2023-10-07T13:22:25Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Relic and data sites": {
+  "revid": 232268,
+  "timestamp": "2026-09-08T11:29:14Z",
+  "categories": [
+   "Data_sites",
+   "Relic_sites"
+  ]
+ },
+ "Rimy Nebula": {
+  "revid": 208676,
+  "timestamp": "2023-10-07T13:22:31Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Ring Nebula": {
+  "revid": 225323,
+  "timestamp": "2025-08-18T04:36:34Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Rocky Nebula": {
+  "revid": 215706,
+  "timestamp": "2024-05-09T02:03:49Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Rogue Drone Asteroid Infestation": {
+  "revid": 228847,
+  "timestamp": "2026-01-10T10:50:09Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Rogue Drone Infestation Sprout": {
+  "revid": 228842,
+  "timestamp": "2026-01-10T10:39:15Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Rogue Drone Outgrowth Colony": {
+  "revid": 223323,
+  "timestamp": "2025-05-27T21:28:07Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Rogue Trial Yard": {
+  "revid": 230501,
+  "timestamp": "2026-04-12T05:45:29Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Ruins": {
+  "revid": 230499,
+  "timestamp": "2026-04-12T05:41:53Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "SCC Secure Key Storage": {
+  "revid": 229998,
+  "timestamp": "2026-03-20T23:11:33Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Saintly Nebula": {
+  "revid": 223503,
+  "timestamp": "2025-05-28T16:08:15Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Salvage Research": {
+  "revid": 231977,
+  "timestamp": "2026-07-23T13:06:35Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Sansha Acclimatization Facility": {
+  "revid": 197723,
+  "timestamp": "2022-11-16T23:45:53Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Sansha Annex": {
+  "revid": 231538,
+  "timestamp": "2026-06-10T05:11:12Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Base": {
+  "revid": 224918,
+  "timestamp": "2025-08-01T10:35:40Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Burrow": {
+  "revid": 225098,
+  "timestamp": "2025-08-14T11:25:03Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Den": {
+  "revid": 225109,
+  "timestamp": "2025-08-14T11:25:12Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Forlorn Den": {
+  "revid": 231796,
+  "timestamp": "2026-06-26T03:16:05Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Forlorn Hideaway": {
+  "revid": 225111,
+  "timestamp": "2025-08-14T11:25:14Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Forlorn Hub": {
+  "revid": 225126,
+  "timestamp": "2025-08-14T11:25:23Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Forlorn Rally Point": {
+  "revid": 225178,
+  "timestamp": "2025-08-14T11:33:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Forsaken Den": {
+  "revid": 225184,
+  "timestamp": "2025-08-14T11:33:36Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Forsaken Hideaway": {
+  "revid": 225100,
+  "timestamp": "2025-08-14T11:25:04Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Forsaken Hub": {
+  "revid": 222377,
+  "timestamp": "2025-04-10T13:01:58Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Forsaken Rally Point": {
+  "revid": 225167,
+  "timestamp": "2025-08-14T11:32:35Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Forsaken Sanctum": {
+  "revid": 230534,
+  "timestamp": "2026-04-15T00:08:52Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Fortress": {
+  "revid": 204829,
+  "timestamp": "2023-06-11T22:33:54Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Gas Processing Site": {
+  "revid": 159972,
+  "timestamp": "2020-08-13T16:08:16Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Sansha Haven": {
+  "revid": 197990,
+  "timestamp": "2022-11-23T05:02:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Hidden Den": {
+  "revid": 225176,
+  "timestamp": "2025-08-14T11:33:33Z",
+  "categories": [
+   "Combat_Anomalies",
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Hidden Hideaway": {
+  "revid": 225097,
+  "timestamp": "2025-08-14T11:25:03Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Hidden Hub": {
+  "revid": 138925,
+  "timestamp": "2018-10-24T19:46:51Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Hidden Rally Point": {
+  "revid": 225138,
+  "timestamp": "2025-08-14T11:32:25Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Hideaway": {
+  "revid": 225123,
+  "timestamp": "2025-08-14T11:25:22Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Hideout": {
+  "revid": 220602,
+  "timestamp": "2024-12-15T13:50:11Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Hub": {
+  "revid": 227493,
+  "timestamp": "2025-11-10T01:03:16Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Lookout": {
+  "revid": 230821,
+  "timestamp": "2026-05-14T17:56:21Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Military Complex": {
+  "revid": 213340,
+  "timestamp": "2024-03-04T00:07:49Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Military Operations Complex": {
+  "revid": 231826,
+  "timestamp": "2026-06-29T03:40:00Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Sansha Military Outpost": {
+  "revid": 213383,
+  "timestamp": "2024-03-05T01:29:34Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Sansha Outpost": {
+  "revid": 228333,
+  "timestamp": "2025-12-25T07:25:11Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Port": {
+  "revid": 225132,
+  "timestamp": "2025-08-14T11:32:22Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Prison Camp": {
+  "revid": 194690,
+  "timestamp": "2022-09-05T08:46:50Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Sansha Provincial HQ": {
+  "revid": 232379,
+  "timestamp": "2026-10-02T10:40:12Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Rally Point": {
+  "revid": 225127,
+  "timestamp": "2025-08-14T11:32:21Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Refuge": {
+  "revid": 212611,
+  "timestamp": "2024-02-07T10:15:15Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Sanctum": {
+  "revid": 225104,
+  "timestamp": "2025-08-14T11:25:08Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Sansha Vigil": {
+  "revid": 229478,
+  "timestamp": "2026-02-11T22:12:46Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha War Supply Complex": {
+  "revid": 230239,
+  "timestamp": "2026-03-30T22:53:22Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Sansha Watch": {
+  "revid": 223259,
+  "timestamp": "2025-05-27T21:16:47Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha Yard": {
+  "revid": 231812,
+  "timestamp": "2026-06-26T18:34:51Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Sansha's Command Relay Outpost": {
+  "revid": 218316,
+  "timestamp": "2024-08-19T15:37:40Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Sansha's Nation Neural Paralytic Facility": {
+  "revid": 231536,
+  "timestamp": "2026-06-10T05:01:44Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Sansha's Nation Occupied Mining Colony": {
+  "revid": 232225,
+  "timestamp": "2026-08-29T06:13:54Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Sansha's Rally Point": {
+  "revid": 225150,
+  "timestamp": "2025-08-14T11:32:30Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Annex": {
+  "revid": 231889,
+  "timestamp": "2026-07-08T22:20:04Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Base": {
+  "revid": 171719,
+  "timestamp": "2021-06-08T16:02:36Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Burrow": {
+  "revid": 222644,
+  "timestamp": "2025-05-03T09:13:17Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Capital Staging": {
+  "revid": 232377,
+  "timestamp": "2026-10-01T00:39:25Z",
+  "categories": []
+ },
+ "Serpentis Chemical Lab": {
+  "revid": 157195,
+  "timestamp": "2020-07-04T09:21:15Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Serpentis Corporation Hydroponics Site": {
+  "revid": 231198,
+  "timestamp": "2026-05-22T02:07:38Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Den": {
+  "revid": 225124,
+  "timestamp": "2025-08-14T11:25:22Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Drug Outlet": {
+  "revid": 225101,
+  "timestamp": "2025-08-14T11:25:05Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Fleet Shipyard": {
+  "revid": 216273,
+  "timestamp": "2024-06-09T09:09:19Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Forlorn Den": {
+  "revid": 225107,
+  "timestamp": "2025-08-14T11:25:11Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Forlorn Hideaway": {
+  "revid": 225140,
+  "timestamp": "2025-08-14T11:32:28Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Forlorn Hub": {
+  "revid": 225108,
+  "timestamp": "2025-08-14T11:25:12Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Forlorn Rally Point": {
+  "revid": 225146,
+  "timestamp": "2025-08-14T11:32:29Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Forsaken Den": {
+  "revid": 225159,
+  "timestamp": "2025-08-14T11:32:32Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Forsaken Hideaway": {
+  "revid": 225154,
+  "timestamp": "2025-08-14T11:32:31Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Forsaken Hub": {
+  "revid": 225141,
+  "timestamp": "2025-08-14T11:32:28Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Forsaken Rally Point": {
+  "revid": 225135,
+  "timestamp": "2025-08-14T11:32:23Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Forsaken Sanctum": {
+  "revid": 230533,
+  "timestamp": "2026-04-15T00:08:20Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Fortress": {
+  "revid": 157229,
+  "timestamp": "2020-07-04T10:27:05Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Gas Processing Site": {
+  "revid": 200713,
+  "timestamp": "2023-02-16T20:25:56Z",
+  "categories": [
+   "Chemical_Labs"
+  ]
+ },
+ "Serpentis Haven": {
+  "revid": 225144,
+  "timestamp": "2025-08-14T11:32:29Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Hidden Den": {
+  "revid": 225156,
+  "timestamp": "2025-08-14T11:32:31Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Hidden Hideaway": {
+  "revid": 225161,
+  "timestamp": "2025-08-14T11:32:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Hidden Hub": {
+  "revid": 225151,
+  "timestamp": "2025-08-14T11:32:30Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Hidden Rally Point": {
+  "revid": 225147,
+  "timestamp": "2025-08-14T11:32:29Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Hideaway": {
+  "revid": 225117,
+  "timestamp": "2025-08-14T11:25:19Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Hideout": {
+  "revid": 219345,
+  "timestamp": "2024-10-21T19:18:36Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Hub": {
+  "revid": 229481,
+  "timestamp": "2026-02-13T01:14:25Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Live Cargo Distribution Facilities": {
+  "revid": 221969,
+  "timestamp": "2025-03-15T16:12:13Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Logistical Outpost": {
+  "revid": 231827,
+  "timestamp": "2026-06-29T18:56:06Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Lookout": {
+  "revid": 223108,
+  "timestamp": "2025-05-25T22:10:47Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Military Complex": {
+  "revid": 207604,
+  "timestamp": "2023-09-06T11:49:50Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Narcotic Warehouses": {
+  "revid": 229618,
+  "timestamp": "2026-02-20T22:28:06Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Outpost": {
+  "revid": 232046,
+  "timestamp": "2026-08-01T00:52:13Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Paramilitary Complex": {
+  "revid": 222431,
+  "timestamp": "2025-04-17T00:01:04Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Phi-Outpost": {
+  "revid": 229449,
+  "timestamp": "2026-02-11T06:14:42Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Port": {
+  "revid": 205560,
+  "timestamp": "2023-07-07T01:37:31Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Prison Camp": {
+  "revid": 211861,
+  "timestamp": "2024-01-16T11:07:47Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "Serpentis Provincial HQ": {
+  "revid": 196954,
+  "timestamp": "2022-10-29T00:35:44Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Rally Point": {
+  "revid": 198036,
+  "timestamp": "2022-11-25T15:45:03Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Refuge": {
+  "revid": 229423,
+  "timestamp": "2026-02-05T22:35:21Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Sanctum": {
+  "revid": 225177,
+  "timestamp": "2025-08-14T11:33:33Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Serpentis Vigil": {
+  "revid": 226994,
+  "timestamp": "2025-09-17T06:54:02Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Watch": {
+  "revid": 232169,
+  "timestamp": "2026-08-16T08:08:24Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Serpentis Yard": {
+  "revid": 229407,
+  "timestamp": "2026-02-03T22:44:09Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Shadow Serpentis Fleet Staging Point": {
+  "revid": 166677,
+  "timestamp": "2021-01-26T13:18:57Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Shattered Debris Field": {
+  "revid": 224158,
+  "timestamp": "2025-06-30T08:50:59Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Shattered Ice Field": {
+  "revid": 224159,
+  "timestamp": "2025-06-30T08:55:49Z",
+  "categories": [
+   "Ice_belts",
+   "Wormhole_sites"
+  ]
+ },
+ "Shimmering Nebula": {
+  "revid": 208685,
+  "timestamp": "2023-10-07T13:22:49Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Shiny Nebula": {
+  "revid": 208686,
+  "timestamp": "2023-10-07T13:22:51Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Sister Nebula": {
+  "revid": 232067,
+  "timestamp": "2026-08-04T08:45:07Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Sizeable Perimeter Reservoir": {
+  "revid": 229858,
+  "timestamp": "2026-03-18T21:50:51Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Sleeper Cache": {
+  "revid": 229821,
+  "timestamp": "2026-03-15T08:28:52Z",
+  "categories": [
+   "Data_sites"
+  ]
+ },
+ "Sleeper Data Sanctuary": {
+  "revid": 216697,
+  "timestamp": "2024-06-23T09:24:18Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Sleeper Information Sanctum": {
+  "revid": 199946,
+  "timestamp": "2023-01-15T18:29:06Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Small Arkonor and Bistot Deposit": {
+  "revid": 216991,
+  "timestamp": "2024-06-30T14:10:27Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Small Asteroid Cluster": {
+  "revid": 216886,
+  "timestamp": "2024-06-28T13:19:33Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Small Crokite and Dark Ochre Deposit": {
+  "revid": 222620,
+  "timestamp": "2025-04-30T14:05:07Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Small Crokite, Dark Ochre and Gneiss Deposit": {
+  "revid": 228074,
+  "timestamp": "2025-12-10T07:51:08Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Small Dark Ochre and Gneiss Deposit": {
+  "revid": 215183,
+  "timestamp": "2024-04-24T11:37:41Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Small Gneiss Deposit": {
+  "revid": 215136,
+  "timestamp": "2024-04-23T19:56:40Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Small Hedbergite, Hemorphite and Jaspet Deposit": {
+  "revid": 215238,
+  "timestamp": "2024-04-25T05:33:54Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Small Hemorphite, Jaspet and Kernite Deposit": {
+  "revid": 224152,
+  "timestamp": "2025-06-30T08:27:38Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Small Hezorime Deposit": {
+  "revid": 224850,
+  "timestamp": "2025-07-24T10:42:40Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Small Jaspet, Kernite and Omber Deposit": {
+  "revid": 224153,
+  "timestamp": "2025-06-30T08:32:48Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Small Kernite and Omber Deposit": {
+  "revid": 227825,
+  "timestamp": "2025-11-26T08:29:33Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Small Mercoxit Deposit": {
+  "revid": 224855,
+  "timestamp": "2025-07-24T11:18:03Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Small Omber Deposit": {
+  "revid": 224155,
+  "timestamp": "2025-06-30T08:39:48Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Small Spodumain, Crokite and Dark Ochre Deposit": {
+  "revid": 215444,
+  "timestamp": "2024-04-30T16:51:24Z",
+  "categories": [
+   "Removed_ore_sites"
+  ]
+ },
+ "Small Ueganite Deposit": {
+  "revid": 224851,
+  "timestamp": "2025-07-24T10:53:00Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Smoking Nebula": {
+  "revid": 232091,
+  "timestamp": "2026-08-06T06:33:57Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Smuggler Hideout": {
+  "revid": 219242,
+  "timestamp": "2024-10-11T10:50:38Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Snowy Owl Nebula": {
+  "revid": 222577,
+  "timestamp": "2025-04-25T10:17:58Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "SoCT Survey Expedition": {
+  "revid": 205794,
+  "timestamp": "2023-07-19T11:33:55Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Solar Cell": {
+  "revid": 221226,
+  "timestamp": "2025-01-19T21:53:10Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Spacious Nebula": {
+  "revid": 220195,
+  "timestamp": "2024-11-20T21:39:02Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Sparking Nebula": {
+  "revid": 223506,
+  "timestamp": "2025-05-28T16:10:19Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Stabilize Rift": {
+  "revid": 231972,
+  "timestamp": "2026-07-23T12:38:52Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Standard Sleeper Cache": {
+  "revid": 231778,
+  "timestamp": "2026-06-23T22:28:48Z",
+  "categories": [
+   "Data_sites",
+   "Relic_sites"
+  ]
+ },
+ "Stellar Fleet Deployment Site": {
+  "revid": 171208,
+  "timestamp": "2021-05-18T11:04:16Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Stellar Observation Post": {
+  "revid": 163144,
+  "timestamp": "2020-10-26T12:46:21Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Strange Energy Readings": {
+  "revid": 199948,
+  "timestamp": "2023-01-15T18:29:26Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Stronghold": {
+  "revid": 229199,
+  "timestamp": "2026-01-19T21:10:16Z",
+  "categories": []
+ },
+ "Sunspark Nebula": {
+  "revid": 227071,
+  "timestamp": "2025-09-26T04:05:51Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Superior Sleeper Cache": {
+  "revid": 231828,
+  "timestamp": "2026-06-29T22:11:31Z",
+  "categories": [
+   "Data_sites",
+   "Relic_sites"
+  ]
+ },
+ "Suspicious Signal": {
+  "revid": 231982,
+  "timestamp": "2026-07-23T13:07:57Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Swarm Nebula": {
+  "revid": 208704,
+  "timestamp": "2023-10-07T13:23:28Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "The Kundalini Manifest": {
+  "revid": 223887,
+  "timestamp": "2025-06-18T10:06:12Z",
+  "categories": []
+ },
+ "The Line": {
+  "revid": 199949,
+  "timestamp": "2023-01-15T18:29:36Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "The Line(updated)": {
+  "revid": 199950,
+  "timestamp": "2023-01-15T18:29:46Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "The Maze": {
+  "revid": 232574,
+  "timestamp": "2026-10-19T06:32:50Z",
+  "categories": [
+   "DED_Complexes"
+  ]
+ },
+ "The Mirror": {
+  "revid": 199951,
+  "timestamp": "2023-01-15T18:29:56Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "The Oruze Construct": {
+  "revid": 232056,
+  "timestamp": "2026-08-02T18:38:12Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "The Ruins of Enclave Cohort 27": {
+  "revid": 199952,
+  "timestamp": "2023-01-15T18:30:06Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Thick Nebula": {
+  "revid": 177725,
+  "timestamp": "2021-11-20T01:19:13Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Token Perimeter Reservoir": {
+  "revid": 229859,
+  "timestamp": "2026-03-18T21:51:19Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Torpid Sleeper Hive": {
+  "revid": 229457,
+  "timestamp": "2026-02-11T06:53:29Z",
+  "categories": []
+ },
+ "Traffic Stop": {
+  "revid": 231973,
+  "timestamp": "2026-07-23T12:39:18Z",
+  "categories": [
+   "Homefront_Operations"
+  ]
+ },
+ "Triglavian Invasion combat sites": {
+  "revid": 223890,
+  "timestamp": "2025-06-18T13:21:16Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "True Creations Research Center": {
+  "revid": 223885,
+  "timestamp": "2025-06-18T09:37:09Z",
+  "categories": []
+ },
+ "True Power Provisional Headquarters": {
+  "revid": 223886,
+  "timestamp": "2025-06-18T09:50:23Z",
+  "categories": []
+ },
+ "True Sansha Fleet Staging Point": {
+  "revid": 227876,
+  "timestamp": "2025-11-30T20:12:40Z",
+  "categories": [
+   "Unrated_Complexes"
+  ]
+ },
+ "Ueganite Deposit": {
+  "revid": 224852,
+  "timestamp": "2025-07-24T11:03:56Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Uncommon Core Deposit": {
+  "revid": 224156,
+  "timestamp": "2025-06-30T08:42:33Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Unexceptional Frontier Deposit": {
+  "revid": 224157,
+  "timestamp": "2025-06-30T08:45:50Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Union Day Combat Challenge": {
+  "revid": 194646,
+  "timestamp": "2022-09-04T06:07:17Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Union Day Elite Combat Challenge": {
+  "revid": 194270,
+  "timestamp": "2022-08-31T07:56:40Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Unknown Anomaly": {
+  "revid": 199956,
+  "timestamp": "2023-01-15T18:30:46Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Core Backup Array": {
+  "revid": 226726,
+  "timestamp": "2025-09-04T23:31:11Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Core Emergence": {
+  "revid": 199958,
+  "timestamp": "2023-01-15T18:31:06Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Frontier Database": {
+  "revid": 216318,
+  "timestamp": "2024-06-11T03:21:22Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Frontier Digital Nexus": {
+  "revid": 221321,
+  "timestamp": "2025-01-30T00:29:50Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Frontier Enclave Relay": {
+  "revid": 199961,
+  "timestamp": "2023-01-15T18:31:36Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Frontier Receiver": {
+  "revid": 199962,
+  "timestamp": "2023-01-15T18:31:46Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Frontier Server Bank": {
+  "revid": 199963,
+  "timestamp": "2023-01-15T18:31:56Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Frontier Trinary Hub": {
+  "revid": 199964,
+  "timestamp": "2023-01-15T18:32:06Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Perimeter Amplifier": {
+  "revid": 199965,
+  "timestamp": "2023-01-15T18:32:16Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Perimeter Comms Relay": {
+  "revid": 216937,
+  "timestamp": "2024-06-29T15:49:59Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Perimeter Information Center": {
+  "revid": 199968,
+  "timestamp": "2023-01-15T18:32:36Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unsecured Perimeter Transponder Farm": {
+  "revid": 216693,
+  "timestamp": "2024-06-23T02:20:46Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ },
+ "Unusual Core Deposit": {
+  "revid": 200736,
+  "timestamp": "2023-02-18T17:54:21Z",
+  "categories": [
+   "Ore_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Uroborus": {
+  "revid": 223888,
+  "timestamp": "2025-06-18T10:13:05Z",
+  "categories": []
+ },
+ "Vast Frontier Reservoir": {
+  "revid": 229861,
+  "timestamp": "2026-03-18T21:52:12Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "Veiled Asteroid Field": {
+  "revid": 228827,
+  "timestamp": "2026-01-10T07:42:57Z",
+  "categories": [
+   "Ore_sites"
+  ]
+ },
+ "Veldspar Deposit": {
+  "revid": 224853,
+  "timestamp": "2025-07-24T11:07:38Z",
+  "categories": [
+   "Ore_sites",
+   "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Vigilance Point": {
+  "revid": 230077,
+  "timestamp": "2026-03-22T16:34:49Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Vital Core Reservoir": {
+  "revid": 229863,
+  "timestamp": "2026-03-18T21:52:59Z",
+  "categories": [
+   "Gas_sites",
+   "Wormhole_sites"
+  ]
+ },
+ "W-Space Blue A0 Rare Asteroids": {
+  "revid": 231100,
+  "timestamp": "2026-05-21T10:29:38Z",
+  "categories": [
+   "Ore_sites",
+   "Rare_ore_sites"
+  ]
+ },
+ "Warp Matrix Convergence": {
+  "revid": 210118,
+  "timestamp": "2023-11-28T15:42:34Z",
+  "categories": [
+   "Relic_sites"
+  ]
+ },
+ "Whirling Nebula": {
+  "revid": 224964,
+  "timestamp": "2025-08-06T15:53:26Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "White Glaze Belt": {
+  "revid": 229719,
+  "timestamp": "2026-03-06T20:01:28Z",
+  "categories": [
+   "Ice_belts"
+  ]
+ },
+ "Wightstorm Anchorage": {
+  "revid": 198697,
+  "timestamp": "2022-12-17T21:08:32Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Wightstorm Forward Base": {
+  "revid": 228346,
+  "timestamp": "2025-12-26T22:02:29Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Wightstorm Muster Point": {
+  "revid": 228344,
+  "timestamp": "2025-12-26T22:00:34Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Wightstorm Transit Site": {
+  "revid": 228345,
+  "timestamp": "2025-12-26T22:01:51Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Wild Nebula": {
+  "revid": 223444,
+  "timestamp": "2025-05-28T12:15:25Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Wispy Nebula": {
+  "revid": 208715,
+  "timestamp": "2023-10-07T13:23:50Z",
+  "categories": [
+   "Gas_sites"
+  ]
+ },
+ "Wispy Ruins": {
+  "revid": 217292,
+  "timestamp": "2024-07-11T21:55:40Z",
+  "categories": [
+   "Relic_sites",
+   "Unrated_Complexes"
+  ]
+ },
+ "World Ark Assault Flashpoint": {
+  "revid": 227125,
+  "timestamp": "2025-09-30T20:51:54Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "World Ark Deployment Site": {
+  "revid": 163324,
+  "timestamp": "2020-10-26T21:53:55Z",
+  "categories": [
+   "Combat_Anomalies"
+  ]
+ },
+ "Wormhole sites": {
+  "revid": 231740,
+  "timestamp": "2026-06-18T18:01:26Z",
+  "categories": [
+   "Wormhole_sites"
+  ]
+ }
+}
