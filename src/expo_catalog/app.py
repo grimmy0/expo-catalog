@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import re
 import sqlite3
 import subprocess
 import sys
@@ -24,9 +23,12 @@ from textual.widgets import DataTable, Footer, Header, Input, Static
 from expo_catalog import db
 from expo_catalog.db import Site
 from expo_catalog.fuzzy import rank
+from expo_catalog.labels import SPACE_WIDTH, TYPE_WIDTH, clip, space_label, type_label
+from expo_catalog.query import parse_query
 
 __all__ = [
     "COLUMNS",
+    "HIDDEN_STATUSES",
     "PLACEHOLDER",
     "Catalog",
     "CatalogApp",
@@ -43,15 +45,21 @@ __all__ = [
     "type_label",
 ]
 
-PLACEHOLDER = "Type to filter… (fzf-style: space = AND, 'exact, !exclude, ^prefix)"
+PLACEHOLDER = "Type to filter… (fzf-style: space = AND, 'exact, !exclude; fields: space:c3 type:relic danger:<=3)"
 COLUMNS: tuple[str, ...] = ("Name", "Type", "Space", "Danger", "Enemies", "Min ship")
 BUILD_COMMAND = "uv run python -m scraper.build"
 REFRESH_COMMAND: tuple[str, ...] = ("-m", "scraper", "refresh")
 """Arguments passed to ``sys.executable`` by ``--refresh`` (fetch → parse → build)."""
 
+HIDDEN_STATUSES: frozenset[str] = frozenset({"removed", "unverified"})
+"""Sites with one of these statuses are hidden until ctrl+r, ``--all`` or a ``status:`` term."""
+
 HELP_TEXT = (
     "Type to filter (fzf syntax: space = AND, 'exact, !exclude, ^prefix, suffix$).\n"
+    "Field terms narrow first: space:c3 type:relic danger:<=3 danger:2-4 ship:frig\n"
+    "faction:angel name:den ewar:web status:removed · !space:null negates\n"
     "↑/↓ or ctrl+k/ctrl+j move · PgUp/PgDn page · Enter toggles details\n"
+    "ctrl+r shows/hides removed + unverified sites (hidden by default)\n"
     "Esc clears the filter (or quits when empty) · ctrl+q quits · F1 / ? help"
 )
 
@@ -91,38 +99,6 @@ _CATEGORY_LABELS: dict[str, str] = {
     "other": "Other",
 }
 
-# Short labels for the Type column (≤ TYPE_WIDTH chars). combat_ded and
-# combat_anomaly are derived from the rating instead, see type_label().
-_TYPE_LABELS: dict[str, str] = {
-    "combat_unrated": "Unrated",
-    "data": "Data",
-    "relic": "Relic",
-    "gas": "Gas",
-    "chemical_lab": "Chem lab",
-    "ghost": "Ghost",
-    "sleeper_cache": "Sleeper",
-    "wormhole_combat": "WH combat",
-    "wormhole_data": "WH data",
-    "wormhole_relic": "WH relic",
-    "wormhole_gas": "WH gas",
-    "wormhole_ore": "WH ore",
-    "ore": "Ore",
-    "ice": "Ice",
-    "fw_complex": "FW plex",
-    "insurgency": "Insurgency",
-    "homefront": "Homefront",
-    "pochven": "Pochven",
-    "drifter": "Drifter",
-    "incursion": "Incursion",
-    "event": "Event",
-    "wormhole_connection": "Wormhole",
-    "other": "Other",
-}
-_DED_RATING = re.compile(r"\b(\d{1,2}/10)\b")
-_TIER_RATING = re.compile(r"\btier\s*(\d+)\b", re.IGNORECASE)
-
-TYPE_WIDTH = 12
-SPACE_WIDTH = 14
 _DANGER_WIDTH = 12  # "▮▮▮▮▮ Medium"
 _CELL_PADDING = 2  # DataTable default cell_padding=1 on both sides
 _TABLE_CHROME = 4  # 1-col margin on each side + vertical scrollbar
@@ -154,37 +130,6 @@ def compute_widths(terminal_width: int) -> ColumnWidths:
     enemies = max(12, round(rest * 0.55))
     min_ship = max(10, rest - enemies)
     return ColumnWidths(name, enemies, min_ship)
-
-
-def _clip(text: str, width: int) -> str:
-    text = " ".join(text.split())
-    return text if len(text) <= width else text[: width - 1].rstrip() + "…"
-
-
-def type_label(site: Site) -> str:
-    """Compact Type cell: ``DED 3/10``, ``Unrated``, ``Anom T4``, ``WH relic`` ..."""
-    rating = site.rating or ""
-    if site.category == "combat_ded":
-        match = _DED_RATING.search(rating)
-        return f"DED {match.group(1)}" if match else "DED"
-    if site.category == "combat_anomaly":
-        match = _TIER_RATING.search(rating)
-        return f"Anom T{match.group(1)}" if match else "Anomaly"
-    label = _TYPE_LABELS.get(site.category)
-    if label is None:
-        label = site.category.replace("_", " ").capitalize()
-    return _clip(label, TYPE_WIDTH)
-
-
-def space_label(space: str, width: int = SPACE_WIDTH) -> str:
-    """Space cell: as-is when it fits, else ``High/Low/Null`` style, else clipped."""
-    text = " ".join(space.split())
-    if len(text) <= width:
-        return text
-    compact = text.replace(", ", "/")
-    if len(compact) <= width:
-        return compact
-    return _clip(text, width)
 
 
 def _cell(text: str, style: str = "") -> Text:
@@ -335,13 +280,22 @@ class CatalogApp(App[None]):
         Binding("pageup", "page_up", "Page up", show=False),
         Binding("pagedown", "page_down", "Page down", show=False),
         Binding("f1,question_mark", "help", "Help", key_display="F1", priority=True),
+        Binding(
+            "ctrl+r",
+            "toggle_hidden",
+            "Hidden",
+            tooltip="Show or hide removed and unverified sites",
+            priority=True,
+        ),
     ]
 
-    def __init__(self, catalog: Catalog) -> None:
+    def __init__(self, catalog: Catalog, *, show_hidden: bool = False) -> None:
         super().__init__()
         self.catalog = catalog
         self.sites: list[Site] = catalog.sites
         self.filtered: list[Site] = list(catalog.sites)
+        self.show_hidden = show_hidden
+        """Whether sites with a status in :data:`HIDDEN_STATUSES` are listed (toggled by ctrl+r)."""
         self._table_built = False
         self._widths = compute_widths(120)
         self._resize_timer: Timer | None = None
@@ -389,17 +343,29 @@ class CatalogApp(App[None]):
                 kind_cell = self._type_cache[kind] = _cell(kind, "dim")
             widths = self._widths
             cached = self._row_cache[site.id] = (
-                _cell(_clip(site.name, widths.name)),
+                _cell(clip(site.name, widths.name)),
                 kind_cell,
                 _cell(space_label(site.space), "dim"),
                 danger,
-                _cell(_clip(site.enemies, widths.enemies)),
-                _cell(_clip(site.min_ship, widths.min_ship)),
+                _cell(clip(site.enemies, widths.enemies)),
+                _cell(clip(site.min_ship, widths.min_ship)),
             )
         return cached
 
-    def _apply_filter(self, query: str, *, force: bool = False) -> None:
-        filtered = [site for _score, site in rank(query, self.sites, key=_search_key)]
+    def _apply_filter(self, text: str, *, force: bool = False) -> None:
+        query = parse_query(text)
+        candidates = [site for site in self.sites if query.matches(site)] if query.filters else self.sites
+        ranked = [site for _score, site in rank(query.plain, candidates, key=_search_key)]
+        if self.show_hidden or query.has_field("status"):
+            # An explicit status: term overrides the default hiding.
+            filtered, hidden = ranked, 0
+        else:
+            filtered = [site for site in ranked if site.status not in HIDDEN_STATUSES]
+            hidden = len(ranked) - len(filtered)
+        status = f"{len(filtered)} / {len(self.sites)} sites"
+        if hidden:
+            status += f" · {hidden} hidden (ctrl+r)"
+        self.query_one("#status", Static).update(status)
         if not force and filtered == self.filtered and self._table_built:
             # Same rows in the same order (e.g. an operator-only token was
             # typed): skip the costly DataTable rebuild.
@@ -411,7 +377,6 @@ class CatalogApp(App[None]):
             table.add_row(*self._row_for(site), key=str(site.id))
         self._table_built = True
         table.move_cursor(row=0, column=0, scroll=True)
-        self.query_one("#status", Static).update(f"{len(filtered)} / {len(self.sites)} sites")
         self._show_detail(0)
 
     def _show_detail(self, row_index: int) -> None:
@@ -469,6 +434,10 @@ class CatalogApp(App[None]):
         pane = self.query_one("#detail-pane", VerticalScroll)
         pane.display = not pane.display
 
+    def action_toggle_hidden(self) -> None:
+        self.show_hidden = not self.show_hidden
+        self._apply_filter(self.query_one("#filter", Input).value)
+
     def action_clear_or_quit(self) -> None:
         filter_input = self.query_one("#filter", Input)
         if filter_input.value:
@@ -485,12 +454,13 @@ def _search_key(site: Site) -> str:
     return site.search_text
 
 
-def run(db_path: str | PathLike[str] | None = None) -> None:
+def run(db_path: str | PathLike[str] | None = None, *, show_hidden: bool = False) -> None:
     """Load the database and run the TUI.
 
     ``db_path`` falls back to ``$EXPO_CATALOG_DB`` and then the catalog bundled
     with the package (:data:`expo_catalog.db.PACKAGE_DB_PATH`). Exits with
-    status 1 and a hint on stderr when the database is missing.
+    status 1 and a hint on stderr when the database is missing. ``show_hidden``
+    starts with removed and unverified sites listed (the ``--all`` flag).
     """
     path = db.resolve_db_path(db_path)
     if not path.is_file():
@@ -499,7 +469,7 @@ def run(db_path: str | PathLike[str] | None = None) -> None:
             file=sys.stderr,
         )
         raise SystemExit(1)
-    CatalogApp(load_catalog(path)).run()
+    CatalogApp(load_catalog(path), show_hidden=show_hidden).run()
 
 
 # -- command line -------------------------------------------------------------
@@ -522,6 +492,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--db",
         metavar="PATH",
         help=f"SQLite catalog to open (default: ${db.ENV_VAR} if set, else {db.DEFAULT_DB_PATH})",
+    )
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="start with removed and unverified sites listed (ctrl+r toggles them in the TUI)",
     )
     parser.add_argument(
         "--refresh",
@@ -562,4 +537,4 @@ def main(argv: Sequence[str] | None = None) -> None:
     args = build_parser().parse_args(argv)
     if args.refresh:
         refresh_catalog()
-    run(args.db)
+    run(args.db, show_hidden=args.all)

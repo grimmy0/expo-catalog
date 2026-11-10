@@ -130,6 +130,49 @@ FIXTURE_SITES = [
         source_url=None,
         search_text="forgotten perimeter gateway wormhole_relic relic site c1-c3 sleepers active",
     ),
+    # The last two are hidden by default (status removed / unverified).
+    dict(
+        name="Serpentis Narcotic Warehouses",
+        category="combat_unrated",
+        scan_group="Combat Site",
+        is_signature=1,
+        space="Low, Null",
+        faction="Serpentis",
+        rating="Unrated",
+        danger=3,
+        danger_label="Medium",
+        enemies="8-12 frigates, 4 cruisers, 2 battlecruisers",
+        min_ship="Battlecruiser",
+        ship_limit=None,
+        ewar="web, scram",
+        status="removed",
+        escalation=None,
+        loot_note=None,
+        description="Unrated complex no longer in the game.",
+        source_url=None,
+        search_text="serpentis narcotic warehouses combat_unrated combat site low null serpentis unrated removed",
+    ),
+    dict(
+        name="Amarr Battlefield",
+        category="fw_complex",
+        scan_group="Beacon",
+        is_signature=0,
+        space="Low (FW warzone)",
+        faction=None,
+        rating="Battlefield plex",
+        danger=2,
+        danger_label="Low",
+        enemies="1 frigate",
+        min_ship="T1 frigate",
+        ship_limit="Frigate only",
+        ewar=None,
+        status="unverified",
+        escalation=None,
+        loot_note=None,
+        description=None,
+        source_url=None,
+        search_text="amarr battlefield fw_complex beacon low (fw warzone) battlefield plex unverified",
+    ),
 ]
 
 FIXTURE_ENEMIES = {
@@ -166,7 +209,10 @@ FIXTURE_ENEMIES = {
     ],
 }
 
-NAMES_SORTED = sorted(s["name"] for s in FIXTURE_SITES)
+ALL_NAMES_SORTED = sorted(s["name"] for s in FIXTURE_SITES)
+HIDDEN_NAMES = sorted(s["name"] for s in FIXTURE_SITES if s["status"] in app_module.HIDDEN_STATUSES)
+NAMES_SORTED = sorted(set(ALL_NAMES_SORTED) - set(HIDDEN_NAMES))
+"""Rows listed by default (removed / unverified sites are hidden)."""
 
 
 @pytest.fixture
@@ -234,6 +280,7 @@ def test_rows_render_sorted_with_status_and_detail(db_path):
             assert (by_key["space"].width, by_key["space"].auto_width) == (14, False)
             assert by_key["name"].auto_width is True
             assert table.row_count == 5
+            assert len(HIDDEN_NAMES) == 2
             assert table_names(table) == NAMES_SORTED
             assert table.cursor_row == 0
             # Type column derived from category + rating
@@ -254,7 +301,7 @@ def test_rows_render_sorted_with_status_and_detail(db_path):
             # n/a row for the data site
             idx = NAMES_SORTED.index("Local Serpentis Mainframe")
             assert table.get_row_at(idx)[3].plain == "n/a"
-            assert app.query_one("#status", Static).content == "5 / 5 sites"
+            assert app.query_one("#status", Static).content == "5 / 7 sites · 2 hidden (ctrl+r)"
             assert isinstance(app.focused, Input)
             text = detail_text(app)
             assert "Angel Hidden Hideaway" in text
@@ -277,17 +324,20 @@ def test_typing_filters_rows_live(db_path):
             # prefix match ranks first, then the mid-text match
             assert table_names(table) == ["Serpentis Phi-Outpost", "Local Serpentis Mainframe"]
             assert table.cursor_row == 0
-            assert app.query_one("#status", Static).content == "2 / 5 sites"
+            # the removed "Serpentis Narcotic Warehouses" matches too but stays hidden
+            assert app.query_one("#status", Static).content == "2 / 7 sites · 1 hidden (ctrl+r)"
             assert "Serpentis Phi-Outpost" in detail_text(app)
 
             # fzf operators: AND + exclude + exact
             await pilot.press("space", "!", "d", "a", "t", "a")
             await pilot.pause()
             assert table_names(table) == ["Serpentis Phi-Outpost"]
+            assert app.query_one("#status", Static).content == "1 / 7 sites · 1 hidden (ctrl+r)"
             await pilot.press("space", "'", "z", "z")
             await pilot.pause()
             assert table.row_count == 0
-            assert app.query_one("#status", Static).content == "0 / 5 sites"
+            # nothing hidden matches either, so no hidden count
+            assert app.query_one("#status", Static).content == "0 / 7 sites"
             assert "No sites match" in detail_text(app)
             # input keeps focus throughout
             assert isinstance(app.focused, Input)
@@ -358,6 +408,136 @@ def test_enter_toggles_detail_panel(db_path):
             await pilot.press("enter")
             await pilot.pause()
             assert pane.display is True
+
+    run_async(main())
+
+
+async def type_text(pilot, text: str) -> None:
+    """Type ``text`` into the focused Input one character at a time."""
+    await pilot.press(*text)
+    await pilot.pause()
+
+
+def test_hidden_statuses_toggle_with_ctrl_r(db_path):
+    async def main():
+        app = CatalogApp(load_catalog(db_path))
+        async with app.run_test() as pilot:
+            await pilot.pause()
+            table = app.query_one("#table", DataTable)
+            status = app.query_one("#status", Static)
+            assert app.show_hidden is False
+            assert table_names(table) == NAMES_SORTED
+            assert status.content == "5 / 7 sites · 2 hidden (ctrl+r)"
+
+            await pilot.press("ctrl+r")
+            await pilot.pause()
+            assert app.show_hidden is True
+            assert table_names(table) == ALL_NAMES_SORTED
+            assert status.content == "7 / 7 sites"
+            assert isinstance(app.focused, Input)  # works while the filter has focus
+            # the detail panel shows the first row again
+            assert ALL_NAMES_SORTED[0] in detail_text(app)
+
+            # the toggle combines with the filter (both prefix matches tie, so they keep name order)
+            await type_text(pilot, "serp")
+            assert table_names(table) == [
+                "Serpentis Narcotic Warehouses",
+                "Serpentis Phi-Outpost",
+                "Local Serpentis Mainframe",
+            ]
+            assert status.content == "3 / 7 sites"
+
+            await pilot.press("ctrl+r")
+            await pilot.pause()
+            assert app.show_hidden is False
+            assert table_names(table) == ["Serpentis Phi-Outpost", "Local Serpentis Mainframe"]
+            assert status.content == "2 / 7 sites · 1 hidden (ctrl+r)"
+            assert app.query_one("#filter", Input).value == "serp"
+
+    run_async(main())
+
+
+def test_status_term_shows_hidden_sites_without_the_toggle(db_path):
+    async def main():
+        app = CatalogApp(load_catalog(db_path))
+        async with app.run_test() as pilot:
+            await pilot.pause()
+            table = app.query_one("#table", DataTable)
+            status = app.query_one("#status", Static)
+            await type_text(pilot, "status:removed")
+            assert app.query_one("#filter", Input).value == "status:removed"
+            assert app.show_hidden is False
+            assert table_names(table) == ["Serpentis Narcotic Warehouses"]
+            assert status.content == "1 / 7 sites"
+            assert "Serpentis Narcotic Warehouses" in detail_text(app)
+
+            # any status: term (even negated) suspends the default hiding
+            await pilot.press("escape")
+            await type_text(pilot, "!status:removed")
+            assert table_names(table) == sorted(set(ALL_NAMES_SORTED) - {"Serpentis Narcotic Warehouses"})
+            assert status.content == "6 / 7 sites"
+
+            # an unknown field name falls through to the fuzzy matcher (no match here)
+            await pilot.press("escape")
+            await type_text(pilot, "foo:removed")
+            assert table.row_count == 0
+            assert status.content == "0 / 7 sites"
+
+    run_async(main())
+
+
+def test_field_terms_filter_and_plain_terms_rank(db_path):
+    async def main():
+        app = CatalogApp(load_catalog(db_path))
+        async with app.run_test() as pilot:
+            await pilot.pause()
+            table = app.query_one("#table", DataTable)
+            status = app.query_one("#status", Static)
+
+            await type_text(pilot, "type:relic")
+            assert table_names(table) == ["Forgotten Perimeter Gateway", "Ruined Angel Crystal Quarry"]
+            assert status.content == "2 / 7 sites"
+            await type_text(pilot, " angel")
+            assert table_names(table) == ["Ruined Angel Crystal Quarry"]
+
+            # the plain part keeps fzf ranking: prefix match first, scattered match last
+            await pilot.press("escape")
+            await type_text(pilot, "space:high ang")
+            assert table_names(table) == [
+                "Angel Hidden Hideaway",
+                "Ruined Angel Crystal Quarry",
+                "Local Serpentis Mainframe",
+            ]
+            assert status.content == "3 / 7 sites"
+
+            # numeric field with the default hiding still applied
+            await pilot.press("escape")
+            await type_text(pilot, "danger:<=2 !space:null")
+            assert table_names(table) == [
+                "Angel Hidden Hideaway",
+                "Local Serpentis Mainframe",
+                "Ruined Angel Crystal Quarry",
+            ]
+            assert status.content == "3 / 7 sites · 1 hidden (ctrl+r)"  # Amarr Battlefield (danger 2)
+            await pilot.press("ctrl+r")
+            await pilot.pause()
+            assert "Amarr Battlefield" in table_names(table)
+            assert status.content == "4 / 7 sites"
+
+    run_async(main())
+
+
+def test_show_hidden_flag_starts_with_everything_listed(db_path):
+    async def main():
+        app = CatalogApp(load_catalog(db_path), show_hidden=True)
+        async with app.run_test() as pilot:
+            await pilot.pause()
+            table = app.query_one("#table", DataTable)
+            assert table_names(table) == ALL_NAMES_SORTED
+            assert app.query_one("#status", Static).content == "7 / 7 sites"
+            await pilot.press("ctrl+r")
+            await pilot.pause()
+            assert table_names(table) == NAMES_SORTED
 
     run_async(main())
 
@@ -463,11 +643,43 @@ def test_space_column_truncated_in_table_but_full_in_detail(db_path):
 
 def test_cli_db_flag_is_passed_to_run(monkeypatch, tmp_path):
     seen: list[object] = []
-    monkeypatch.setattr(app_module, "run", lambda db_path=None: seen.append(db_path))
+    monkeypatch.setattr(app_module, "run", lambda db_path=None, *, show_hidden=False: seen.append(db_path))
     app_module.main(["--db", str(tmp_path / "x.sqlite")])
     assert seen == [str(tmp_path / "x.sqlite")]
     app_module.main([])
     assert seen[-1] is None
+
+
+def test_cli_all_flag_starts_with_hidden_sites_shown(monkeypatch):
+    assert app_module.build_parser().parse_args(["--all"]).all is True
+    assert app_module.build_parser().parse_args([]).all is False
+    seen: list[tuple[object, bool]] = []
+    monkeypatch.setattr(
+        app_module,
+        "run",
+        lambda db_path=None, *, show_hidden=False: seen.append((db_path, show_hidden)),
+    )
+    app_module.main(["--all"])
+    app_module.main(["--all", "--db", "x.sqlite"])
+    app_module.main([])
+    assert seen == [(None, True), ("x.sqlite", True), (None, False)]
+
+
+def test_run_passes_show_hidden_to_the_app(monkeypatch, db_path):
+    created: list[tuple[object, bool]] = []
+
+    class FakeApp:
+        def __init__(self, catalog, *, show_hidden=False):
+            created.append((catalog, show_hidden))
+
+        def run(self):
+            pass
+
+    monkeypatch.setattr(app_module, "CatalogApp", FakeApp)
+    app_module.run(db_path, show_hidden=True)
+    app_module.run(db_path)
+    assert [flag for _catalog, flag in created] == [True, False]
+    assert len(created[0][0].sites) == 7
 
 
 def test_cli_refresh_runs_scraper_then_launches(monkeypatch, tmp_path):
@@ -482,7 +694,7 @@ def test_cli_refresh_runs_scraper_then_launches(monkeypatch, tmp_path):
 
     monkeypatch.setattr(app_module.subprocess, "run", fake_run)
     launched: list[object] = []
-    monkeypatch.setattr(app_module, "run", lambda db_path=None: launched.append(db_path))
+    monkeypatch.setattr(app_module, "run", lambda db_path=None, *, show_hidden=False: launched.append(db_path))
 
     app_module.main(["--refresh", "--db", "custom.sqlite"])
     assert calls == [([sys.executable, "-m", "scraper", "refresh"], tmp_path)]
@@ -494,7 +706,7 @@ def test_cli_refresh_reports_scraper_failure(monkeypatch, tmp_path, capsys):
     (tmp_path / "scraper" / "__init__.py").write_text("")
     monkeypatch.setattr(app_module.db, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(app_module.subprocess, "run", lambda cmd, **kw: subprocess.CompletedProcess(cmd, 3))
-    monkeypatch.setattr(app_module, "run", lambda db_path=None: pytest.fail("TUI must not launch"))
+    monkeypatch.setattr(app_module, "run", lambda db_path=None, **kwargs: pytest.fail("TUI must not launch"))
     with pytest.raises(SystemExit) as excinfo:
         app_module.main(["--refresh"])
     assert excinfo.value.code == 1

@@ -36,9 +36,14 @@ From a checkout, without installing:
 ```sh
 uv run expo-catalog                 # open the catalog
 uv run expo-catalog --db PATH       # use another SQLite file (also: EXPO_CATALOG_DB=PATH)
+uv run expo-catalog --all           # start with removed and unverified sites listed
 uv run expo-catalog --refresh       # re-fetch the wiki and rebuild the database, then open it
 uv run expo-catalog --version       # print the version and exit
 ```
+
+Sites whose status is `removed` or `unverified` are hidden by default; the
+status line counts them and `ctrl+r` toggles them. `--all` starts with them
+listed, and a `status:` filter term (see below) always shows what it names.
 
 The database ships inside the package as `src/expo_catalog/data/catalog.sqlite`
 (`expo_catalog/data/catalog.sqlite` once installed). If the database is missing
@@ -57,6 +62,7 @@ it needs a source checkout: an editable install (`uv tool install -e .`) or
 | `PageUp` / `PageDown` | page through the table |
 | `Enter` | toggle the detail panel |
 | `Esc` | clear the filter; quit when it is already empty |
+| `ctrl+r` | show / hide removed and unverified sites |
 | `ctrl+q` | quit |
 | `F1` / `?` | help |
 
@@ -73,6 +79,22 @@ alphabetical order.
 | `!relic` | exclude texts containing `relic` |
 | `^angel` | prefix match |
 | `site$` | suffix match |
+
+A `field:value` term (no spaces in the value) filters on one column before the
+fuzzy terms rank what is left, so `space:c3 type:relic forgotten` lists only C3
+relic sites, ordered by how well they match `forgotten`. `!field:value`
+negates; `foo:bar` with an unknown field name is an ordinary fuzzy term.
+
+| Field term | Meaning |
+| --- | --- |
+| `space:c3` | Space column: a token (`high`, `low`, `null`, `c1`..`c6`, `c13`, `wormhole`, `thera`, `shattered`, `pochven`, `drifter`), an alias (`hs`, `ls`, `ns`, `wh`, `j-space`, `k-space`) or any substring (`space:delve`). Ranges expand (`C1-C4` matches `c2`), a bare `Wormhole` matches every class, `Any`/`Various`/`Unknown` match everything |
+| `type:relic` | Type label (`DED 3/10`, `WH relic`, `Anom T4`, `FW plex` …), category (`combat ded`, `wormhole relic`), scan group (`Data Site`) or rating |
+| `danger:<=3` | danger level: `3`, `<3`, `>2`, `<=3`, `>=4` or a range `2-4`; labels work too (`danger:high`, `danger:safe-medium`) |
+| `ship:frig` | substring of Min ship |
+| `faction:angel` | substring of the faction |
+| `name:den` | substring of the name |
+| `ewar:web` | substring of the EWAR note |
+| `status:removed` | substring of the status; also lifts the default hiding of removed / unverified sites |
 
 ### Columns
 
@@ -147,9 +169,9 @@ Every site carries a `status`:
 | status | Meaning |
 | --- | --- |
 | `active` | currently in the game |
-| `removed` | no longer spawns, kept for reference |
+| `removed` | no longer spawns, kept for reference (hidden in the TUI by default) |
 | `event` | recurring or seasonal event site |
-| `unverified` | known only from Singularity (test server) data or an uncertain name |
+| `unverified` | known only from Singularity (test server) data or an uncertain name (hidden in the TUI by default) |
 
 The schema lives in `src/expo_catalog/db.py` and is the single source of truth
 for both the builder and the TUI.
@@ -172,6 +194,8 @@ expo-catalog/
 │   ├── app.py        # Textual app (table, filter, detail panel)
 │   ├── db.py         # SQLite schema + read/insert helpers
 │   ├── fuzzy.py      # fzf-style matcher
+│   ├── labels.py     # Type / Space column labels
+│   ├── query.py      # field:value filter terms
 │   └── data/
 │       └── catalog.sqlite  # the bundled catalog (ships in the wheel)
 ├── scraper/

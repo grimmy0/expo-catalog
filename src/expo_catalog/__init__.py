@@ -4,7 +4,7 @@ from __future__ import annotations
 
 
 def main() -> None:
-    """Console-script entry point (``expo-catalog [--db PATH] [--refresh] [--version]``)."""
+    """Console-script entry point (``expo-catalog [--db PATH] [--all] [--refresh] [--version]``)."""
     from expo_catalog.app import main as app_main
 
     app_main()
