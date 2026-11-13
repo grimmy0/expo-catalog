@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import pytest
+
+from scraper import parse
 from scraper.parse import (
     NpcRow,
     normalise_class,
@@ -182,3 +185,19 @@ def test_parse_kv():
         "faction": "Angel",
         "location": "High, Low",
     }
+
+
+# --------------------------------------------------------------------------- tracked inputs
+def test_tracked_inputs_exist_and_load():
+    assert parse.NPCWH_FILE.is_file() and parse.WHISK_TEMPLATE.is_file()
+    assert parse.NPCWH_FILE.parent.name == "data" and parse.WHISK_TEMPLATE.parent.name == "data"
+    codes = parse.load_npcwh_codes()
+    assert codes and all("name" in v and "class" in v for v in codes.values())
+    assert parse.load_whisk()
+
+
+@pytest.mark.parametrize(("attr", "loader"), [("NPCWH_FILE", "load_npcwh_codes"), ("WHISK_TEMPLATE", "load_whisk")])
+def test_missing_tracked_input_raises(monkeypatch, tmp_path, attr, loader):
+    monkeypatch.setattr(parse, attr, tmp_path / "missing")
+    with pytest.raises(FileNotFoundError, match="missing"):
+        getattr(parse, loader)()

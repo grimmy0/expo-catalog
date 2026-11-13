@@ -80,9 +80,6 @@ EXTRA_PAGES: tuple[str, ...] = (
     "Serpentis Capital Staging",
 )
 
-# Templates whose wikitext the parser needs (saved directly under RAW_DIR).
-TEMPLATE_PAGES: tuple[str, ...] = ("Template:Whisk",)
-
 
 def safe_filename(title: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]+", "_", title).strip("_")[:150]
@@ -224,7 +221,7 @@ def save_state(state: dict[str, dict], path: Path = STATE_FILE) -> None:
 
 
 def fetch_all() -> None:
-    """Refresh the whole raw cache: category lists, every member page, needed templates, wiki state."""
+    """Refresh the whole raw cache: category lists, every member page, wiki state."""
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     rows: list[tuple[str, str]] = []
     for category in SITE_CATEGORIES:
@@ -235,7 +232,6 @@ def fetch_all() -> None:
     tracked = tracked_titles(rows)
     revisions: dict[str, dict] = {}
     resolved = fetch_pages(list(tracked), state=revisions)
-    fetch_pages(TEMPLATE_PAGES, out_dir=RAW_DIR)
     state = {
         t: {"revid": revisions[t]["revid"], "timestamp": revisions[t]["timestamp"], "categories": tracked[t]}
         for t in tracked

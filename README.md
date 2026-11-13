@@ -130,6 +130,14 @@ uv run python -m scraper refresh # all three in one go
 The per-stage modules (`python -m scraper.fetch`, `.parse`, `.build`) still
 work as well.
 
+Besides the wiki cache, the pipeline reads these tracked, hand-maintained
+inputs (a missing one is an error):
+
+- `data/event_sites.json`: seasonal/live-event site research
+- `data/npcwh_codes.json` + `data/Template_Whisk.wiki`: Sleeper NPC code table
+  used to resolve `{{npcwh}}` rows, and the blue-loot values for `{{whisk}}`
+- `data/wormholes.json`: wormhole connection types
+
 ### Keeping the catalog up to date
 
 The wiki changes slowly but steadily. `data/wiki_state.json` records the
@@ -208,6 +216,9 @@ expo-catalog/
 │   ├── rules.py      # classification / danger rules
 │   └── wiki.py       # MediaWiki API client
 ├── data/             # pipeline inputs and intermediates (not shipped)
+│   ├── event_sites.json     # hand-maintained event site research
+│   ├── npcwh_codes.json     # hand-maintained Sleeper NPC codes
+│   ├── Template_Whisk.wiki  # hand-maintained blue-loot table
 │   ├── parsed_sites.json
 │   ├── wiki_state.json  # revision snapshot used by `scraper check`
 │   ├── wormholes.json

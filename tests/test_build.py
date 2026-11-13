@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from scraper import build, rules
+from scraper import build, curated, rules
 from scraper.parse import PARSED_FILE
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -315,6 +315,22 @@ def test_space_and_rating_helpers():
     assert rules.rating_of(page("X", ["DED Complexes"], {"rating": "DED 4/10"}), "combat_ded") == "4/10"
     assert rules.faction_of(page("Gurista Outpost", [], {"faction": "Guristas"})) == "Guristas"
     assert rules.faction_of(page("Core Garrison", ["Wormhole sites"])) == "Sleepers"
+
+
+# --------------------------------------------------------------------------- event data
+def test_event_file_exists_and_loads():
+    assert curated.EVENTS_FILE.is_file()
+    events = curated.load_events()
+    assert events and all(e.get("name") for e in events)
+    assert curated.event_sites(events)
+
+
+def test_missing_event_file_raises(monkeypatch, tmp_path):
+    monkeypatch.setattr(curated, "EVENTS_FILE", tmp_path / "missing.json")
+    with pytest.raises(FileNotFoundError, match="missing.json"):
+        curated.load_events()
+    # Passing events explicitly never touches the file.
+    assert curated.generated_sites({}, events=[]) is not None
 
 
 # --------------------------------------------------------------------------- integration

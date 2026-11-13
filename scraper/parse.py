@@ -5,8 +5,13 @@ Handles the templates the wiki uses for exploration sites:
 * ``{{CMBSiteInfo|name=|type=|rating=|location=|ship limit=|faction=|...}}``
 * ``{{Infobox gas nebula|type=|subtype=|location=|is guarded=|...}}``
 * ``{{NPCTableHead|<wave>}}`` followed by ``{{NPCTableRow|<Class>|<count>|<name>|k=v...}}``
-* ``{{npcwh|<code>|<N>x}}`` Sleeper rows (codes resolved via ``data/raw/npcwh_codes.json``)
+* ``{{npcwh|<code>|<N>x}}`` Sleeper rows (codes resolved via ``data/npcwh_codes.json``)
 * ``{{Past content}}``, ``{{Update|..}}``, ``{{Stub}}``, ``{{Merge|..}}`` status flags
+
+Besides the git-ignored wiki cache in ``data/raw/``, parsing reads two tracked,
+hand-maintained inputs: ``data/npcwh_codes.json`` (the Sleeper NPC code table behind
+``{{npcwh}}`` rows) and ``data/Template_Whisk.wiki`` (blue-loot values behind ``{{whisk}}``).
+Both are required; a missing file raises instead of silently degrading the output.
 
 Run ``uv run python -m scraper.parse`` to write ``data/parsed_sites.json``.
 """
@@ -21,9 +26,10 @@ from pathlib import Path
 
 from scraper.wiki import RAW_DIR, WIKI_DIR, load_category_index
 
-PARSED_FILE = RAW_DIR.parent / "parsed_sites.json"
-NPCWH_FILE = RAW_DIR / "npcwh_codes.json"
-WHISK_TEMPLATE = RAW_DIR / "Template_Whisk.wiki"
+DATA_DIR = RAW_DIR.parent
+PARSED_FILE = DATA_DIR / "parsed_sites.json"
+NPCWH_FILE = DATA_DIR / "npcwh_codes.json"
+WHISK_TEMPLATE = DATA_DIR / "Template_Whisk.wiki"
 
 HOSTILE_CLASSES = {
     "frigate": "frigate",
@@ -358,10 +364,15 @@ def parse_npc_tables(text: str) -> list[NpcRow]:
     return rows
 
 
+def _require(path: Path, what: str) -> Path:
+    if not path.exists():
+        raise FileNotFoundError(f"{what} not found at {path}; it is a tracked input (restore it from git)")
+    return path
+
+
 def load_npcwh_codes() -> dict[str, dict]:
-    if NPCWH_FILE.exists():
-        return json.loads(NPCWH_FILE.read_text(encoding="utf-8"))
-    return {}
+    """Sleeper NPC code table used to resolve ``{{npcwh}}`` rows (required)."""
+    return json.loads(_require(NPCWH_FILE, "Sleeper NPC code table").read_text(encoding="utf-8"))
 
 
 def parse_sleeper_rows(text: str, codes: dict[str, dict]) -> list[NpcRow]:
@@ -447,12 +458,11 @@ def parse_blue_loot(text: str, whisk: dict[str, int]) -> int | None:
 
 
 def load_whisk() -> dict[str, int]:
-    """Map whisk short codes to blue-loot ISK from the cached template, if present."""
-    if not WHISK_TEMPLATE.exists():
-        return {}
+    """Map whisk short codes to blue-loot ISK from the tracked ``Template:Whisk`` copy (required)."""
+    text = _require(WHISK_TEMPLATE, "Template:Whisk copy").read_text(encoding="utf-8")
     out: dict[str, int] = {}
     pattern = re.compile(r"\|\s*([^|=\n]+?)\s*\|\s*([a-z0-9]+)\s*=\s*\*?\s*([\d,]+)")
-    for m in pattern.finditer(WHISK_TEMPLATE.read_text(encoding="utf-8")):
+    for m in pattern.finditer(text):
         out[m.group(2).lower()] = int(m.group(3).replace(",", ""))
     return out
 

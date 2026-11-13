@@ -1,0 +1,684 @@
+{
+ "ad": {
+  "name": "Awakened Defender",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "adef": {
+  "name": "Awakened Defender",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "Awakened Defender": {
+  "name": "Awakened Defender",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "ae": {
+  "name": "Awakened Escort",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "aesc": {
+  "name": "Awakened Escort",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "Awakened Escort": {
+  "name": "Awakened Escort",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "ak": {
+  "name": "Awakened Keeper",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "akee": {
+  "name": "Awakened Keeper",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "Awakened Keeper": {
+  "name": "Awakened Keeper",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "ap": {
+  "name": "Awakened Patroller",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "apat": {
+  "name": "Awakened Patroller",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "Awakened Patroller": {
+  "name": "Awakened Patroller",
+  "class": "cruiser",
+  "ewar": []
+ },
+ "apr": {
+  "name": "Awakened Preserver",
+  "class": "cruiser",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "apre": {
+  "name": "Awakened Preserver",
+  "class": "cruiser",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "Awakened Preserver": {
+  "name": "Awakened Preserver",
+  "class": "cruiser",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "as": {
+  "name": "Awakened Sentinel",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "asen": {
+  "name": "Awakened Sentinel",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "Awakened Sentinel": {
+  "name": "Awakened Sentinel",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "au": {
+  "name": "Awakened Upholder",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier",
+   "Energy Neutralization"
+  ]
+ },
+ "auph": {
+  "name": "Awakened Upholder",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier",
+   "Energy Neutralization"
+  ]
+ },
+ "Awakened Upholder": {
+  "name": "Awakened Upholder",
+  "class": "cruiser",
+  "ewar": [
+   "Stasis Webifier",
+   "Energy Neutralization"
+  ]
+ },
+ "aw": {
+  "name": "Awakened Warden",
+  "class": "cruiser",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "awar": {
+  "name": "Awakened Watchman",
+  "class": "cruiser",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "Awakened Warden": {
+  "name": "Awakened Warden",
+  "class": "cruiser",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "awat": {
+  "name": "Awakened Watchman",
+  "class": "cruiser",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "Awakened Watchman": {
+  "name": "Awakened Watchman",
+  "class": "cruiser",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "ed": {
+  "name": "Emergent Defender",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "edef": {
+  "name": "Emergent Defender",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "Emergent Defender": {
+  "name": "Emergent Defender",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "ee": {
+  "name": "Emergent Escort",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "eesc": {
+  "name": "Emergent Escort",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "Emergent Escort": {
+  "name": "Emergent Escort",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "ek": {
+  "name": "Emergent Keeper",
+  "class": "frigate",
+  "ewar": [
+   "Energy Neutralization",
+   "Remote Repair"
+  ]
+ },
+ "ekee": {
+  "name": "Emergent Keeper",
+  "class": "frigate",
+  "ewar": [
+   "Energy Neutralization",
+   "Remote Repair"
+  ]
+ },
+ "Emergent Keeper": {
+  "name": "Emergent Keeper",
+  "class": "frigate",
+  "ewar": [
+   "Energy Neutralization",
+   "Remote Repair"
+  ]
+ },
+ "ep": {
+  "name": "Emergent Patroller",
+  "class": "frigate",
+  "ewar": []
+ },
+ "epat": {
+  "name": "Emergent Patroller",
+  "class": "frigate",
+  "ewar": []
+ },
+ "Emergent Patroller": {
+  "name": "Emergent Patroller",
+  "class": "frigate",
+  "ewar": []
+ },
+ "epr": {
+  "name": "Emergent Preserver",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "epre": {
+  "name": "Emergent Preserver",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "Emergent Preserver": {
+  "name": "Emergent Preserver",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "es": {
+  "name": "Emergent Sentinel",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor"
+  ]
+ },
+ "esen": {
+  "name": "Emergent Sentinel",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor"
+  ]
+ },
+ "Emergent Sentinel": {
+  "name": "Emergent Sentinel",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor"
+  ]
+ },
+ "eu": {
+  "name": "Emergent Upholder",
+  "class": "frigate",
+  "ewar": [
+   "Energy Neutralization",
+   "Remote Repair"
+  ]
+ },
+ "euph": {
+  "name": "Emergent Upholder",
+  "class": "frigate",
+  "ewar": [
+   "Energy Neutralization",
+   "Remote Repair"
+  ]
+ },
+ "Emergent Upholder": {
+  "name": "Emergent Upholder",
+  "class": "frigate",
+  "ewar": [
+   "Energy Neutralization",
+   "Remote Repair"
+  ]
+ },
+ "ew": {
+  "name": "Emergent Warden",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "ewar": {
+  "name": "Emergent Warden",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "Emergent Warden": {
+  "name": "Emergent Warden",
+  "class": "frigate",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "ewat": {
+  "name": "Emergent Watchman",
+  "class": "frigate",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "Emergent Watchman": {
+  "name": "Emergent Watchman",
+  "class": "frigate",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "sd": {
+  "name": "Sleepless Defender",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "sdef": {
+  "name": "Sleepless Defender",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "Sleepless Defender": {
+  "name": "Sleepless Defender",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier"
+  ]
+ },
+ "se": {
+  "name": "Sleepless Escort",
+  "class": "battleship",
+  "ewar": []
+ },
+ "sesc": {
+  "name": "Sleepless Escort",
+  "class": "battleship",
+  "ewar": []
+ },
+ "Sleepless Escort": {
+  "name": "Sleepless Escort",
+  "class": "battleship",
+  "ewar": []
+ },
+ "sg": {
+  "name": "Sleepless Guardian",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "sgua": {
+  "name": "Sleepless Guardian",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "Sleepless Guardian": {
+  "name": "Sleepless Guardian",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "sk": {
+  "name": "Sleepless Keeper",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "skee": {
+  "name": "Sleepless Keeper",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "Sleepless Keeper": {
+  "name": "Sleepless Keeper",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "so": {
+  "name": "Sleepless Outguard",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "sout": {
+  "name": "Sleepless Outguard",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "Sleepless Outguard": {
+  "name": "Sleepless Outguard",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "sp": {
+  "name": "Sleepless Patroller",
+  "class": "battleship",
+  "ewar": []
+ },
+ "spat": {
+  "name": "Sleepless Patroller",
+  "class": "battleship",
+  "ewar": []
+ },
+ "Sleepless Patroller": {
+  "name": "Sleepless Patroller",
+  "class": "battleship",
+  "ewar": []
+ },
+ "spr": {
+  "name": "Sleepless Preserver",
+  "class": "battleship",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "spre": {
+  "name": "Sleepless Preserver",
+  "class": "battleship",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "Sleepless Preserver": {
+  "name": "Sleepless Preserver",
+  "class": "battleship",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "ss": {
+  "name": "Sleepless Safeguard",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "ssaf": {
+  "name": "Sleepless Safeguard",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "Sleepless Safeguard": {
+  "name": "Sleepless Safeguard",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "sse": {
+  "name": "Sleepless Sentinel",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "ssen": {
+  "name": "Sleepless Sentinel",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "Sleepless Sentinel": {
+  "name": "Sleepless Sentinel",
+  "class": "battleship",
+  "ewar": [
+   "Stasis Webifier",
+   "Warp Disruptor",
+   "Energy Neutralization"
+  ]
+ },
+ "su": {
+  "name": "Sleepless Upholder",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "suph": {
+  "name": "Sleepless Upholder",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "Sleepless Upholder": {
+  "name": "Sleepless Upholder",
+  "class": "battleship",
+  "ewar": [
+   "Energy Neutralization"
+  ]
+ },
+ "sw": {
+  "name": "Sleepless Warden",
+  "class": "battleship",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "swar": {
+  "name": "Sleepless Warden",
+  "class": "battleship",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "Sleepless Warden": {
+  "name": "Sleepless Warden",
+  "class": "battleship",
+  "ewar": [
+   "Remote Repair"
+  ]
+ },
+ "swat": {
+  "name": "Sleepless Watchman",
+  "class": "battleship",
+  "ewar": []
+ },
+ "Sleepless Watchman": {
+  "name": "Sleepless Watchman",
+  "class": "battleship",
+  "ewar": []
+ },
+ "w": {
+  "name": "Wakeful Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "wake": {
+  "name": "Wakeful Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "argo": {
+  "name": "Wakeful Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "Wakeful Sentry Tower": {
+  "name": "Wakeful Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "r": {
+  "name": "Restless Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "rest": {
+  "name": "Restless Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "Restless Sentry Tower": {
+  "name": "Restless Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "v": {
+  "name": "Vigilant Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "vigi": {
+  "name": "Vigilant Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "siri": {
+  "name": "Vigilant Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "Vigilant Sentry Tower": {
+  "name": "Vigilant Sentry Tower",
+  "class": "tower",
+  "ewar": []
+ },
+ "wave": {
+  "name": "Wave",
+  "class": "?",
+  "ewar": []
+ },
+ "Wave": {
+  "name": "Wave",
+  "class": "?",
+  "ewar": []
+ }
+}

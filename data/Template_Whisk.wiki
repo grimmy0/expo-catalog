@@ -1,0 +1,59 @@
+<!-- TITLE: Template:Whisk -->
+<includeonly>{{#switch: {{{1|}}}
+<!--Class 1-->
+| Perimeter Ambush Point | pap = *8,600,000 {{blueloot}} {{whsalvage}}
+| Perimeter Camp | pc = *9,600,000 {{blueloot}} {{whsalvage}}
+| Phase Catalyst Node | pcn = *7,400,000 {{blueloot}} {{whsalvage}}
+| The Line | tl = *10,400,000 {{blueloot}} {{whsalvage}}
+| Unsecured Perimeter Amplifier  | upa = *10,200,000 {{blueloot}} {{whsalvage}}
+| Unsecured Perimeter Information Center  | upic = *11,800,000 {{blueloot}} {{whsalvage}}
+| Forgotten Perimeter Coronation Platform | fpcp = *12,800,000 {{blueloot}} {{whsalvage}}
+| Forgotten Perimeter Power Array | fppa = *9,200,000 {{blueloot}} {{whsalvage}}
+<!--Class 2-->
+| Perimeter Checkpoint | pc2 = *12,900,000 {{blueloot}} {{whsalvage}}
+| Perimeter Hangar | ph = *15,600,000 {{blueloot}} {{whsalvage}}
+| The Ruins of Enclave Cohort 27 | troec27 = *15,600,000 {{blueloot}} {{whsalvage}}
+| Sleeper Data Sanctuary | sds = *10,400,000 {{blueloot}} {{whsalvage}}
+| Unsecured Perimeter Comms Relay  | upcr = *18,300,000 {{blueloot}} {{whsalvage}}
+| Unsecured Perimeter Transponder Farm | uptf = *26,700,000 {{blueloot}} {{whsalvage}}
+| Forgotten Perimeter Gateway | fpg = *19,100,000 {{blueloot}} {{whsalvage}}
+| Forgotten Perimeter Habitation Coils | fphc = *25,400,000 {{blueloot}} {{whsalvage}}
+<!--Class 3-->
+| Fortification Frontier Stronghold | ffs = *41,100,000 {{blueloot}} {{whsalvage}}
+| Outpost Frontier Stronghold | ofs = *45,100,000 {{blueloot}} {{whsalvage}}
+| Solar Cell | sc = *43,000,000 {{blueloot}} {{whsalvage}}
+| The Oruze Construct | toc = *41,600,000 {{blueloot}} {{whsalvage}}
+| Unsecured Frontier Database | ufd = *88,400,000 {{blueloot}} {{whsalvage}}
+| Unsecured Frontier Receiver | ufr = *75,100,000 {{blueloot}} {{whsalvage}}
+| Forgotten Frontier Quarantine Outpost | ffqo = *49,500,000 {{blueloot}} {{whsalvage}}
+| Forgotten Frontier Recursive Depot | ffrd = *65,500,000 {{blueloot}} {{whsalvage}}
+<!--Class 4-->
+| Frontier Barracks | fb = *86,700,000 {{blueloot}} {{whsalvage}}
+| Frontier Command Post | fcp = *92,300,000 {{blueloot}} {{whsalvage}}
+| Integrated Terminus | it = *55,300,000 {{blueloot}} {{whsalvage}}
+| Sleeper Information Sanctum | sis = *81,800,000 {{blueloot}} {{whsalvage}}
+| Unsecured Frontier Digital Nexus | ufdn = *115,000,000 {{blueloot}} {{whsalvage}}
+| Unsecured Frontier Trinary Hub | ufth = *115,000,000 {{blueloot}} {{whsalvage}}
+| Forgotten Frontier Conversion Module | ffcm = *115,000,000 {{blueloot}} {{whsalvage}}
+| Forgotten Frontier Evacuation Center | ffec = *115,000,000 {{blueloot}} {{whsalvage}}
+<!--Class 5-->
+| Core Garrison | cg = *253,000,000 {{blueloot}} {{whsalvage}}
+| Core Stronghold | cs = *234,900,000 {{blueloot}} {{whsalvage}}
+| Oruze Osobnyk | oo = *164,700,000 {{blueloot}} {{whsalvage}}
+| Quarantine Area | qa = *146,900,000 {{blueloot}} {{whsalvage}}
+| Forgotten Core Data Field | fcdf = *279,000,000 {{blueloot}} {{whsalvage}}
+| Forgotten Core Information Pen | fcip = *330,000,000 {{blueloot}} {{whsalvage}}
+| Unsecured Frontier Enclave Relay | ufer = *329,900,000 Total, 114,000,000 for the waves prior to hacking. {{blueloot}} {{whsalvage}}
+| Unsecured Frontier Server Bank | ufsb = *272,100,000 {{blueloot}} {{whsalvage}}
+<!--Class 6-->
+| Core Citadel | cc = *610,100,000 {{blueloot}} {{whsalvage}}
+| Core Bastion | cb = *455,600,000 {{blueloot}} {{whsalvage}}
+| Strange Energy Readings | ser = *293,000,000 {{blueloot}} {{whsalvage}}
+| The Mirror | tm = *363,000,000 {{blueloot}} {{whsalvage}}
+| Forgotten Core Assembly Hall | fcah = *642,500,000 {{blueloot}} {{whsalvage}}
+| Forgotten Core Circuitry Disassembler | fccd = *657,600,000 {{blueloot}} {{whsalvage}}
+| Unsecured Core Backup Array | ucba = *688,300,000 {{blueloot}} {{whsalvage}}
+| Unsecured Core Emergence | uce = *627,100,000 {{blueloot}} {{whsalvage}}
+}}</includeonly><noinclude>
+{{documentation}}
+</noinclude>

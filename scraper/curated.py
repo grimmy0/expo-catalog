@@ -5,7 +5,7 @@ is produced here: generic pirate data/relic sites, ghost sites, faction-warfare
 plexes, insurgency sites, homefront variants, Pochven ore fields, wormhole
 connections (from ``data/wormholes.json``), Drifter/shattered beacons, odd ore
 and ice anomalies, pirate strongholds, Singularity-only (unverified) entries and
-seasonal event sites (from the event research JSON).
+seasonal event sites (from ``data/event_sites.json``).
 
 Each generated record is a plain dict with the ``sites`` columns (minus ``id``
 and ``search_text``) plus an optional ``enemy_rows`` list.
@@ -22,12 +22,7 @@ from scraper.rules import DANGER_LABELS, EXPLO_FRIGATE, canonical_faction, norma
 
 ROOT = Path(__file__).resolve().parent.parent
 WORMHOLES_FILE = ROOT / "data" / "wormholes.json"
-EVENTS_FILE_CANDIDATES = (
-    ROOT / "data" / "event_sites.json",
-    Path(
-        "/tmp/claude-1000/-home-grmm-projects-expo-catalog/8109817a-86dd-4a19-b450-5201675d89c8/scratchpad/events/event_sites.json"
-    ),
-)
+EVENTS_FILE = ROOT / "data" / "event_sites.json"
 
 WIKI = "https://wiki.eveuniversity.org/"
 
@@ -1251,10 +1246,16 @@ def _event_min_ship(entry: Mapping[str, Any], danger: int, scan_group: str) -> s
 
 
 def load_events() -> list[dict[str, Any]]:
-    for candidate in EVENTS_FILE_CANDIDATES:
-        if candidate.exists():
-            return json.loads(candidate.read_text(encoding="utf-8"))
-    return []
+    """Load the hand-maintained seasonal/live-event site research from ``EVENTS_FILE``.
+
+    A missing file is an error: silently building without it would drop every event site.
+    """
+    if not EVENTS_FILE.exists():
+        raise FileNotFoundError(
+            f"event site data not found at {EVENTS_FILE}; it is a tracked input "
+            "(restore it from git, or pass events= explicitly to build without it)"
+        )
+    return json.loads(EVENTS_FILE.read_text(encoding="utf-8"))
 
 
 def event_sites(events: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
