@@ -4,14 +4,17 @@ Handles the templates the wiki uses for exploration sites:
 
 * ``{{CMBSiteInfo|name=|type=|rating=|location=|ship limit=|faction=|...}}``
 * ``{{Infobox gas nebula|type=|subtype=|location=|is guarded=|...}}``
+* ``{{Missiondetails|Level=|Faction1=|EWAR=|ShipSizeLimit=|...}}`` (COSMOS mission sites; keys are
+  mapped onto the site-infobox names, see ``MISSION_KEYS``)
 * ``{{NPCTableHead|<wave>}}`` followed by ``{{NPCTableRow|<Class>|<count>|<name>|k=v...}}``
 * ``{{npcwh|<code>|<N>x}}`` Sleeper rows (codes resolved via ``data/npcwh_codes.json``)
 * ``{{Past content}}``, ``{{Update|..}}``, ``{{Stub}}``, ``{{Merge|..}}`` status flags
 
-Besides the git-ignored wiki cache in ``data/raw/``, parsing reads two tracked,
-hand-maintained inputs: ``data/npcwh_codes.json`` (the Sleeper NPC code table behind
-``{{npcwh}}`` rows) and ``data/Template_Whisk.wiki`` (blue-loot values behind ``{{whisk}}``).
-Both are required; a missing file raises instead of silently degrading the output.
+Besides the git-ignored wiki cache in ``data/raw/``, parsing reads three tracked inputs:
+``data/npcwh_codes.json`` (the Sleeper NPC code table behind ``{{npcwh}}`` rows),
+``data/Template_Whisk.wiki`` (blue-loot values behind ``{{whisk}}``) and ``data/systems.json``
+(security and region of the systems COSMOS sites sit in, maintained by ``scraper.systems``).
+All are required; a missing file raises instead of silently degrading the output.
 
 Run ``uv run python -m scraper.parse`` to write ``data/parsed_sites.json``.
 """
@@ -21,9 +24,11 @@ from __future__ import annotations
 import json
 import re
 import sys
+from collections.abc import Mapping
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
+from scraper import systems as system_table
 from scraper.wiki import RAW_DIR, WIKI_DIR, load_category_index
 
 DATA_DIR = RAW_DIR.parent
@@ -75,6 +80,8 @@ CLASS_ORDER = (
 LEADING_TEMPLATES = (
     "CMBSiteInfo",
     "Infobox gas nebula",
+    "Missiondetails",
+    "MissionBriefing",
     "NPCTableCSS",
     "Update",
     "Past content",
@@ -126,6 +133,24 @@ class ParsedPage:
     escalations: list[str]
     blue_loot_isk: int | None
     merge_target: str | None
+    # COSMOS sites only (fixed-location complexes):
+    system_candidates: list[str] = field(default_factory=list)  # possible system names, most likely first
+    system: dict | None = None  # {"name", "security", "region"} from data/systems.json
+    scan_hint: str | None = None  # "signature" | "anomaly" | "beacon" | None (unknown)
+
+
+COSMOS_CATEGORY = "COSMOS sites"
+
+# {{Missiondetails}} keys -> the site-infobox keys the rules read. "Type" (Encounter/Courier/...)
+# is kept as "mission type" so it never reaches the site-type logic.
+MISSION_KEYS: dict[str, str] = {
+    "faction1": "faction",
+    "shipsizelimit": "ship limit",
+    "ewar": "ewar",
+    "level": "level",
+    "type": "mission type",
+    "objective": "objective",
+}
 
 
 # --------------------------------------------------------------------------- helpers
@@ -467,6 +492,167 @@ def load_whisk() -> dict[str, int]:
     return out
 
 
+def strip_templates(text: str) -> str:
+    """Remove every ``{{...}}`` template, nested ones included."""
+    prev = None
+    while prev != text:
+        prev = text
+        text = re.sub(r"\{\{[^{}]*\}\}", "", text)
+    return text
+
+
+# A system-name word: "Hjoramold", "Old" (of "Old Man Star") or a null-sec code like "PPG-XC" / "DUO-51".
+_SYSTEM_WORD = r"(?:[A-Z][a-z][A-Za-z']*|[A-Z0-9]{1,6}-[A-Z0-9]{1,6})"
+_SYSTEM_PHRASE = rf"{_SYSTEM_WORD}(?: {_SYSTEM_WORD}){{0,2}}"
+_SYSTEM_WORD_RE = re.compile(rf"^{_SYSTEM_WORD}$")
+# Words that are never the system a COSMOS page means. Some are real system names (Amarr, Thera) that
+# show up in prose such as "in Amarr space", so they are only skipped when found in running text.
+_NOT_SYSTEMS = frozenset(
+    "High Low Null Highsec Lowsec Nullsec Sec Security Space Unknown Warning System Region Constellation "
+    "The This That Each Room Pocket Wave Moon Planet Belt Asteroid Station Gate Deadspace Cosmic "
+    "Signature Beacon Agent Mission Level "
+    # Region-name words that are also (unrelated) system names: "Vale of the Silent" vs Vale (Pochven).
+    "Vale".split()
+)
+_PROSE_ONLY_NOT_SYSTEMS = frozenset(
+    "Amarr Caldari Gallente Minmatar Ammatar Khanid Jove Thera Pochven Sansha Angel Blood Serpentis "
+    "Guristas Mordu Kazka Maru Concord".split()
+)
+_CELESTIAL_TITLE_RE = re.compile(rf"^({_SYSTEM_WORD}) [IVXLC]+\b")
+_DOTLAN_RE = re.compile(r"evemaps\.dotlan\.net/(?:map/[^/\s\]|]+|system)/([^/\s\]|#?]+)", re.I)
+_LOCATED_RE = re.compile(rf"\blocated (?:in|at) (?:the )?({_SYSTEM_PHRASE})|\bsystem of ({_SYSTEM_PHRASE})")
+_NAMED_SYSTEM_RE = re.compile(rf"\b({_SYSTEM_PHRASE}) system\b")
+_IN_RE = re.compile(rf"\b(?:in|at) (?:the )?({_SYSTEM_PHRASE})")
+
+
+def _phrase_candidates(phrase: str, prose: bool) -> list[str]:
+    """The whole phrase plus each word of it, minus the never-a-system words."""
+    words = phrase.split()
+    out = [phrase] if len(words) > 1 else []
+    out += words
+    stop = _NOT_SYSTEMS | (_PROSE_ONLY_NOT_SYSTEMS if prose else frozenset())
+    return [w for w in out if w not in stop and w.split()[0] not in stop]
+
+
+def system_candidates(location: str, text: str, title: str = "") -> list[str]:
+    """Possible solar-system names for a fixed-location (COSMOS) site, most likely first.
+
+    The infobox ``location`` comes first ("Airmia ({{ColorSecurityRating|..}})", "IGE-RI (Null)"),
+    then dotlan map links, then prose: "located in PPG-XC", "Autama system", "in Sakkikainen",
+    and last the system of a celestial-named title ("Otitoh VII- Moon 19"). Which of them really
+    are systems (or constellations) is decided later against ``data/systems.json``.
+    """
+    out: list[str] = []
+    loc = strip_markup(strip_templates(location or ""))
+    tokens = [t for t in re.split(r"[^A-Za-z0-9'-]+", loc) if t]
+
+    def is_word(tok: str) -> bool:
+        return bool(_SYSTEM_WORD_RE.match(tok)) and tok not in _NOT_SYSTEMS
+
+    for i, tok in enumerate(tokens):
+        if not is_word(tok):
+            continue
+        run = [tok]  # up to three adjacent name words: "Old Man Star"
+        for nxt in tokens[i + 1 : i + 3]:
+            if not is_word(nxt):
+                break
+            run.append(nxt)
+        out += [" ".join(run[:n]) for n in range(len(run), 0, -1)]
+    # dotlan map links name the system exactly, even when the link label is misspelt
+    out += [m.group(1).replace("_", " ") for m in _DOTLAN_RE.finditer(text or "")]
+    prose = strip_markup(strip_templates(text or ""))
+    for pattern in (_LOCATED_RE, _NAMED_SYSTEM_RE, _IN_RE):
+        for m in pattern.finditer(prose):
+            phrase = next(g for g in m.groups() if g)
+            out += _phrase_candidates(phrase, prose=True)
+    # Titles named after a celestial: "Otitoh VII- Moon 19", "Otomainen VIII – Asteroid Belt 1".
+    m = _CELESTIAL_TITLE_RE.match(title or "")
+    if m:
+        out.append(m.group(1))
+    seen: list[str] = []
+    for c in out:
+        if c not in seen and len(c) <= 40:
+            seen.append(c)
+    return seen
+
+
+_ANOMALY_CUES = re.compile(
+    r"shows? up as an? (?:combat )?anomaly|no requirement to probe|does not need to be (?:scanned|probed)", re.I
+)
+_WEAK_ANOMALY_CUES = re.compile(r"\bis an? (?:[\w']+ ){0,3}combat anomaly\b", re.I)
+_SIGNATURE_CUES = re.compile(
+    r"cosmic signature|scanned down|must be (?:scanned|probed)|needs? to be (?:scanned|probed)|"
+    r"has to be (?:scanned|probed)|found by (?:probe )?scanning|found with (?:core |combat )?probes|"
+    r"(?:probe|scan) (?:it |the site )?down|requires? (?:probe )?scanning|scanning the signature|scannable|"
+    r"signature is (?:not )?static|"
+    # signature ids such as "signature (TQH-960)" or "[OUI-560]"
+    r"\bsignatures?\b[^.]{0,30}\b(?-i:[A-Z]{3}-\d{3})\b|[(\[](?-i:[A-Z]{3}-\d{3})[)\]]",
+    re.I,
+)
+_BEACON_CUES = re.compile(
+    r"warpable beacon|beacon (?:that is |which is )?visible|(?:on|in) (?:the |your )?overview|"
+    r"marked with a[^.]{0,40}beacon|shows? up as a[^.]{0,40}beacon|static beacon|site beacon|deadspace beacon",
+    re.I,
+)
+
+
+def scan_hint(text: str, infobox: Mapping[str, str]) -> str | None:
+    """How a site is found: ``"signature"`` (probe it down), ``"anomaly"`` or ``"beacon"``; None if unsaid.
+
+    An explicit infobox ``signature strength`` wins ("Beacon", "Signature", "5% in High Sec");
+    otherwise the page prose decides: anomaly cues ("shows up as an anomaly"), then signature
+    cues ("needs to be scanned down", signature ids like ``TQH-960``), then "is a ... combat
+    anomaly", then beacon cues.
+    """
+    sig = str(infobox.get("signature strength", "")).lower()
+    if "beacon" in sig:
+        return "beacon"
+    if "signature" in sig or "%" in sig:
+        return "signature"
+    prose = strip_markup(strip_templates(text))
+    for hint, cues in (
+        ("anomaly", _ANOMALY_CUES),
+        ("signature", _SIGNATURE_CUES),
+        ("anomaly", _WEAK_ANOMALY_CUES),
+        ("beacon", _BEACON_CUES),
+    ):
+        if cues.search(prose):
+            return hint
+    return None
+
+
+def load_systems() -> dict[str, dict]:
+    """Security/region table for COSMOS systems (``data/systems.json``, required)."""
+    return system_table.load_systems()
+
+
+def read_page(path: Path) -> tuple[str, str]:
+    """Return ``(title, wikitext)`` of a cached page (the TITLE comment line removed)."""
+    text = path.read_text(encoding="utf-8")
+    m = re.match(r"<!-- TITLE: (.*?) -->\n", text)
+    title = m.group(1) if m else path.stem
+    return title, (text[m.end() :] if m else text)
+
+
+def page_categories(title: str, text: str, category_index: Mapping[str, set[str]]) -> list[str]:
+    """Categories from the page's own ``[[Category:..]]`` links plus the cached category lists."""
+    categories = set(re.findall(r"\[\[\s*Category:\s*([^\]|]+)", text)) | set(category_index.get(title, set()))
+    return sorted({c.strip().replace("_", " ") for c in categories if c.strip()})
+
+
+def parse_infobox(text: str) -> tuple[str | None, dict[str, str]]:
+    """The first site infobox on the page: CMBSiteInfo, Infobox gas nebula, else Missiondetails."""
+    for kind in ("CMBSiteInfo", "Infobox gas nebula"):
+        found = find_templates(text, kind)
+        if found:
+            return kind, parse_kv(found[0])
+    found = find_templates(text, "Missiondetails")
+    if found:
+        raw = parse_kv(found[0])
+        return "Missiondetails", {MISSION_KEYS[k]: v for k, v in raw.items() if k in MISSION_KEYS}
+    return None, {}
+
+
 def parse_flags(text: str) -> dict[str, str | bool]:
     flags: dict[str, str | bool] = {}
     for name, key in (
@@ -489,23 +675,19 @@ def parse_page(
     category_index: dict[str, set[str]],
     codes: dict[str, dict],
     whisk: dict[str, int],
+    systems: Mapping[str, Mapping] | None = None,
 ) -> ParsedPage:
-    text = path.read_text(encoding="utf-8")
-    m = re.match(r"<!-- TITLE: (.*?) -->\n", text)
-    title = m.group(1) if m else path.stem
-    if m:
-        text = text[m.end() :]
-    categories = set(re.findall(r"\[\[\s*Category:\s*([^\]|]+)", text)) | category_index.get(title, set())
-    categories_clean = sorted({c.strip().replace("_", " ") for c in categories if c.strip()})
+    title, text = read_page(path)
+    categories_clean = page_categories(title, text, category_index)
+    infobox_kind, infobox = parse_infobox(text)
 
-    infobox_kind: str | None = None
-    infobox: dict[str, str] = {}
-    for kind in ("CMBSiteInfo", "Infobox gas nebula"):
-        found = find_templates(text, kind)
-        if found:
-            infobox_kind = kind
-            infobox = parse_kv(found[0])
-            break
+    candidates: list[str] = []
+    system = None
+    hint = None
+    if COSMOS_CATEGORY in categories_clean:
+        candidates = system_candidates(infobox.get("location", ""), text, title)
+        system = system_table.lookup(candidates, systems or {})
+        hint = scan_hint(text, infobox)
 
     merge_target = None
     merge = find_templates(text, "Merge")
@@ -529,6 +711,9 @@ def parse_page(
         escalations=parse_escalations(text),
         blue_loot_isk=parse_blue_loot(text, whisk),
         merge_target=merge_target,
+        system_candidates=candidates,
+        system=system,
+        scan_hint=hint,
     )
 
 
@@ -536,10 +721,11 @@ def parse_all(wiki_dir: Path = WIKI_DIR) -> list[ParsedPage]:
     category_index = load_category_index()
     codes = load_npcwh_codes()
     whisk = load_whisk()
+    systems = load_systems()
     pages: list[ParsedPage] = []
     for path in sorted(wiki_dir.glob("*.wiki")):
         try:
-            pages.append(parse_page(path, category_index, codes, whisk))
+            pages.append(parse_page(path, category_index, codes, whisk, systems))
         except Exception as exc:  # never let one odd page kill the run
             print(f"  warning: failed to parse {path.name}: {exc}", file=sys.stderr)
     return pages
@@ -556,6 +742,8 @@ def main() -> None:
         f"  with infobox: {with_box}, with NPC rows: {with_rows}, neither: {neither}, "
         f"past content: {sum(1 for p in pages if p.flags.get('past_content'))}"
     )
+    cosmos = [p for p in pages if COSMOS_CATEGORY in p.categories]
+    print(f"  COSMOS pages: {len(cosmos)}, with a resolved system: {sum(1 for p in cosmos if p.system)}")
 
 
 if __name__ == "__main__":

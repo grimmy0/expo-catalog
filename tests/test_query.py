@@ -244,6 +244,9 @@ def test_space_field(space, term, expected):
         (dict(category="chemical_lab", rating=None, scan_group="Gas Site"), "chem", True),
         (dict(category="sleeper_cache", rating=None, scan_group="Data Site"), "sleeper", True),
         (dict(category="wormhole_connection", rating="→ C5", scan_group="Wormhole"), "wormhole", True),
+        (dict(category="cosmos", rating="COSMOS L4", scan_group="Combat Site"), "cosmos", True),
+        (dict(category="cosmos", rating="COSMOS", scan_group="Beacon"), "cosmos", True),
+        (dict(category="combat_unrated", rating="Unrated"), "cosmos", False),
         # category with underscores replaced
         (dict(category="wormhole_relic", rating="C3", scan_group="Relic Site"), "wormhole relic", True),
         (dict(category="wormhole_relic", rating="C3", scan_group="Relic Site"), "relic", True),

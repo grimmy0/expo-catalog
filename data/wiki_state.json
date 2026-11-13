@@ -62,11 +62,37 @@
    "Homefront_Operations"
   ]
  },
+ "Accelerator Flashpoint": {
+  "revid": 222502,
+  "timestamp": "2025-04-20T14:30:59Z",
+  "categories": []
+ },
  "Advanced Drone Outgrowth Colony": {
   "revid": 186320,
   "timestamp": "2022-05-17T21:52:30Z",
   "categories": [
    "Combat_Anomalies"
+  ]
+ },
+ "Aether Drone Hive": {
+  "revid": 210258,
+  "timestamp": "2023-12-03T23:04:52Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Amarr Military Training Grounds": {
+  "revid": 194928,
+  "timestamp": "2022-09-10T16:28:14Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Ammatar Traitor's Hideout": {
+  "revid": 196075,
+  "timestamp": "2022-10-08T12:20:43Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Ancient Ruins": {
@@ -331,8 +357,8 @@
   ]
  },
  "Angel's Red Light District": {
-  "revid": 231859,
-  "timestamp": "2026-07-04T01:03:43Z",
+  "revid": 232884,
+  "timestamp": "2026-11-08T18:19:37Z",
   "categories": [
    "DED_Complexes"
   ]
@@ -456,6 +482,20 @@
    "Removed_ore_sites"
   ]
  },
+ "Bai Tarziiki": {
+  "revid": 207085,
+  "timestamp": "2023-08-20T13:16:44Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Bandit Hideout": {
+  "revid": 126694,
+  "timestamp": "2017-09-20T17:39:48Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Bandit Nebula": {
   "revid": 208599,
   "timestamp": "2023-10-07T13:19:57Z",
@@ -469,6 +509,13 @@
   "categories": [
    "Gas_sites",
    "Wormhole_sites"
+  ]
+ },
+ "Bazeri Palen": {
+  "revid": 207462,
+  "timestamp": "2023-08-31T10:22:52Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Besieged Covert Research Facility": {
@@ -491,6 +538,11 @@
   "categories": [
    "Relic_sites"
   ]
+ },
+ "Blood Annex": {
+  "revid": 188213,
+  "timestamp": "2022-06-15T19:32:54Z",
+  "categories": []
  },
  "Blood Burrow": {
   "revid": 225142,
@@ -815,11 +867,25 @@
    "Chemical_Labs"
   ]
  },
+ "Cadaver Reef": {
+  "revid": 201653,
+  "timestamp": "2023-03-18T16:05:12Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Calabash Nebula": {
   "revid": 223489,
   "timestamp": "2025-05-28T15:58:42Z",
   "categories": [
    "Gas_sites"
+  ]
+ },
+ "Caldari Agent's Hideout": {
+  "revid": 172271,
+  "timestamp": "2021-07-02T12:45:23Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Cardinal Nebula": {
@@ -886,11 +952,123 @@
    "Combat_Anomalies"
   ]
  },
+ "Contested Amarr Bastion of Blood": {
+  "revid": 216556,
+  "timestamp": "2024-06-17T13:29:02Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Amarr Crimson Keep": {
+  "revid": 207178,
+  "timestamp": "2023-08-22T11:53:31Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Amarr Sanguine Vaults": {
+  "revid": 207176,
+  "timestamp": "2023-08-22T11:35:59Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Caldari Lai Dai Refinery": {
+  "revid": 217064,
+  "timestamp": "2024-07-01T13:45:04Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Caldari Mining Facilities": {
+  "revid": 207001,
+  "timestamp": "2023-08-17T11:04:24Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Contested Covert Research Facilities": {
   "revid": 228670,
   "timestamp": "2026-01-05T10:30:43Z",
   "categories": [
    "Data_sites"
+  ]
+ },
+ "Contested Gallente Azure Canyon": {
+  "revid": 207211,
+  "timestamp": "2023-08-23T12:27:40Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Gallente Roden Shipyard's Outpost": {
+  "revid": 203300,
+  "timestamp": "2023-05-13T07:36:21Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Gallente Skeleton Comet": {
+  "revid": 230757,
+  "timestamp": "2026-05-05T22:59:49Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Gallentean Canyon of Rust": {
+  "revid": 207593,
+  "timestamp": "2023-09-06T08:31:24Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Guristas Outrider Post": {
+  "revid": 207081,
+  "timestamp": "2023-08-20T12:30:53Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Kazka Headquarters": {
+  "revid": 218952,
+  "timestamp": "2024-09-23T11:02:31Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Kois City": {
+  "revid": 200406,
+  "timestamp": "2023-02-02T16:00:22Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Minmatar Army Complex": {
+  "revid": 212335,
+  "timestamp": "2024-01-31T21:56:51Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Minmatar Guerilla Base": {
+  "revid": 179419,
+  "timestamp": "2021-12-27T00:04:22Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Minmatar Legendary Stronghold": {
+  "revid": 230577,
+  "timestamp": "2026-04-17T23:51:51Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Contested Minmatar Military Depot": {
+  "revid": 230598,
+  "timestamp": "2026-04-19T05:08:00Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Convocation Watchpost": {
@@ -956,6 +1134,13 @@
    "Wormhole_sites"
   ]
  },
+ "Courier Gone Missing (2 of 2)": {
+  "revid": 196053,
+  "timestamp": "2022-10-08T09:44:59Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Crab Spider Nebula": {
   "revid": 229376,
   "timestamp": "2026-01-31T15:09:03Z",
@@ -1003,6 +1188,13 @@
   "timestamp": "2026-04-22T12:35:58Z",
   "categories": [
    "Unrated_Complexes"
+  ]
+ },
+ "Devil‘s Dig Site": {
+  "revid": 168955,
+  "timestamp": "2021-03-01T04:49:34Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Dewy Nebula": {
@@ -1092,7 +1284,9 @@
  "Distress Beacon": {
   "revid": 223788,
   "timestamp": "2025-06-13T15:36:59Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "Dread Assault": {
   "revid": 232232,
@@ -1118,6 +1312,13 @@
   "timestamp": "2023-01-15T18:22:25Z",
   "categories": [
    "Wormhole_sites"
+  ]
+ },
+ "Drifting Cask": {
+  "revid": 207181,
+  "timestamp": "2023-08-22T12:39:39Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Drone Assembly": {
@@ -1480,6 +1681,13 @@
    "Unrated_Complexes"
   ]
  },
+ "Fort Kumar": {
+  "revid": 207174,
+  "timestamp": "2023-08-22T10:57:40Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Fortification Frontier Stronghold": {
   "revid": 221682,
   "timestamp": "2025-03-07T11:13:30Z",
@@ -1490,7 +1698,16 @@
  "Forward Reconnaissance Outpost": {
   "revid": 223795,
   "timestamp": "2025-06-14T11:59:57Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
+ },
+ "Freebooter's Haven": {
+  "revid": 207170,
+  "timestamp": "2023-08-22T10:04:57Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
  },
  "Frontier Barracks": {
   "revid": 199922,
@@ -1513,11 +1730,32 @@
    "Gas_sites"
   ]
  },
+ "Gallente Mining Operation": {
+  "revid": 197068,
+  "timestamp": "2022-11-03T13:18:12Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Gaseous Nebula": {
   "revid": 208630,
   "timestamp": "2023-10-07T13:20:59Z",
   "categories": [
    "Gas_sites"
+  ]
+ },
+ "Gatti Zhara": {
+  "revid": 212286,
+  "timestamp": "2024-01-31T15:28:40Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Genom's Secret Outpost": {
+  "revid": 200166,
+  "timestamp": "2023-01-21T16:48:02Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Ghost Nebula": {
@@ -1715,6 +1953,13 @@
   "timestamp": "2026-10-05T23:59:35Z",
   "categories": [
    "Chemical_Labs"
+  ]
+ },
+ "Guristas Guard Post": {
+  "revid": 200220,
+  "timestamp": "2023-01-23T13:14:10Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Guristas Guerilla Grounds": {
@@ -1959,7 +2204,15 @@
   "revid": 232197,
   "timestamp": "2026-08-22T21:55:45Z",
   "categories": [
+   "COSMOS_sites",
    "Gas_sites"
+  ]
+ },
+ "Ihakana VI – State and Region Bank Investment Bank": {
+  "revid": 207334,
+  "timestamp": "2023-08-28T06:20:45Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Incipient Drone Swarm": {
@@ -1967,6 +2220,13 @@
   "timestamp": "2026-02-11T06:45:20Z",
   "categories": [
    "Combat_Anomalies"
+  ]
+ },
+ "Incursion sites": {
+  "revid": 216963,
+  "timestamp": "2024-06-30T07:19:31Z",
+  "categories": [
+   "Incursions_sites"
   ]
  },
  "Independence": {
@@ -2021,10 +2281,57 @@
    "Wormhole_sites"
   ]
  },
+ "Jakela Plantation": {
+  "revid": 204743,
+  "timestamp": "2023-06-08T04:52:05Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Jove Observatory": {
   "revid": 229157,
   "timestamp": "2026-01-18T07:41:15Z",
   "categories": []
+ },
+ "Kador Military Outpost": {
+  "revid": 223405,
+  "timestamp": "2025-05-28T12:08:31Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Kazka Bandit Post": {
+  "revid": 205445,
+  "timestamp": "2023-07-02T09:17:29Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Kazka Blockade": {
+  "revid": 231757,
+  "timestamp": "2026-06-21T15:17:19Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Ketta Tommin's Residence": {
+  "revid": 213948,
+  "timestamp": "2024-03-14T11:09:51Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Khanid Stronghold": {
+  "revid": 229328,
+  "timestamp": "2026-01-26T03:14:38Z",
+  "categories": []
+ },
+ "Kyan Magdesh": {
+  "revid": 212285,
+  "timestamp": "2024-01-31T15:27:12Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
  },
  "Kylixium Deposit": {
   "revid": 224844,
@@ -2032,6 +2339,13 @@
   "categories": [
    "Ore_sites",
    "Sovereignty_Hub_ore_deposits"
+  ]
+ },
+ "Labyrinth": {
+  "revid": 207280,
+  "timestamp": "2023-08-26T08:45:50Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Large Arkonor and Bistot Deposit": {
@@ -2197,11 +2511,46 @@
    "Relic_sites"
   ]
  },
+ "Lord Manel's Mansion": {
+  "revid": 216562,
+  "timestamp": "2024-06-17T18:14:07Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Maekor's Plantation": {
+  "revid": 204016,
+  "timestamp": "2023-06-02T10:08:00Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Magye Pirates": {
+  "revid": 205442,
+  "timestamp": "2023-07-02T00:53:06Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Major Conduit": {
   "revid": 206939,
   "timestamp": "2023-08-15T10:42:23Z",
   "categories": [
    "Combat_Anomalies"
+  ]
+ },
+ "Mamo's Backyard": {
+  "revid": 230663,
+  "timestamp": "2026-04-27T22:20:42Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Maru Prison Facility": {
+  "revid": 207584,
+  "timestamp": "2023-09-05T12:28:00Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Massive Nebula": {
@@ -2232,11 +2581,60 @@
    "Homefront_Operations"
   ]
  },
+ "Minecore Facilities": {
+  "revid": 207171,
+  "timestamp": "2023-08-22T10:08:29Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Minecore Harvester Depot": {
+  "revid": 207172,
+  "timestamp": "2023-08-22T10:10:45Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Minedrill's Alpha Excavation Site": {
+  "revid": 206807,
+  "timestamp": "2023-08-12T13:48:53Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Minedrill's Beta Excavation Site": {
+  "revid": 207168,
+  "timestamp": "2023-08-22T09:43:15Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Minmatar Alliance Defense Brigade": {
+  "revid": 207227,
+  "timestamp": "2023-08-24T10:51:50Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Minmatar Brigands": {
+  "revid": 212937,
+  "timestamp": "2024-02-19T15:20:12Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Minmatar Contracted Bio-Farm": {
   "revid": 211593,
   "timestamp": "2024-01-08T00:50:15Z",
   "categories": [
    "DED_Complexes"
+  ]
+ },
+ "Minmatar Military Training Grounds": {
+  "revid": 207226,
+  "timestamp": "2023-08-24T10:40:19Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Minor Angel Annex": {
@@ -2311,30 +2709,68 @@
    "Gas_sites"
   ]
  },
+ "Museum Arcana": {
+  "revid": 196276,
+  "timestamp": "2022-10-12T03:03:11Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Nation Commander Outpost": {
   "revid": 223797,
   "timestamp": "2025-06-14T12:30:01Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "Nation Commander Stronghold": {
   "revid": 223882,
   "timestamp": "2025-06-17T22:01:39Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "Nation Consolidation Network": {
   "revid": 223881,
   "timestamp": "2025-06-17T21:37:49Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
+ },
+ "Nation Industrial Proxy": {
+  "revid": 223860,
+  "timestamp": "2025-06-16T10:14:53Z",
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "Nation Mining Colony": {
   "revid": 223863,
   "timestamp": "2025-06-16T11:22:57Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "Nation Rebirth Facility": {
   "revid": 223884,
   "timestamp": "2025-06-18T09:34:20Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
+ },
+ "Nefantar Ruins": {
+  "revid": 207637,
+  "timestamp": "2023-09-09T12:22:40Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Next of Kin (1 of 2)": {
+  "revid": 206917,
+  "timestamp": "2023-08-14T10:19:52Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
  },
  "Nocxite Deposit": {
   "revid": 224849,
@@ -2406,6 +2842,20 @@
    "Wormhole_sites"
   ]
  },
+ "Otitoh VII- Moon 19": {
+  "revid": 207394,
+  "timestamp": "2023-08-28T12:03:08Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Otomainen VIII – Asteroid Belt 1": {
+  "revid": 207029,
+  "timestamp": "2023-08-18T14:34:31Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Outgrowth Rogue Drone Hive (10/10)": {
   "revid": 229386,
   "timestamp": "2026-02-01T09:41:06Z",
@@ -2437,12 +2887,16 @@
  "Override Transfer Array": {
   "revid": 223864,
   "timestamp": "2025-06-16T12:14:32Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "Overwhelmed Civilian Facility": {
   "revid": 223883,
   "timestamp": "2025-06-18T09:26:08Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "PDW-09FX Frentix Distribution Base": {
   "revid": 171141,
@@ -2470,6 +2924,13 @@
   "timestamp": "2024-03-10T22:43:45Z",
   "categories": [
    "Gas_sites"
+  ]
+ },
+ "Pend Insurance Storage Bin": {
+  "revid": 198647,
+  "timestamp": "2022-12-17T07:30:36Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Perimeter Ambush Point": {
@@ -2519,9 +2980,16 @@
    "Gas_sites"
   ]
  },
+ "Pioneer's Sanctuary": {
+  "revid": 207208,
+  "timestamp": "2023-08-23T11:18:35Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Pipe Nebula": {
-  "revid": 223499,
-  "timestamp": "2025-05-28T16:06:15Z",
+  "revid": 232916,
+  "timestamp": "2026-11-11T13:29:05Z",
   "categories": [
    "Gas_sites"
   ]
@@ -2551,7 +3019,22 @@
   "revid": 203920,
   "timestamp": "2023-06-01T12:39:10Z",
   "categories": [
+   "COSMOS_sites",
    "Gas_sites"
+  ]
+ },
+ "Port Maphante": {
+  "revid": 135409,
+  "timestamp": "2018-05-23T07:03:49Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Pourpas Aunten": {
+  "revid": 207215,
+  "timestamp": "2023-08-23T14:41:20Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Pristine White Glaze Belt": {
@@ -2568,10 +3051,26 @@
    "Gas_sites"
   ]
  },
+ "Prohibited Caldari Navy Base": {
+  "revid": 211600,
+  "timestamp": "2024-01-08T08:58:13Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Prohibited Guristas Pirate Base": {
+  "revid": 167508,
+  "timestamp": "2021-02-04T16:05:44Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Propaganda Cluster": {
   "revid": 223861,
   "timestamp": "2025-06-16T10:36:13Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "Provisional Angel Outpost": {
   "revid": 173368,
@@ -2636,6 +3135,13 @@
    "Homefront_Operations"
   ]
  },
+ "Rakogh Administration Complex": {
+  "revid": 214539,
+  "timestamp": "2024-04-04T01:52:23Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Rampant Drone Fabricator": {
   "revid": 232184,
   "timestamp": "2026-08-20T11:34:23Z",
@@ -2671,6 +3177,20 @@
    "Relic_sites"
   ]
  },
+ "Restricted Caldari Navy Base": {
+  "revid": 223446,
+  "timestamp": "2025-05-28T12:15:36Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Restricted Serpentis Base": {
+  "revid": 201138,
+  "timestamp": "2023-03-07T14:38:21Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Rimy Nebula": {
   "revid": 208676,
   "timestamp": "2023-10-07T13:22:31Z",
@@ -2685,6 +3205,13 @@
    "Gas_sites"
   ]
  },
+ "Roaving Brigands": {
+  "revid": 172276,
+  "timestamp": "2021-07-02T12:51:37Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Rocky Nebula": {
   "revid": 215706,
   "timestamp": "2024-05-09T02:03:49Z",
@@ -2697,6 +3224,13 @@
   "timestamp": "2026-01-10T10:50:09Z",
   "categories": [
    "DED_Complexes"
+  ]
+ },
+ "Rogue Drone Blockade": {
+  "revid": 207554,
+  "timestamp": "2023-09-04T13:00:12Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Rogue Drone Infestation Sprout": {
@@ -2727,11 +3261,25 @@
    "Unrated_Complexes"
   ]
  },
+ "Rush Town Ruins": {
+  "revid": 231127,
+  "timestamp": "2026-05-21T10:29:47Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "SCC Secure Key Storage": {
   "revid": 229998,
   "timestamp": "2026-03-20T23:11:33Z",
   "categories": [
    "Data_sites"
+  ]
+ },
+ "ST 60 Hideout": {
+  "revid": 172151,
+  "timestamp": "2021-06-27T13:15:28Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Saintly Nebula": {
@@ -3400,6 +3948,13 @@
    "Gas_sites"
   ]
  },
+ "Sispur's Estate": {
+  "revid": 197830,
+  "timestamp": "2022-11-19T22:15:13Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Sister Nebula": {
   "revid": 232067,
   "timestamp": "2026-08-04T08:45:07Z",
@@ -3544,6 +4099,13 @@
    "Sovereignty_Hub_ore_deposits"
   ]
  },
+ "Small mining colony": {
+  "revid": 174056,
+  "timestamp": "2021-09-13T06:22:18Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Smoking Nebula": {
   "revid": 232091,
   "timestamp": "2026-08-06T06:33:57Z",
@@ -3663,10 +4225,40 @@
    "Gas_sites"
   ]
  },
+ "Taisu Magdesh's Stronghold": {
+  "revid": 223440,
+  "timestamp": "2025-05-28T12:14:53Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Temko Surveillance Outpost": {
+  "revid": 210691,
+  "timestamp": "2023-12-19T15:32:47Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "The Alliance Barrack": {
+  "revid": 207225,
+  "timestamp": "2023-08-24T10:34:49Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "The Iacta Space Plain": {
+  "revid": 200453,
+  "timestamp": "2023-02-05T13:19:27Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "The Kundalini Manifest": {
   "revid": 223887,
   "timestamp": "2025-06-18T10:06:12Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "The Line": {
   "revid": 199949,
@@ -3703,11 +4295,25 @@
    "Wormhole_sites"
   ]
  },
+ "The Pirate Expedition": {
+  "revid": 200455,
+  "timestamp": "2023-02-05T13:42:26Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "The Ruins of Enclave Cohort 27": {
   "revid": 199952,
   "timestamp": "2023-01-15T18:30:06Z",
   "categories": [
    "Wormhole_sites"
+  ]
+ },
+ "The Serpentis Agent": {
+  "revid": 179489,
+  "timestamp": "2021-12-30T16:06:50Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Thick Nebula": {
@@ -3747,18 +4353,29 @@
  "True Creations Research Center": {
   "revid": 223885,
   "timestamp": "2025-06-18T09:37:09Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "True Power Provisional Headquarters": {
   "revid": 223886,
   "timestamp": "2025-06-18T09:50:23Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "True Sansha Fleet Staging Point": {
   "revid": 227876,
   "timestamp": "2025-11-30T20:12:40Z",
   "categories": [
    "Unrated_Complexes"
+  ]
+ },
+ "Tsuna's Private Compounds": {
+  "revid": 207049,
+  "timestamp": "2023-08-19T08:48:07Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  },
  "Ueganite Deposit": {
@@ -3898,10 +4515,19 @@
    "Wormhole_sites"
   ]
  },
+ "Urigamu‘s Warehouse": {
+  "revid": 207071,
+  "timestamp": "2023-08-20T09:38:23Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
  "Uroborus": {
   "revid": 223888,
   "timestamp": "2025-06-18T10:13:05Z",
-  "categories": []
+  "categories": [
+   "Incursions_sites"
+  ]
  },
  "Vast Frontier Reservoir": {
   "revid": 229861,
@@ -4039,6 +4665,34 @@
   "timestamp": "2026-06-18T18:01:26Z",
   "categories": [
    "Wormhole_sites"
+  ]
+ },
+ "Yakura Harvesting Depot": {
+  "revid": 200934,
+  "timestamp": "2023-03-01T09:03:17Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Yamia Mida": {
+  "revid": 207180,
+  "timestamp": "2023-08-22T12:36:12Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Yan Jung Relic Site": {
+  "revid": 154915,
+  "timestamp": "2020-05-24T16:45:25Z",
+  "categories": [
+   "COSMOS_sites"
+  ]
+ },
+ "Yan Jung Ruins": {
+  "revid": 232820,
+  "timestamp": "2026-11-05T21:59:33Z",
+  "categories": [
+   "COSMOS_sites"
   ]
  }
 }

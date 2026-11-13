@@ -2,7 +2,8 @@
 
     uv run python -m scraper check [--json PATH] [--write-state]
 
-Compares the live category membership and latest revision ids with the committed
+Compares the live membership (tracked categories, ``wiki.EXTRA_PAGES`` and pages using a
+site infobox template, see ``wiki.site_membership``) and latest revision ids with the committed
 ``data/wiki_state.json`` snapshot and reports NEW, REMOVED and CHANGED pages
 (with wiki diff links). Changed pages that have a hand-written override in
 ``scraper.curated.OVERRIDES`` are flagged for re-review.
@@ -62,7 +63,7 @@ class Report:
             f"{len(self.changed)} changed, {len(self.new)} new, {len(self.removed)} removed"
         ]
         if self.new:
-            lines.append("NEW pages (in tracked categories, not yet in the catalog):")
+            lines.append("NEW pages (in tracked categories or using a site infobox, not yet in the catalog):")
             lines += [f"  + {n['title']}  [{', '.join(n['categories']) or 'extra'}]" for n in self.new]
         if self.removed:
             lines.append("REMOVED pages (tracked, no longer in categories or deleted):")
@@ -131,11 +132,9 @@ def compute_report(
 
 
 def live_membership() -> dict[str, list[str]]:
-    rows: list[tuple[str, str]] = []
-    for category in wiki.SITE_CATEGORIES:
-        rows += [(category, t) for t in wiki.category_members(category)]
-        time.sleep(wiki.REQUEST_DELAY_S)
-    return wiki.tracked_titles(rows)
+    """{title: categories} the catalog should track now (same rules as ``wiki.fetch_all``)."""
+    _rows, tracked = wiki.site_membership()
+    return tracked
 
 
 def state_from(current: Mapping[str, list[str]], meta: Mapping[str, Mapping]) -> dict[str, dict]:

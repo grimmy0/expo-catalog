@@ -94,6 +94,7 @@ _CATEGORY_LABELS: dict[str, str] = {
     "homefront": "Homefront operation",
     "pochven": "Pochven site",
     "drifter": "Drifter site",
+    "cosmos": "COSMOS site",
     "event": "Event site",
     "wormhole_connection": "Wormhole connection",
     "other": "Other",

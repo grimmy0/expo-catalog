@@ -584,6 +584,7 @@ def test_run_with_missing_db_exits_with_hint(tmp_path, capsys):
         ("pochven", None, "Pochven"),
         ("drifter", None, "Drifter"),
         ("incursion", "Vanguard", "Incursion"),
+        ("cosmos", "COSMOS L4", "COSMOS"),
         ("event", "Crimson Harvest (2023-2026)", "Event"),
         ("wormhole_connection", "→ C5", "Wormhole"),
         ("other", None, "Other"),

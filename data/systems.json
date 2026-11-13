@@ -1,0 +1,170 @@
+{
+ "3GD6-8": {
+  "security": -0.2153,
+  "region": "Catch"
+ },
+ "3L-Y9M": {
+  "security": -0.1709,
+  "region": "Feythabolis"
+ },
+ "A8-XBW": {
+  "security": -0.1697,
+  "region": "Fountain"
+ },
+ "Airmia": {
+  "security": 0.6231,
+  "region": "The Forge"
+ },
+ "Algintal": {
+  "kind": "constellation",
+  "security": 0.9,
+  "min_security": 0.4659,
+  "region": "Sinq Laison"
+ },
+ "Alsottobier": {
+  "security": 0.5081,
+  "region": "Sinq Laison"
+ },
+ "Aphi": {
+  "security": 0.5225,
+  "region": "Kador"
+ },
+ "Audesder": {
+  "security": 0.2647,
+  "region": "Molden Heath"
+ },
+ "Autama": {
+  "security": 0.7751,
+  "region": "Lonetrek"
+ },
+ "Barkrik": {
+  "security": 0.5624,
+  "region": "Metropolis"
+ },
+ "BJD4-E": {
+  "security": -0.1366,
+  "region": "Feythabolis"
+ },
+ "Chanoun": {
+  "security": 0.5136,
+  "region": "Kador"
+ },
+ "Colelie": {
+  "security": 0.5124,
+  "region": "Sinq Laison"
+ },
+ "Deltole": {
+  "security": 0.5405,
+  "region": "Sinq Laison"
+ },
+ "DUO-51": {
+  "security": -0.473,
+  "region": "Wicked Creek"
+ },
+ "E-8CSQ": {
+  "kind": "constellation",
+  "security": -0.1908,
+  "min_security": -0.4081,
+  "region": "Vale of the Silent"
+ },
+ "Fluekele": {
+  "security": 0.5616,
+  "region": "Sinq Laison"
+ },
+ "Friggi": {
+  "security": 0.5092,
+  "region": "The Forge"
+ },
+ "G5ED-Y": {
+  "security": -0.2666,
+  "region": "Vale of the Silent"
+ },
+ "Garisas": {
+  "security": 0.4971,
+  "region": "Kador"
+ },
+ "Hjoramold": {
+  "security": 0.5092,
+  "region": "Metropolis"
+ },
+ "IGE-RI": {
+  "security": -0.0486,
+  "region": "Fountain"
+ },
+ "Ihakana": {
+  "security": 0.3808,
+  "region": "The Forge"
+ },
+ "Inder": {
+  "security": 0.5103,
+  "region": "Metropolis"
+ },
+ "Jolia": {
+  "security": 0.5078,
+  "region": "Sinq Laison"
+ },
+ "K-X5AX": {
+  "security": -0.1349,
+  "region": "Feythabolis"
+ },
+ "Kenobanala": {
+  "security": 0.2894,
+  "region": "Derelik"
+ },
+ "Koona": {
+  "security": 0.5186,
+  "region": "Kador"
+ },
+ "Lirsautton": {
+  "security": 0.8356,
+  "region": "Everyshore"
+ },
+ "Nakugard": {
+  "security": 0.5209,
+  "region": "Metropolis"
+ },
+ "O-LR1H": {
+  "security": -0.2472,
+  "region": "Vale of the Silent"
+ },
+ "Otitoh": {
+  "security": 0.4817,
+  "region": "The Forge"
+ },
+ "Otomainen": {
+  "security": 0.4792,
+  "region": "The Forge"
+ },
+ "Parchanier": {
+  "security": 0.9,
+  "region": "Sinq Laison"
+ },
+ "PPG-XC": {
+  "security": -0.0131,
+  "region": "Cloud Ring"
+ },
+ "Sakkikainen": {
+  "security": 0.5949,
+  "region": "The Forge"
+ },
+ "Thelan": {
+  "security": 0.227,
+  "region": "Sinq Laison"
+ },
+ "Traun": {
+  "security": 0.6295,
+  "region": "Metropolis"
+ },
+ "Tvink": {
+  "security": 0.4769,
+  "region": "Metropolis"
+ },
+ "ZH3-BS": {
+  "security": -0.0898,
+  "region": "Tenal"
+ },
+ "Zimse": {
+  "security": 0.5111,
+  "region": "Kador"
+ }
+}

@@ -16,8 +16,12 @@ Danger scale (``DANGER_LABELS``):
 from __future__ import annotations
 
 import re
+from collections import Counter
 from collections.abc import Iterable, Mapping
 from typing import Any
+
+from scraper.systems import security_class
+from scraper.systems import space_label as system_space_label
 
 DANGER_LABELS: dict[int, str] = {0: "n/a", 1: "Safe", 2: "Low", 3: "Medium", 4: "High", 5: "Deadly"}
 
@@ -214,6 +218,8 @@ UNRATED_RULES: list[tuple[re.Pattern[str], str, int, str]] = [
         4,
         "Battleship (Dominix/Rattlesnake/Praxis)",
     ),
+    # Gate-locked (Khanid Slave Trader Insignia) highsec complex: frigates, ~12 cruisers, sentries.
+    (re.compile(r"^Khanid Stronghold$"), "High (Amarr space)", 3, "Battlecruiser (Drake/Gnosis/Myrmidon)"),
 ]
 
 COMBAT_RELIC_RUINS = (
@@ -230,6 +236,7 @@ INCURSION_TIERS: dict[str, tuple[str, int, str, str]] = {
     "Distress Beacon": ("Staging", 3, "Frigate gang (3+)", "top 5 contributors paid"),
     "Forward Reconnaissance Outpost": ("Staging", 3, "Frigate gang (3+)", "top 5 contributors paid"),
     "Propaganda Cluster": ("Staging", 3, "Frigate gang (3+)", "top 5 contributors paid"),
+    "Nation Industrial Proxy": ("Staging", 3, "Frigate gang (3+)", "top 5 contributors paid"),
     "Nation Commander Outpost": ("Vanguard", 4, "Fleet (5-10, logi)", "5-10 pilots (high), 5-15 (low/null)"),
     "Nation Mining Colony": ("Vanguard", 4, "Fleet (5-10, logi)", "5-10 pilots; requires Lyavite"),
     "Override Transfer Array": ("Vanguard", 4, "Fleet (5-10, logi)", "5-10 pilots; hacker recommended"),
@@ -274,6 +281,8 @@ POCHVEN_TITLES: dict[str, tuple[int, str, str]] = {
     "EDENCOM Staging Area": (4, "Fleet (5+, logi)", "Combat Anomaly"),
     "EDENCOM Field Base": (5, "Fleet (10-15, logi)", "Combat Anomaly"),
     "Stellar Observation Post": (4, "Cruiser fleet (5+, logi)", "Combat Anomaly"),
+    # Defend the Stellar Observatory against Triglavian waves and a Zirnitra dreadnought.
+    "Accelerator Flashpoint": (5, "Fleet (10-15, logi)", "Combat Anomaly"),
 }
 POCHVEN_FACTION: dict[str, str] = {
     "Incipient Drone Swarm": "Rogue Drones",
@@ -295,6 +304,7 @@ POCHVEN_FACTION: dict[str, str] = {
     "EDENCOM Staging Area": "Triglavian Collective",
     "EDENCOM Field Base": "Triglavian Collective",
     "Stellar Observation Post": "EDENCOM",
+    "Accelerator Flashpoint": "Triglavian Collective",
 }
 # Fallback enemy summaries for pages whose wiki text has no NPC table.
 ENEMIES_FALLBACK: dict[str, str] = {
@@ -319,6 +329,8 @@ ENEMIES_FALLBACK: dict[str, str] = {
     "ships) around the Dazh Liminality Locus; cruiser-gated",
     "CHAIN Mindflood Production Facility": "Not documented; expect Blood Raider elite frigates, cruisers and "
     "battleships like other Production Facilities",
+    "Accelerator Flashpoint": "Two Triglavian waves against the Stellar Observatory, then a Liminal Zirnitra "
+    "dreadnought; EDENCOM ships fight alongside",
 }
 
 # Invasion-era sites that still spawn in k-space Triglavian/EDENCOM minor-victory systems and in Pochven.
@@ -343,6 +355,7 @@ POCHVEN_LIVE = {
     "Overmind Nursery Grove",
     "Observatory Infiltration",
     "Deepflow rifts",
+    "Accelerator Flashpoint",  # EDENCOM fortress systems (k-space), still spawning
 }
 
 EVENT_TITLES = {
@@ -378,6 +391,12 @@ def _ib(page: Mapping[str, Any], key: str) -> str:
 
 def _ib_type(page: Mapping[str, Any]) -> str:
     return _ib(page, "type").lower()
+
+
+def is_cosmos(page: Mapping[str, Any]) -> bool:
+    """COSMOS complexes (fixed-location sites); the COSMOS gas nebulae stay gas sites."""
+    cats = _cats(page)
+    return "COSMOS sites" in cats and "Gas sites" not in cats
 
 
 def anomaly_match(title: str) -> tuple[str, str | None, int] | None:
@@ -461,6 +480,19 @@ def classify(page: Mapping[str, Any]) -> tuple[str, str, int]:
         return "ore", "Ore Anomaly", 0
     if title == "Serpentis Capital Staging":
         return "combat_anomaly", "Combat Anomaly", 0
+    if title == "Khanid Stronghold":  # stub page without a topic category; probed-down highsec complex
+        return "combat_unrated", "Combat Site", 1
+
+    # COSMOS complexes: before the DED/unrated/type branches (their infobox type is "cosmos", "ded",
+    # "unrated" ...). Most are warpable beacons; some must be probed down or show up as anomalies
+    # (see parse.scan_hint). A page that does not say counts as a beacon.
+    if is_cosmos(page):
+        hint = page.get("scan_hint")
+        if hint == "signature":
+            return "cosmos", "Combat Site", 1
+        if hint == "anomaly":
+            return "cosmos", "Combat Anomaly", 0
+        return "cosmos", "Beacon", 0
 
     # Wormhole sites (Sleeper space)
     if title in WH_ANOMALIES:
@@ -624,6 +656,8 @@ def space_of(page: Mapping[str, Any], category: str) -> str:
         return wh_class(base) or normalise_space(raw) or "Wormhole"
     if category == "ice" and title == "Shattered Ice Field":
         return "Shattered"
+    if category == "cosmos":
+        return cosmos_space(page)
     if category == "pochven" or title in POCHVEN_TITLES:
         if title == "Observatory Infiltration":
             return "Low, Pochven"
@@ -633,6 +667,8 @@ def space_of(page: Mapping[str, Any], category: str) -> str:
             return "Triglavian/EDENCOM minor-victory systems; Pochven"
         if title == "Stellar Observation Post":
             return "EDENCOM minor-victory systems"
+        if title == "Accelerator Flashpoint":
+            return "High, Low (EDENCOM fortress systems)"
         if title == "Emerging Conduit":
             return "High (2019-2020 version)"
         return "Pochven"
@@ -770,6 +806,23 @@ def space_of(page: Mapping[str, Any], category: str) -> str:
     return norm or "Unknown"
 
 
+_SPACE_BANDS = re.compile(r"(?:High|Low|Null)(?:, (?:High|Low|Null))*")
+_SEC_RATING = re.compile(r"ColorSecurityRating\s*\|\s*(?:rating\s*=\s*)?(-?\d+(?:\.\d+)?)", re.I)
+
+
+def cosmos_space(page: Mapping[str, Any]) -> str:
+    """``High (Hjoramold, Heimatar)`` from the resolved system; else the security band the page gives."""
+    system = page.get("system")
+    if system:
+        return system_space_label(system)
+    raw = _ib(page, "location")
+    m = _SEC_RATING.search(raw)
+    if m:
+        return security_class(float(m.group(1)))
+    norm = normalise_space(re.sub(r"\{\{.*?\}\}", "", raw))
+    return norm if _SPACE_BANDS.fullmatch(norm) else "Unknown"
+
+
 # --------------------------------------------------------------------------- faction
 FACTION_ALIASES: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"angel|gist|domination|cartel", re.I), "Angel Cartel"),
@@ -790,6 +843,10 @@ FACTION_ALIASES: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"minmatar|republic", re.I), "Minmatar Navy"),
     (re.compile(r"sisters|soe|sanctuary", re.I), "Sisters of EVE"),
     (re.compile(r"upwell", re.I), "Upwell"),
+    # COSMOS-only factions (after the general ones, so they never shadow them)
+    (re.compile(r"kazka", re.I), "Kazka Bandits"),
+    (re.compile(r"\bmaru\b", re.I), "Maru Pirates"),
+    (re.compile(r"khanid", re.I), "Khanid Kingdom"),
 ]
 
 
@@ -802,8 +859,52 @@ CHEM_LAB_PREFIXES: list[tuple[str, str]] = [
 ]
 
 
+_EMPIRE_NAVIES = ("Amarr Navy", "Caldari Navy", "Gallente Navy", "Minmatar Navy", "Drifters")
+# COSMOS NPCs are named after the empire whose storyline they belong to ("Caldari Bandit",
+# "Caldari Drifter", "Imperial Navy Maller"), so empire words map to the empire, not its navy,
+# and "drifter" only means the Drifters at the start of a name.
+COSMOS_FACTION_ALIASES: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"kazka", re.I), "Kazka Bandits"),
+    (re.compile(r"\bmaru\b", re.I), "Maru Pirates"),
+    (re.compile(r"khanid", re.I), "Khanid Kingdom"),
+    (re.compile(r"ammatar", re.I), "Ammatar Mandate"),
+    *[(pat, name) for pat, name in FACTION_ALIASES if name not in _EMPIRE_NAVIES],
+    (re.compile(r"^drifter\b", re.I), "Drifters"),
+    (re.compile(r"amarr|imperial", re.I), "Amarr Empire"),
+    (re.compile(r"caldari|\bstate\b", re.I), "Caldari State"),
+    (re.compile(r"gallente|federation|federal", re.I), "Gallente Federation"),
+    (re.compile(r"minmatar|republic|brutor", re.I), "Minmatar Republic"),
+]
+
+
+def _cosmos_alias(text: str) -> str | None:
+    for pat, name in COSMOS_FACTION_ALIASES:
+        if pat.search(text):
+            return name
+    return None
+
+
+def cosmos_faction(page: Mapping[str, Any]) -> str | None:
+    """The faction the wiki infobox names, else the most numerous hostile faction in the NPC tables."""
+    raw = _ib(page, "faction")
+    named = _cosmos_alias(raw) if raw else None
+    if named:
+        return named
+    counts: Counter[str] = Counter()
+    for r in page.get("npc_rows", []):
+        if r.get("hostile", True):
+            name = _cosmos_alias(str(r.get("name", "")))
+            if name:
+                counts[name] += int(r.get("count_max") or r.get("count_min") or 1)
+    if counts:
+        return counts.most_common(1)[0][0]
+    return canonical_faction(raw) if raw else None
+
+
 def faction_of(page: Mapping[str, Any]) -> str | None:
     title = _title(page)
+    if is_cosmos(page):
+        return cosmos_faction(page)
     if title in POCHVEN_FACTION:
         return POCHVEN_FACTION[title]
     for prefix, faction in CHEM_LAB_PREFIXES:
@@ -1042,6 +1143,9 @@ def rating_of(page: Mapping[str, Any], category: str) -> str | None:
         return f"Tier {tier}" + (f" Level {level}" if variant else "")
     if category == "incursion" and title in INCURSION_TIERS:
         return INCURSION_TIERS[title][0]
+    if category == "cosmos":
+        level = re.search(r"\d+", _ib(page, "level"))
+        return f"COSMOS L{level.group(0)}" if level else "COSMOS"
     if category in ("combat_unrated", "chemical_lab"):
         return "Unrated"
     if raw and raw.lower() not in ("none", "n/a", "na", ""):
@@ -1097,6 +1201,17 @@ def _danger_base(page: Mapping[str, Any], category: str, space: str) -> int:
         return 4
     if category == "chemical_lab":
         return 4 if has_bs else 3
+    if category == "cosmos":
+        # Judge from the documented tables; COSMOS pockets range from frigate camps to L4-style BS fleets.
+        if not rows:
+            return 0  # no NPC table on the wiki: unknown
+        if has_class(rows, "dreadnought", "carrier", "supercarrier", "titan"):
+            return 5
+        if has_bs:
+            return 4
+        if has_class(rows, "cruiser", "battlecruiser"):
+            return 3
+        return 2 if hostile else 1
     if category == "sleeper_cache":
         return {"Limited Sleeper Cache": 2, "Standard Sleeper Cache": 3, "Superior Sleeper Cache": 4}.get(title, 3)
     if category == "data":
@@ -1281,6 +1396,22 @@ def min_ship_of(page: Mapping[str, Any], category: str, space: str, danger: int)
     if category == "chemical_lab":
         return cap_by_limit(
             "Battleship / T3C with data analyzer" if danger >= 4 else "Battlecruiser with data analyzer", limit
+        )
+    if category == "cosmos":
+        if danger == 0:
+            return "Unknown"
+        if danger == 3 and has_class(rows, "battlecruiser"):
+            return cap_by_limit("Battlecruiser (Drake/Gnosis/Myrmidon)", limit)
+        return cap_by_limit(
+            {
+                0: "Unknown",
+                1: "Any ship",
+                2: "Destroyer",
+                3: "T1 cruiser (Vexor/Caracal/Omen/Rupture)",
+                4: "Battleship / T3C",
+                5: "Fleet (5+, logi)",
+            }[danger],
+            limit,
         )
     if category == "sleeper_cache":
         return {

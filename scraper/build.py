@@ -78,10 +78,18 @@ def page_record(page: Mapping[str, Any]) -> dict[str, Any]:
         "homefront",
         "drifter",
         "event",
+        "cosmos",
     )
     enemies, ewar, enemy_rows = rules.aggregate_enemies(page.get("npc_rows", []), faction, combat=combat)
     if title in rules.ENEMIES_FALLBACK:
         enemies = rules.ENEMIES_FALLBACK[title]  # hand-written prose beats a misleading table sum
+    elif (
+        enemies == "Unknown"
+        and category == "cosmos"
+        and page.get("npc_rows")
+        and not any(r.get("hostile", True) for r in page["npc_rows"])
+    ):
+        enemies = "None (neutral NPCs only)"  # the tables list only non-hostile ships
     elif enemies == "Unknown":
         enemies = rules.enemies_fallback(title, category) or enemies
     elif enemies == "None" and category in ("data", "relic", "sleeper_cache", "ghost"):
@@ -94,7 +102,10 @@ def page_record(page: Mapping[str, Any]) -> dict[str, Any]:
     if page.get("blue_loot_isk"):
         loot = f"Blue loot ~{page['blue_loot_isk'] / 1e6:,.1f}M ISK"
     sig = page.get("infobox", {}).get("signature strength")
-    if sig and sig.lower() not in ("n/a", "na", "", "anomaly", "100% anomaly"):
+    not_strengths = ("n/a", "na", "", "anomaly", "100% anomaly")
+    if category == "cosmos":  # COSMOS pages put "Beacon" / "Signature" / "Unknown" here; the scan group says it
+        not_strengths += ("beacon", "signature", "unknown", "none")
+    if sig and sig.lower() not in not_strengths:
         loot = (loot + "; " if loot else "") + f"Signature strength {sig}"
     return {
         "name": title,

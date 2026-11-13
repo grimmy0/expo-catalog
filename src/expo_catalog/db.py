@@ -125,6 +125,7 @@ CATEGORIES: tuple[str, ...] = (
     "pochven",
     "drifter",
     "incursion",
+    "cosmos",
     "event",
     "wormhole_connection",
     "other",

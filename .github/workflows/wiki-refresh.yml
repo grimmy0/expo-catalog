@@ -85,6 +85,7 @@ jobs:
             src/expo_catalog/data/catalog.sqlite
             data/parsed_sites.json
             data/wiki_state.json
+            data/systems.json
 
       - name: Summary
         if: always()

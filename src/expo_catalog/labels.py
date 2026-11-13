@@ -46,6 +46,7 @@ _TYPE_LABELS: dict[str, str] = {
     "pochven": "Pochven",
     "drifter": "Drifter",
     "incursion": "Incursion",
+    "cosmos": "COSMOS",
     "event": "Event",
     "wormhole_connection": "Wormhole",
     "other": "Other",

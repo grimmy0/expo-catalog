@@ -317,6 +317,122 @@ def test_space_and_rating_helpers():
     assert rules.faction_of(page("Core Garrison", ["Wormhole sites"])) == "Sleepers"
 
 
+# --------------------------------------------------------------------------- COSMOS sites
+def cosmos(title="Some COSMOS Site", infobox=None, rows=None, hint=None, system=None, cats=None) -> dict:
+    p = page(title, cats or ["COSMOS sites"], infobox, rows)
+    p.update(scan_hint=hint, system=system)
+    return p
+
+
+@pytest.mark.parametrize(
+    ("p", "expected"),
+    [
+        (cosmos(hint="signature"), ("cosmos", "Combat Site", 1)),
+        (cosmos(hint="beacon"), ("cosmos", "Beacon", 0)),
+        (cosmos(hint="anomaly"), ("cosmos", "Combat Anomaly", 0)),
+        (cosmos(hint=None), ("cosmos", "Beacon", 0)),  # unsaid: COSMOS complexes are mostly beacons
+        # The COSMOS category beats the infobox type (Yan Jung Relic Site says type=ded).
+        (cosmos("Yan Jung Relic Site", {"type": "ded"}, hint="beacon"), ("cosmos", "Beacon", 0)),
+        (cosmos("Guristas Guard Post", {"type": "unrated"}, hint="signature"), ("cosmos", "Combat Site", 1)),
+        # COSMOS gas nebulae stay gas sites.
+        (cosmos("Icy Nebula", {"type": "COSMOS"}, cats=["COSMOS sites", "Gas sites"]), ("gas", "Gas Site", 1)),
+        # No COSMOS category: type=cosmos is still the gas-nebula marker.
+        (page("Polar Bear Nebula", ["Gas sites"], {"type": "COSMOS"}), ("gas", "Gas Site", 1)),
+        # Pages that lost their topic category, found through the infobox template.
+        (
+            page("Khanid Stronghold", [], {"location": "High", "faction": "Khanid"}),
+            ("combat_unrated", "Combat Site", 1),
+        ),
+        (page("Accelerator Flashpoint", ["Needing updates"], {"type": "anomaly"}), ("pochven", "Combat Anomaly", 0)),
+        (page("Nation Industrial Proxy", ["Incursions sites"]), ("incursion", "Combat Anomaly", 0)),
+    ],
+)
+def test_classify_cosmos_and_rediscovered_pages(p, expected):
+    assert rules.classify(p) == expected
+
+
+def test_cosmos_space():
+    ppg = {"name": "PPG-XC", "security": -0.0436, "region": "Cloud Ring"}
+    assert rules.space_of(cosmos(system=ppg), "cosmos") == "Null (PPG-XC, Cloud Ring)"
+    # Unresolved system: fall back to the security the page shows, then to the band it names.
+    rated = cosmos(infobox={"location": "Thelan ({{ColorSecurityRating|-0.2}}) - Sinq Laison"})
+    assert rules.space_of(rated, "cosmos") == "Null"
+    assert rules.space_of(cosmos(infobox={"location": "High"}), "cosmos") == "High"
+    assert rules.space_of(cosmos(infobox={"location": "?"}), "cosmos") == "Unknown"
+
+
+def test_cosmos_faction_prefers_the_infobox_then_the_npc_majority():
+    assert rules.faction_of(cosmos(infobox={"faction": "Maru Pirates"}, rows=[row("cruiser", 9, 9, "Corpum")])) == (
+        "Maru Pirates"
+    )
+    bandits = [row("frigate", 9, 9, "Caldari Drifter"), row("frigate", 1, 1, "Caldari Bandit")]
+    assert rules.faction_of(cosmos(rows=bandits)) == "Caldari State"  # COSMOS "Drifter" bandits, not the Drifters
+    serp = [row("battleship", 5, 5, "Core Lord Admiral"), row("cruiser", 3, 3, "Corelum Chief Infantry")]
+    assert rules.faction_of(cosmos(infobox={"faction": "Serpentis"}, rows=serp)) == "Serpentis"
+    assert rules.faction_of(cosmos(rows=[row("frigate", 3, 3, "Kazka Bandit")])) == "Kazka Bandits"
+    assert rules.faction_of(cosmos()) is None
+
+
+def test_cosmos_rating_danger_and_min_ship():
+    courier = cosmos(
+        "Courier Gone Missing (2 of 2)",
+        {"level": "4", "faction": "Serpentis"},
+        [row("battleship", 5, 5, "Core Lord Admiral"), row("cruiser", 3, 3, "Corelum Chief Sentinel")],
+        hint="signature",
+    )
+    assert rules.rating_of(courier, "cosmos") == "COSMOS L4"
+    assert rules.rating_of(cosmos(), "cosmos") == "COSMOS"
+    assert rules.danger_of(courier, "cosmos", "Null") == 4
+    assert rules.min_ship_of(courier, "cosmos", "Null", 4) == "Battleship / T3C"
+    frigs = cosmos(rows=[row("frigate", 9, 9, "Guristas Despoiler")])
+    assert (
+        rules.danger_of(frigs, "cosmos", "High") == 2 and rules.min_ship_of(frigs, "cosmos", "High", 2) == "Destroyer"
+    )
+    bc = cosmos(rows=[row("battlecruiser", 3, 3, "x")], infobox={"ship limit": "Cruiser"})
+    assert rules.danger_of(bc, "cosmos", "High") == 3
+    assert rules.min_ship_of(bc, "cosmos", "High", 3) == "T1 cruiser (Vexor/Caracal/Omen/Rupture)"  # gate cap
+    dread = cosmos(rows=[row("dreadnought", 1, 1, "x")])
+    assert rules.danger_of(dread, "cosmos", "Null") == 5
+    unknown = cosmos()
+    assert (
+        rules.danger_of(unknown, "cosmos", "High") == 0 and rules.min_ship_of(unknown, "cosmos", "High", 0) == "Unknown"
+    )
+    neutral = cosmos(rows=[row("frigate", 3, 3, "PD Security Enforcer", hostile=False)])
+    assert rules.danger_of(neutral, "cosmos", "High") == 1
+
+
+def test_cosmos_page_record():
+    neutral = cosmos(
+        "Pend Insurance Storage Bin",
+        {"signature strength": "Beacon"},
+        [row("frigate", 3, 3, "PD Security Enforcer", hostile=False)],
+        hint="beacon",
+        system={"name": "Fluekele", "security": 0.6, "region": "Sinq Laison"},
+    )
+    rec = build.page_record(neutral)
+    assert rec["category"] == "cosmos" and rec["scan_group"] == "Beacon" and rec["is_signature"] == 0
+    assert rec["space"] == "High (Fluekele, Sinq Laison)"
+    assert rec["enemies"] == "None (neutral NPCs only)" and rec["danger"] == 1
+    assert rec["loot_note"] is None  # "Beacon" is not a signature strength
+    sig = cosmos("Gatti Zhara", {"signature strength": "5% in High Sec"}, [row("frigate", 3, 3, "x")], hint="signature")
+    assert build.page_record(sig)["loot_note"] == "Signature strength 5% in High Sec"
+
+
+def test_rediscovered_pages_rules():
+    flash = page("Accelerator Flashpoint", ["Needing updates"], {"type": "anomaly", "faction": "Triglavians"})
+    assert rules.space_of(flash, "pochven") == "High, Low (EDENCOM fortress systems)"
+    assert rules.status_of(flash, "pochven") == "active"
+    assert rules.danger_of(flash, "pochven", "") == 5
+    assert rules.faction_of(flash) == "Triglavian Collective"
+    khanid = page("Khanid Stronghold", [], {"location": "High", "faction": "Khanid"}, [row("cruiser", 12, 12, "x")])
+    assert rules.space_of(khanid, "combat_unrated") == "High (Amarr space)"
+    assert rules.danger_of(khanid, "combat_unrated", "High") == 3
+    assert rules.faction_of(khanid) == "Khanid Kingdom"
+    proxy = page("Nation Industrial Proxy", ["Incursions sites"])
+    assert rules.rating_of(proxy, "incursion") == "Staging"
+    assert rules.min_ship_of(proxy, "incursion", "", rules.danger_of(proxy, "incursion", "")) == "Frigate gang (3+)"
+
+
 # --------------------------------------------------------------------------- event data
 def test_event_file_exists_and_loads():
     assert curated.EVENTS_FILE.is_file()
@@ -413,6 +529,27 @@ def test_catalog_spot_checks(catalog):
     assert _site(catalog, "Emerging Conduit (2019-2020 highsec version)")["status"] == "removed"
     assert _site(catalog, "Wormhole K162")["rating"] == "K162 (exit)"
     assert _site(catalog, "Wormhole B274")["rating"] == "→ High-sec"
+
+
+def test_catalog_includes_cosmos_and_rediscovered_sites(catalog):
+    s = _site(catalog, "Courier Gone Missing (2 of 2)")
+    assert s["category"] == "cosmos" and s["scan_group"] == "Combat Site" and s["is_signature"] == 1
+    assert s["space"] == "Null (PPG-XC, Cloud Ring)" and s["rating"] == "COSMOS L4"
+    assert s["faction"] == "Serpentis" and s["danger"] == 4 and "battleships" in s["enemies"]
+    assert s["source_url"] == "https://wiki.eveuniversity.org/Courier_Gone_Missing_(2_of_2)"
+    assert catalog.execute("SELECT COUNT(*) FROM sites WHERE category = 'cosmos'").fetchone()[0] >= 80
+    assert _site(catalog, "Maru Prison Facility")["space"] == "High (Hjoramold, Metropolis)"
+    assert _site(catalog, "Contested Minmatar Military Depot")["scan_group"] == "Beacon"
+    assert _site(catalog, "Yan Jung Relic Site")["category"] == "cosmos"
+    for gas in ("Icy Nebula", "Polar Bear Nebula"):  # COSMOS gas nebulae stay gas sites
+        assert _site(catalog, gas)["category"] == "gas"
+    assert _site(catalog, "Nation Industrial Proxy")["rating"] == "Staging"
+    assert _site(catalog, "Khanid Stronghold")["category"] == "combat_unrated"
+    assert _site(catalog, "Blood Annex")["category"] == "combat_unrated"
+    assert _site(catalog, "Accelerator Flashpoint")["status"] == "active"
+    # Escalation destinations and Mercenary Den sites are not catalogued.
+    for name in ("Angel Capital Staging", "Molting Season", "Drifter Muster Point"):
+        assert catalog.execute("SELECT COUNT(*) FROM sites WHERE name = ?", (name,)).fetchone()[0] == 0
 
 
 def test_catalog_vocabularies(catalog):

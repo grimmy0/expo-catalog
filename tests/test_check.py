@@ -11,11 +11,17 @@ from scraper import check, wiki
 
 
 class FakeApi:
-    """Answers categorymembers and revisions queries from in-memory data."""
+    """Answers categorymembers, embeddedin and revisions queries from in-memory data."""
 
-    def __init__(self, members: dict[str, list[str]], revisions: dict[str, tuple[int, str]]):
+    def __init__(
+        self,
+        members: dict[str, list[str]],
+        revisions: dict[str, tuple[int, str]],
+        embedded: dict[str, list[str]] | None = None,
+    ):
         self.members = members  # category -> titles
         self.revisions = revisions  # title -> (revid, timestamp)
+        self.embedded = embedded or {}  # template -> titles using it
         self.calls: list[dict] = []
 
     def __call__(self, params: dict) -> dict:
@@ -23,6 +29,9 @@ class FakeApi:
         if params.get("list") == "categorymembers":
             cat = params["cmtitle"].removeprefix("Category:")
             return {"query": {"categorymembers": [{"title": t} for t in self.members.get(cat, [])]}}
+        if params.get("list") == "embeddedin":
+            assert params["einamespace"] == "0"
+            return {"query": {"embeddedin": [{"title": t} for t in self.embedded.get(params["eititle"], [])]}}
         if params.get("prop") == "revisions":
             assert "content" not in params["rvprop"], "check must not download page content"
             pages = []
@@ -156,6 +165,78 @@ def test_tracked_titles_merges_categories_and_extras(monkeypatch):
     monkeypatch.setattr(wiki, "EXTRA_PAGES", ("Extra",))
     rows = [("Data_sites", "A"), ("Relic_sites", "A"), ("Gas_sites", "B")]
     assert wiki.tracked_titles(rows) == {"A": ["Data_sites", "Relic_sites"], "B": ["Gas_sites"], "Extra": []}
+    # Template-discovered pages are tracked like extras (no category); a category member keeps its categories.
+    assert wiki.tracked_titles(rows, discovered=["Lost", "A"]) == {
+        "A": ["Data_sites", "Relic_sites"],
+        "B": ["Gas_sites"],
+        "Extra": [],
+        "Lost": [],
+    }
+
+
+@pytest.fixture
+def membership_api(monkeypatch, quiet_sleep):
+    monkeypatch.setattr(wiki, "SITE_CATEGORIES", ("Data_sites", "COSMOS_sites"))
+    monkeypatch.setattr(wiki, "EXTRA_PAGES", ("Extra",))
+    monkeypatch.setattr(wiki, "IGNORED_CATEGORIES", ("Expeditions",))
+    monkeypatch.setattr(wiki, "IGNORED_PAGES", {"Event Overview": "covered by event data"})
+    fake = FakeApi(
+        members={
+            "Data_sites": ["A"],
+            "COSMOS_sites": ["Courier Gone Missing (2 of 2)"],
+            "Expeditions": ["Some Escalation"],
+        },
+        revisions={},
+        embedded={
+            "Template:CMBSiteInfo": ["A", "Extra", "Khanid Stronghold", "Some Escalation", "Event Overview"],
+        },
+    )
+    monkeypatch.setattr(wiki, "api", fake)
+    return fake
+
+
+def test_site_membership_adds_template_users_minus_ignored(membership_api):
+    rows, tracked = wiki.site_membership()
+    assert rows == [("Data_sites", "A"), ("COSMOS_sites", "Courier Gone Missing (2 of 2)")]
+    assert tracked == {
+        "A": ["Data_sites"],
+        "Courier Gone Missing (2 of 2)": ["COSMOS_sites"],
+        "Extra": [],
+        "Khanid Stronghold": [],  # lost its topic category; found through its CMBSiteInfo infobox
+    }
+    # check uses the very same membership, so such pages show up as NEW in the weekly report.
+    assert check.live_membership() == tracked
+
+
+def test_fetch_all_writes_category_rows_only_and_state_for_every_tracked_page(
+    membership_api, monkeypatch, tmp_path: Path
+):
+    monkeypatch.setattr(wiki, "RAW_DIR", tmp_path / "raw")
+    monkeypatch.setattr(wiki, "CATEGORY_FILE", tmp_path / "raw" / "category_members.tsv")
+    monkeypatch.setattr(wiki, "STATE_FILE", tmp_path / "wiki_state.json")
+    monkeypatch.setattr(wiki, "ROOT", tmp_path)
+
+    def fake_fetch_pages(titles, out_dir=None, state=None):
+        for i, title in enumerate(titles):
+            state[title] = {"revid": i + 1, "timestamp": "2026-11-12T00:00:00Z"}
+        return {t: t for t in titles}
+
+    monkeypatch.setattr(wiki, "fetch_pages", fake_fetch_pages)
+    wiki.fetch_all()
+    tsv = (tmp_path / "raw" / "category_members.tsv").read_text().splitlines()
+    assert tsv == ["Data_sites\tA", "COSMOS_sites\tCourier Gone Missing (2 of 2)"]  # no pseudo-categories
+    state = json.loads((tmp_path / "wiki_state.json").read_text())
+    assert set(state) == {"A", "Courier Gone Missing (2 of 2)", "Extra", "Khanid Stronghold"}
+    assert state["Khanid Stronghold"]["categories"] == []
+
+
+def test_site_categories_cover_cosmos_and_incursions():
+    assert {"COSMOS_sites", "Incursions_sites"} <= set(wiki.SITE_CATEGORIES)
+    assert "Template:CMBSiteInfo" in wiki.SITE_TEMPLATES
+    assert "Expeditions" in wiki.IGNORED_CATEGORIES
+    assert all(reason for reason in wiki.IGNORED_PAGES.values())
+    # Incursion sites come from their category now, not from a hand-kept list.
+    assert "Distress Beacon" not in wiki.EXTRA_PAGES
 
 
 def test_cli_dispatch(monkeypatch):

@@ -41,6 +41,8 @@ SITE_CATEGORIES: tuple[str, ...] = (
     "Sovereignty_Hub_ore_deposits",
     "Ice_belts",
     "Homefront_Operations",
+    "Incursions_sites",
+    "COSMOS_sites",
 )
 
 # Pages outside those categories that the catalog also needs.
@@ -55,21 +57,6 @@ EXTRA_PAGES: tuple[str, ...] = (
     "Asteroid Belt Remnants",
     "Jove Observatory",
     "Original Drifter Combat Anomalies",
-    # Incursions
-    "Distress Beacon",
-    "Forward Reconnaissance Outpost",
-    "Propaganda Cluster",
-    "Nation Commander Outpost",
-    "Nation Mining Colony",
-    "Override Transfer Array",
-    "Nation Commander Stronghold",
-    "Nation Consolidation Network",
-    "Overwhelmed Civilian Facility",
-    "Nation Rebirth Facility",
-    "True Creations Research Center",
-    "True Power Provisional Headquarters",
-    "The Kundalini Manifest",
-    "Uroborus",
     # Rogue drones, Drifters, misc
     "Rogue Drone Outgrowth Colony",
     "Rampant Drone Fabricator",
@@ -79,6 +66,28 @@ EXTRA_PAGES: tuple[str, ...] = (
     "Hrada-Oki Bivouac",
     "Serpentis Capital Staging",
 )
+
+# Site pages are also discovered through their infobox template, so a page that lost (or never had)
+# its topic category is still tracked. Discovered pages are tracked like EXTRA_PAGES (no category).
+SITE_TEMPLATES: tuple[str, ...] = ("Template:CMBSiteInfo",)
+
+# Template users in these categories are not catalog sites.
+IGNORED_CATEGORIES: tuple[str, ...] = (
+    "Expeditions",  # escalation destinations, delivered by the journal; never scanned or seen as anomalies
+    "COSMOS_agents",  # agent pages that describe a COSMOS mission with the site infobox
+    "Mercenary_Tactical_Operations",  # sites offered only to the owner of a Mercenary Den
+)
+
+# Individual template users that are not catalog records, with the reason.
+IGNORED_PAGES: dict[str, str] = {
+    "Crimson Harvest (2020)": "event overview; its sites come from data/event_sites.json",
+    "Shining Flame Base": "event site; covered by data/event_sites.json",
+    "Treacherous Collapsed Conduit": "event site; covered by data/event_sites.json",
+    "Upwell Covert Research Facilities": "event site; covered by data/event_sites.json",
+    "Molting Season": "escalation destination (type=escalation), not a signature",
+    "Toxic Waste Scandal!": "escalation destination (type=expedition), not a signature",
+    "Signal Source": "escalation destination (type=expedition, past content), not a signature",
+}
 
 
 def safe_filename(title: str) -> str:
@@ -106,6 +115,26 @@ def category_members(category: str) -> list[str]:
     while True:
         data = api(params)
         titles += [m["title"] for m in data.get("query", {}).get("categorymembers", [])]
+        cont = data.get("continue")
+        if not cont:
+            return titles
+        params = dict(params, **cont)
+        time.sleep(REQUEST_DELAY_S)
+
+
+def embedded_in(template: str) -> list[str]:
+    """Return main-namespace page titles that transclude ``template`` (e.g. ``Template:CMBSiteInfo``)."""
+    titles: list[str] = []
+    params = {
+        "action": "query",
+        "list": "embeddedin",
+        "eititle": template,
+        "eilimit": "500",
+        "einamespace": "0",
+    }
+    while True:
+        data = api(params)
+        titles += [m["title"] for m in data.get("query", {}).get("embeddedin", [])]
         cont = data.get("continue")
         if not cont:
             return titles
@@ -198,23 +227,50 @@ def fetch_pages(
     return resolved
 
 
-def tracked_titles(rows: Iterable[tuple[str, str]]) -> dict[str, list[str]]:
-    """{title: sorted categories} for every category member plus the EXTRA_PAGES (empty category list)."""
+def tracked_titles(rows: Iterable[tuple[str, str]], discovered: Iterable[str] = ()) -> dict[str, list[str]]:
+    """{title: sorted categories} for every category member, plus EXTRA_PAGES and ``discovered`` (no category)."""
     cats: dict[str, set[str]] = {}
     for category, title in rows:
         cats.setdefault(title, set()).add(category)
-    for title in EXTRA_PAGES:
+    for title in (*EXTRA_PAGES, *discovered):
         cats.setdefault(title, set())
     return {t: sorted(c) for t, c in sorted(cats.items())}
 
 
-def load_state(path: Path = STATE_FILE) -> dict[str, dict]:
+def discovered_titles(rows: Iterable[tuple[str, str]]) -> list[str]:
+    """Pages using a SITE_TEMPLATES infobox that the categories and EXTRA_PAGES miss, minus the ignored ones."""
+    known = {title for _category, title in rows} | set(EXTRA_PAGES) | set(IGNORED_PAGES)
+    for category in IGNORED_CATEGORIES:
+        known.update(category_members(category))
+        time.sleep(REQUEST_DELAY_S)
+    found: set[str] = set()
+    for template in SITE_TEMPLATES:
+        found.update(t for t in embedded_in(template) if t not in known)
+        time.sleep(REQUEST_DELAY_S)
+    return sorted(found)
+
+
+def site_membership() -> tuple[list[tuple[str, str]], dict[str, list[str]]]:
+    """Live membership: the (category, title) rows of SITE_CATEGORIES and the full tracked-title map.
+
+    Shared by ``fetch_all`` and ``scraper.check`` so both track exactly the same pages.
+    """
+    rows: list[tuple[str, str]] = []
+    for category in SITE_CATEGORIES:
+        rows += [(category, title) for title in category_members(category)]
+        time.sleep(REQUEST_DELAY_S)
+    return rows, tracked_titles(rows, discovered_titles(rows))
+
+
+def load_state(path: Path | None = None) -> dict[str, dict]:
+    path = path or STATE_FILE  # resolved at call time, so tests can point STATE_FILE elsewhere
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def save_state(state: dict[str, dict], path: Path = STATE_FILE) -> None:
+def save_state(state: dict[str, dict], path: Path | None = None) -> None:
+    path = path or STATE_FILE
     path.parent.mkdir(parents=True, exist_ok=True)
     ordered = {t: state[t] for t in sorted(state)}
     path.write_text(json.dumps(ordered, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -223,13 +279,8 @@ def save_state(state: dict[str, dict], path: Path = STATE_FILE) -> None:
 def fetch_all() -> None:
     """Refresh the whole raw cache: category lists, every member page, wiki state."""
     RAW_DIR.mkdir(parents=True, exist_ok=True)
-    rows: list[tuple[str, str]] = []
-    for category in SITE_CATEGORIES:
-        for title in category_members(category):
-            rows.append((category, title))
-        time.sleep(REQUEST_DELAY_S)
+    rows, tracked = site_membership()
     CATEGORY_FILE.write_text("".join(f"{c}\t{t}\n" for c, t in rows), encoding="utf-8")
-    tracked = tracked_titles(rows)
     revisions: dict[str, dict] = {}
     resolved = fetch_pages(list(tracked), state=revisions)
     state = {

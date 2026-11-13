@@ -5,7 +5,8 @@ fzf-style filtering. It covers known space, wormhole space (C1–C6, Thera,
 shattered and Drifter systems) and Pochven: DED-rated and unrated combat
 sites, data, relic and gas sites, ghost sites, sleeper caches, chemical labs,
 combat/ore/ice anomalies, Faction Warfare complexes, insurgency and homefront
-sites, incursions, wormhole connections and recurring event sites. Each entry
+sites, incursions, COSMOS complexes, wormhole connections and recurring event
+sites. Each entry
 shows how dangerous the site is, what you will be shooting (or dodging) and the
 smallest ship that can reasonably run it.
 
@@ -100,7 +101,7 @@ negates; `foo:bar` with an unknown field name is an ordinary fuzzy term.
 
 - **Name**: exact in-game site name.
 - **Type**: short category/rating label, e.g. `DED 3/10`, `Relic`, `WH gas`,
-  `Anomaly T6`, `FW plex`.
+  `Anomaly T6`, `FW plex`, `COSMOS`.
 - **Space**: where the site spawns (`High, Low`, `C3`, `Pochven`, …), truncated
   in the table and shown in full in the detail panel.
 - **Danger**: a 0–5 bar coloured green to red.
@@ -137,6 +138,10 @@ inputs (a missing one is an error):
 - `data/npcwh_codes.json` + `data/Template_Whisk.wiki`: Sleeper NPC code table
   used to resolve `{{npcwh}}` rows, and the blue-loot values for `{{whisk}}`
 - `data/wormholes.json`: wormhole connection types
+- `data/systems.json`: security status and region of the systems COSMOS sites
+  sit in (the Space column). `fetch` keeps it in step with the pages: it
+  resolves newly mentioned systems through [ESI](https://esi.evetech.net) and
+  drops ones no page names any more
 
 ### Keeping the catalog up to date
 
@@ -151,7 +156,13 @@ uv run python -m scraper refresh            # fetch -> parse -> build (also rewr
 uv run expo-catalog --refresh               # the same, then open the TUI
 ```
 
-`check` lists NEW pages (in a tracked category but not yet in the catalog),
+A page is tracked when it is in one of the site categories in `scraper/wiki.py`
+(`SITE_CATEGORIES`), listed in `EXTRA_PAGES`, or uses the `{{CMBSiteInfo}}` site
+infobox. The last rule catches site pages that lost (or never had) their topic
+category; escalation destinations (Category:Expeditions), COSMOS agent pages,
+Mercenary Den operations and the pages in `IGNORED_PAGES` are left out.
+
+`check` lists NEW pages (tracked by those rules but not yet in the catalog),
 REMOVED pages and CHANGED pages with a link to the wiki diff; changed pages that
 have a hand-written entry in `scraper/curated.py` (`OVERRIDES`) are flagged so
 the override can be re-reviewed.
@@ -169,6 +180,8 @@ Sources:
 - [EVE University wiki](https://wiki.eveuniversity.org) (CC-BY-SA) for site
   pages, NPC tables and escalations.
 - EVE Ref reference data (derived from the SDE) for wormhole types.
+- [ESI](https://esi.evetech.net) for the security status and region of COSMOS
+  systems (`data/systems.json`).
 - Hand-curated lists in `scraper/curated.py` for sites the wiki does not
   describe consistently.
 
@@ -214,11 +227,13 @@ expo-catalog/
 │   ├── check.py      # wiki change detection against data/wiki_state.json
 │   ├── curated.py    # hand-maintained site lists
 │   ├── rules.py      # classification / danger rules
+│   ├── systems.py    # COSMOS system security lookup (ESI -> data/systems.json)
 │   └── wiki.py       # MediaWiki API client
 ├── data/             # pipeline inputs and intermediates (not shipped)
 │   ├── event_sites.json     # hand-maintained event site research
 │   ├── npcwh_codes.json     # hand-maintained Sleeper NPC codes
 │   ├── Template_Whisk.wiki  # hand-maintained blue-loot table
+│   ├── systems.json         # COSMOS system security/region cache
 │   ├── parsed_sites.json
 │   ├── wiki_state.json  # revision snapshot used by `scraper check`
 │   ├── wormholes.json

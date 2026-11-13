@@ -5,6 +5,7 @@ from __future__ import annotations
 import pytest
 
 from scraper import parse
+from scraper import systems as system_table
 from scraper.parse import (
     NpcRow,
     normalise_class,
@@ -189,15 +190,140 @@ def test_parse_kv():
 
 # --------------------------------------------------------------------------- tracked inputs
 def test_tracked_inputs_exist_and_load():
-    assert parse.NPCWH_FILE.is_file() and parse.WHISK_TEMPLATE.is_file()
+    assert parse.NPCWH_FILE.is_file() and parse.WHISK_TEMPLATE.is_file() and system_table.SYSTEMS_FILE.is_file()
     assert parse.NPCWH_FILE.parent.name == "data" and parse.WHISK_TEMPLATE.parent.name == "data"
     codes = parse.load_npcwh_codes()
     assert codes and all("name" in v and "class" in v for v in codes.values())
     assert parse.load_whisk()
+    systems = parse.load_systems()
+    assert systems and all(isinstance(v["security"], float) and v["region"] for v in systems.values())
 
 
-@pytest.mark.parametrize(("attr", "loader"), [("NPCWH_FILE", "load_npcwh_codes"), ("WHISK_TEMPLATE", "load_whisk")])
-def test_missing_tracked_input_raises(monkeypatch, tmp_path, attr, loader):
-    monkeypatch.setattr(parse, attr, tmp_path / "missing")
+@pytest.mark.parametrize(
+    ("module", "attr", "loader"),
+    [
+        (parse, "NPCWH_FILE", "load_npcwh_codes"),
+        (parse, "WHISK_TEMPLATE", "load_whisk"),
+        (system_table, "SYSTEMS_FILE", "load_systems"),
+    ],
+)
+def test_missing_tracked_input_raises(monkeypatch, tmp_path, module, attr, loader):
+    monkeypatch.setattr(module, attr, tmp_path / "missing")
     with pytest.raises(FileNotFoundError, match="missing"):
         getattr(parse, loader)()
+
+
+# --------------------------------------------------------------------------- COSMOS pages
+COURIER = """{{Missiondetails
+|Name=
+|Level= 4
+|Type= Encounter
+|Objective= Acquire 3 x Ovon Flac's Documents (0.3 m³)
+|Faction1= Serpentis
+|EWAR= Web (Serpentis Stasis Towers)
+|ShipSizeLimit=
+}}
+{{MissionBriefing
+|The container you delivered to me was completely empty! Those damned Serpentis must have snatched them.
+}}
+
+The Cosmic Signature of the same name is located in PPG-XC.
+
+It is unknown if the Signature is always present or if accepting the Mission spawns the site.
+
+{{NPCTableHead|Defenders}}
+{{NPCTableRow|Battleship|5|Core Lord Admiral}}
+{{NPCTableRow|Sentry|4|Serpentis Stasis Tower|ewar= Web}}
+|}
+
+<noinclude>
+[[Category:COSMOS sites]]
+[[Category:COSMOS missions]]
+</noinclude>
+"""
+
+
+def test_missiondetails_is_read_as_the_infobox_without_a_site_type():
+    kind, infobox = parse.parse_infobox(COURIER)
+    assert kind == "Missiondetails"
+    assert infobox["faction"] == "Serpentis" and infobox["level"] == "4"
+    assert infobox["ewar"].startswith("Web") and infobox["mission type"] == "Encounter"
+    assert "type" not in infobox  # "Encounter" must never reach the site-type rules
+    assert "ship limit" not in infobox  # empty values are dropped
+
+
+def test_site_infobox_wins_over_missiondetails():
+    kind, infobox = parse.parse_infobox("{{CMBSiteInfo\n|type=COSMOS\n|location=Inder\n}}\n" + COURIER)
+    assert kind == "CMBSiteInfo" and infobox == {"type": "COSMOS", "location": "Inder"}
+
+
+@pytest.mark.parametrize(
+    ("location", "text", "title", "first"),
+    [
+        ("", COURIER, "Courier Gone Missing (2 of 2)", "PPG-XC"),
+        ("", "The Bandit Hideout is a small COSMOS combat site in Sakkikainen. It is marked", "", "Sakkikainen"),
+        ("", "is a [[Minmatar COSMOS]] level 4 mission site in DUO-51 ({{ColorSecurityRating|-0.5}}).", "", "DUO-51"),
+        ("", "an unnamed and unmarked site in Autama system. The site is located at Autama VII", "", "Autama"),
+        ("", "Port Maphante is a static COSMOS site in system of Garisas.", "", "Garisas"),
+        ("Airmia ({{ColorSecurityRating|{{SystemToSecurity|Airmia}}}})", "", "", "Airmia"),
+        ("-0.8 YAW-7M (Low Sec Warning!)", "", "", "YAW-7M"),
+        ("IGE-RI (Null)", "", "", "IGE-RI"),
+        ("Old Man Star", "", "", "Old Man Star"),
+        ("", "", "Otitoh VII- Moon 19", "Otitoh"),
+    ],
+)
+def test_system_candidates_first_guess(location, text, title, first):
+    assert parse.system_candidates(location, text, title)[0] == first
+
+
+def test_system_candidates_order_and_stop_words():
+    loc = "E-8CSQ constellation of the Vale of the Silent"
+    cands = parse.system_candidates(loc, "")
+    assert cands[0] == "E-8CSQ" and "Vale" not in cands  # Vale is a Pochven system, not meant here
+    assert parse.system_candidates("-0.8 YAW-7M (Low Sec Warning!)", "") == ["YAW-7M"]
+    cands = parse.system_candidates("", "A site in Amarr space, located in Hjoramold.")
+    assert cands[0] == "Hjoramold" and "Amarr" not in cands
+    # A misspelt link label still yields the real system from the dotlan URL.
+    link = "[https://evemaps.dotlan.net/map/Derelik/Kenobanala Kenobalana]"
+    assert parse.system_candidates("Kenobalana", link)[:2] == ["Kenobalana", "Kenobanala"]
+
+
+@pytest.mark.parametrize(
+    ("text", "infobox", "hint"),
+    [
+        ("", {"signature strength": "Beacon"}, "beacon"),
+        ("", {"signature strength": "Signature"}, "signature"),
+        ("", {"signature strength": "5% in High Sec"}, "signature"),
+        ("The Cosmic Signature of the same name is located in PPG-XC.", {}, "signature"),
+        ("It has no beacon and needs to be scanned with probes.", {}, "signature"),
+        ("Kazka Bandit Post is a Caldari COSMOS signature (TQH-960) in Otomainen.", {}, "signature"),
+        ("It is marked with a warpable beacon that is visible in the overview.", {}, "beacon"),
+        ("The site shows up on overview as a beacon.", {}, "beacon"),
+        ("It shows up as an Anomaly using the probe scanner. There is no requirement to probe it down.", {}, "anomaly"),
+        ("Restricted Caldari Navy Base is a Guristas COSMOS combat anomaly.", {}, "anomaly"),
+        ("Rush in and shoot everything.", {"signature strength": "Unknown"}, None),
+    ],
+)
+def test_scan_hint(text, infobox, hint):
+    assert parse.scan_hint(text, infobox) == hint
+
+
+def test_parse_page_resolves_cosmos_system_and_hint(tmp_path):
+    path = tmp_path / "Courier_Gone_Missing_2_of_2.wiki"
+    path.write_text("<!-- TITLE: Courier Gone Missing (2 of 2) -->\n" + COURIER, encoding="utf-8")
+    systems = {"PPG-XC": {"security": -0.0436, "region": "Cloud Ring"}}
+    page = parse.parse_page(path, {}, {}, {}, systems)
+    assert page.title == "Courier Gone Missing (2 of 2)"
+    assert page.categories == ["COSMOS missions", "COSMOS sites"]
+    assert page.infobox_kind == "Missiondetails" and page.infobox["faction"] == "Serpentis"
+    assert page.system == {"name": "PPG-XC", "security": -0.0436, "region": "Cloud Ring"}
+    assert page.scan_hint == "signature"
+    assert page.description == "The Cosmic Signature of the same name is located in PPG-XC."
+    assert [r.name for r in page.npc_rows] == ["Core Lord Admiral", "Serpentis Stasis Tower"]
+
+
+def test_parse_page_leaves_non_cosmos_pages_alone(tmp_path):
+    path = tmp_path / "Angel_Vigil.wiki"
+    path.write_text("<!-- TITLE: Angel Vigil -->\nA site in Hjoramold.\n[[Category:Unrated Complexes]]\n")
+    page = parse.parse_page(path, {}, {}, {}, {"Hjoramold": {"security": 0.5, "region": "Metropolis"}})
+    assert page.system_candidates == [] and page.system is None and page.scan_hint is None

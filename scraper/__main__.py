@@ -1,6 +1,6 @@
 """Command-line front end for the data pipeline.
 
-    uv run python -m scraper fetch            # wiki -> data/raw (git-ignored) + data/wiki_state.json
+    uv run python -m scraper fetch            # wiki -> data/raw (git-ignored), data/wiki_state.json, data/systems.json
     uv run python -m scraper parse            # data/raw -> data/parsed_sites.json
     uv run python -m scraper build [--out P]  # data/parsed_sites.json -> src/expo_catalog/data/catalog.sqlite
     uv run python -m scraper check [--json P] # compare the live wiki with data/wiki_state.json
@@ -19,9 +19,11 @@ OUT_HELP = "output SQLite path (default src/expo_catalog/data/catalog.sqlite, th
 
 
 def cmd_fetch(_args: argparse.Namespace) -> int:
+    from scraper import systems
     from scraper.wiki import fetch_all
 
     fetch_all()
+    systems.refresh()  # resolve systems newly named on COSMOS pages (ESI) into data/systems.json
     return 0
 
 
