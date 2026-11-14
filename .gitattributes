@@ -1,0 +1,12 @@
+# Normalise line endings to LF in the repository and working tree.
+* text=auto eol=lf
+
+# Binary data: no diffs, no line-ending conversion.
+*.sqlite binary
+
+# Generated files: collapsed in GitHub diffs and left out of language stats.
+uv.lock                                linguist-generated=true
+data/parsed_sites.json                 linguist-generated=true
+data/wiki_state.json                   linguist-generated=true
+data/systems.json                      linguist-generated=true
+src/expo_catalog/data/catalog.sqlite   linguist-generated=true
