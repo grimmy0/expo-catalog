@@ -1,0 +1,59 @@
+name: Bug report
+description: Something in the TUI or the scraper does not work as documented.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. For wrong site data (danger, enemies, min ship, …) use the
+        **Data correction** form instead, and report security problems privately as described in
+        [SECURITY.md](https://github.com/grimmy0/expo-catalog/blob/main/SECURITY.md).
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `expo-catalog --version`, or the commit you run from.
+      placeholder: expo-catalog 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: OS and terminal
+      description: Operating system, terminal emulator and, if relevant, Python and uv versions.
+      placeholder: Fedora 45, kitty 0.40, uv 0.13.5
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The command you ran and the keys or filter you typed.
+      placeholder: |
+        1. Run `expo-catalog`
+        2. Type `space:c3 type:relic`
+        3. Press Enter
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: What happened instead. Paste any traceback or error output here.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Screenshots, workarounds, or anything else that helps.
+    validations:
+      required: false

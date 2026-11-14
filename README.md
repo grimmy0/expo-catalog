@@ -1,5 +1,12 @@
 # expo-catalog
 
+Every EVE Online exploration site in one searchable terminal table.
+
+[![CI](https://github.com/grimmy0/expo-catalog/actions/workflows/ci.yml/badge.svg)](https://github.com/grimmy0/expo-catalog/actions/workflows/ci.yml)
+[![Code license: MIT](https://img.shields.io/badge/code%20license-MIT-blue.svg)](LICENSE)
+[![Data license: CC BY-SA 4.0](https://img.shields.io/badge/data%20license-CC%20BY--SA%204.0-lightgrey.svg)](LICENSE-DATA)
+[![Python 3.15](https://img.shields.io/badge/python-3.15-blue.svg)](https://www.python.org/downloads/)
+
 A terminal UI catalog of every EVE Online cosmic signature and anomaly, with
 fzf-style filtering. It covers known space, wormhole space (C1–C6, Thera,
 shattered and Drifter systems) and Pochven: DED-rated and unrated combat
@@ -9,6 +16,8 @@ sites, incursions, COSMOS complexes, wormhole connections and recurring event
 sites. Each entry
 shows how dangerous the site is, what you will be shooting (or dodging) and the
 smallest ship that can reasonably run it.
+
+![expo-catalog filtered with "type:ded serp", showing Serpentis DED sites with danger bars and the detail panel for Serpentis Phi-Outpost](docs/screenshot.svg)
 
 ## Requirements
 
@@ -21,7 +30,7 @@ The catalog database is bundled with the package, so an installed copy works
 without the checkout:
 
 ```sh
-uv tool install git+ssh://git@github.com/grimmy0/expo-catalog.git   # from GitHub
+uv tool install git+https://github.com/grimmy0/expo-catalog   # from GitHub
 uv tool install -e .      # from a checkout; editable, so `git pull` and --refresh update the data in place
 expo-catalog              # now on PATH (~/.local/bin)
 uv tool upgrade expo-catalog   # pick up a refreshed catalog
@@ -177,8 +186,8 @@ the repository settings.
 
 Sources:
 
-- [EVE University wiki](https://wiki.eveuniversity.org) (CC-BY-SA) for site
-  pages, NPC tables and escalations.
+- [EVE University wiki](https://wiki.eveuniversity.org) (CC BY-SA 4.0, see
+  [License](#license)) for site pages, NPC tables and escalations.
 - EVE Ref reference data (derived from the SDE) for wormhole types.
 - [ESI](https://esi.evetech.net) for the security status and region of COSMOS
   systems (`data/systems.json`).
@@ -200,11 +209,15 @@ for both the builder and the TUI.
 ## Tests
 
 ```sh
+uv sync                                       # installs the dev tools (pytest, ruff)
 uv run pytest -q
+uv run ruff check src scraper tests           # lint
+uv run ruff format --check src scraper tests  # formatting
 ```
 
 Tests run offline; the TUI tests drive the app headless with Textual's
-`App.run_test()`.
+`App.run_test()`. CI runs the same commands on every push and pull request,
+plus a [zizmor](https://docs.zizmor.sh) audit of the workflows.
 
 ## Layout
 
@@ -238,6 +251,59 @@ expo-catalog/
 │   ├── wiki_state.json  # revision snapshot used by `scraper check`
 │   ├── wormholes.json
 │   └── raw/          # git-ignored wiki cache
-├── .github/workflows/   # ci.yml, wiki-refresh.yml (weekly refresh PR)
-└── tests/
+├── docs/
+│   └── screenshot.svg
+├── tests/
+├── .github/
+│   ├── workflows/       # ci.yml, wiki-refresh.yml (weekly refresh PR)
+│   ├── ISSUE_TEMPLATE/  # bug report, data correction, feature request forms
+│   ├── dependabot.yml   # weekly GitHub Actions + uv updates
+│   ├── pull_request_template.md
+│   └── CODEOWNERS
+├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── LICENSE           # MIT (code)
+└── LICENSE-DATA      # CC BY-SA 4.0 (wiki-derived data)
 ```
+
+## Contributing
+
+Bug reports, data corrections and pull requests are welcome; see
+[CONTRIBUTING.md](CONTRIBUTING.md). Wrong site data is easiest to fix through
+the [data correction](https://github.com/grimmy0/expo-catalog/issues/new?template=data_correction.yml)
+form. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md), and report
+security problems privately as described in [SECURITY.md](SECURITY.md).
+Changes are listed in [CHANGELOG.md](CHANGELOG.md).
+
+## License
+
+The code is licensed under the [MIT License](LICENSE).
+
+The site data is derived from the EVE University wiki and is licensed under
+[CC BY-SA 4.0](LICENSE-DATA). This covers `data/parsed_sites.json`,
+`data/event_sites.json`, `data/npcwh_codes.json`, `data/Template_Whisk.wiki`,
+`data/wiki_state.json` and the bundled `src/expo_catalog/data/catalog.sqlite`.
+Attribution:
+
+> Site descriptions, NPC tables, escalations and loot values from the
+> [EVE University wiki](https://wiki.eveuniversity.org) by the EVE University
+> wiki contributors, licensed under
+> [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The data was
+> extracted, parsed and reorganised for this catalog, and combined with
+> hand-curated corrections. Each site's record links its source page.
+
+If you redistribute the data or something built from it, keep this attribution
+and share it under the same license.
+
+`data/wormholes.json` and `data/systems.json` hold CCP game data: wormhole
+types from the Static Data Export via EVE Ref, and system security and region
+from [ESI](https://esi.evetech.net).
+
+## Disclaimer
+
+EVE Online and all related names, logos and images are trademarks or
+registered trademarks of CCP hf. All rights reserved. expo-catalog is an
+unofficial fan project and is not affiliated with or endorsed by CCP hf. or
+EVE University.

@@ -1,0 +1,65 @@
+name: Data correction
+description: A site is missing, or one of its fields is wrong or out of date.
+title: "[Data]: "
+labels: ["data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Most of the catalog is built from the [EVE University wiki](https://wiki.eveuniversity.org).
+        If the wiki itself is wrong, please fix it there as well; the weekly refresh then picks the
+        change up. Use this form for anything the catalog gets wrong, including sites that are missing.
+  - type: input
+    id: site
+    attributes:
+      label: Site name
+      description: The exact in-game name, as shown in the Name column (or as it appears in game if it is missing).
+      placeholder: Forgotten Perimeter Coronation Platform
+    validations:
+      required: true
+  - type: dropdown
+    id: fields
+    attributes:
+      label: Field(s) that are wrong
+      multiple: true
+      options:
+        - Name
+        - Type
+        - Space
+        - Danger
+        - Enemies
+        - Min ship
+        - Status
+        - Site is missing
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current value
+      description: What the catalog shows now (leave empty for a missing site).
+    validations:
+      required: false
+  - type: textarea
+    id: correct
+    attributes:
+      label: Correct value
+      description: What it should be, and why.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link backing the correction (wiki page, patch notes, dev blog, video, killmail, …).
+      placeholder: https://wiki.eveuniversity.org/...
+    validations:
+      required: true
+  - type: checkboxes
+    id: wiki
+    attributes:
+      label: Wiki
+      options:
+        - label: I have fixed (or will fix) the EVE University wiki page too, where it applies.
+          required: false
