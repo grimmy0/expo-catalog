@@ -40,7 +40,9 @@ First release.
   3.0), security policy, issue forms (bug report, data correction, feature
   request), pull request template and CODEOWNERS.
 - Dependabot version updates for GitHub Actions and uv dependencies.
-- README screenshot, badges, and Contributing / License / Disclaimer sections.
+- README quick start for players new to Python, screenshots rendered from the
+  real app, worked filter examples, a troubleshooting section, badges, and
+  Contributing / License / Disclaimer sections.
 
 ### Security
 

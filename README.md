@@ -19,15 +19,67 @@ smallest ship that can reasonably run it.
 
 ![expo-catalog filtered with "type:ded serp", showing Serpentis DED sites with danger bars and the detail panel for Serpentis Phi-Outpost](docs/screenshot.svg)
 
+## Quick start
+
+New to Python tools? You only need [uv](https://docs.astral.sh/uv/) and Git;
+uv takes care of Python and the other dependencies.
+
+1. Install uv, using the commands from the
+   [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/):
+
+   ```sh
+   # macOS and Linux
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+
+   ```powershell
+   # Windows (PowerShell)
+   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+   ```
+
+   Package managers work too: `brew install uv` (Homebrew),
+   `winget install --id=astral-sh.uv -e` (WinGet) or `scoop install main/uv`
+   (Scoop). Open a new terminal afterwards so the `uv` command is found.
+
+2. Install [Git](https://git-scm.com/downloads) if you do not have it; uv uses
+   it to install from GitHub.
+
+3. Install expo-catalog:
+
+   ```sh
+   uv tool install git+https://github.com/grimmy0/expo-catalog
+   ```
+
+   You do not need to install Python 3.15 yourself: by default uv downloads a
+   Python version when it cannot find a suitable one on your system. Each uv
+   release knows a fixed list of downloadable Python versions, so if uv says it
+   cannot find Python 3.15, update uv (`uv self update` if you used the
+   installer script, otherwise your package manager's upgrade command) and try
+   again.
+
+4. Run it:
+
+   ```sh
+   expo-catalog
+   ```
+
+   Start typing to filter the table. `F1` shows the help; `Esc` on an empty
+   filter or `ctrl+q` quits. If the command is not found, see
+   [Troubleshooting](#troubleshooting).
+
+Update to the latest catalog with `uv tool upgrade expo-catalog`; remove it
+with `uv tool uninstall expo-catalog`.
+
 ## Requirements
 
-- Python 3.15
+- Python 3.15 (uv downloads it if needed, see [Quick start](#quick-start))
 - [uv](https://docs.astral.sh/uv/)
+- Git, to install from GitHub
 
 ## Install
 
-The catalog database is bundled with the package, so an installed copy works
-without the checkout:
+The [Quick start](#quick-start) covers the usual install. The catalog database
+is bundled with the package, so an installed copy works without the checkout:
 
 ```sh
 uv tool install git+https://github.com/grimmy0/expo-catalog   # from GitHub
@@ -55,6 +107,13 @@ Sites whose status is `removed` or `unverified` are hidden by default; the
 status line counts them and `ctrl+r` toggles them. `--all` starts with them
 listed, and a `status:` filter term (see below) always shows what it names.
 
+<details>
+<summary>Screenshot: removed sites listed with <code>status:removed</code></summary>
+
+![expo-catalog filtered with "status:removed": removed anomalies, event sites, ore deposits and Drifter sites are listed, and the detail panel for Advanced Drone Outgrowth Colony shows Status: removed](docs/screenshot-removed.svg)
+
+</details>
+
 The database ships inside the package as `src/expo_catalog/data/catalog.sqlite`
 (`expo_catalog/data/catalog.sqlite` once installed). If the database is missing
 the command prints a hint and exits with status 1. `--refresh` runs
@@ -75,6 +134,13 @@ it needs a source checkout: an editable install (`uv tool install -e .`) or
 | `ctrl+r` | show / hide removed and unverified sites |
 | `ctrl+q` | quit |
 | `F1` / `?` | help |
+
+<details>
+<summary>Screenshot: the <code>F1</code> help</summary>
+
+![The F1 help notification listing the filter syntax, field terms and keys, shown over a "space:c5 danger:>=4" search whose status line reads "33 / 1238 sites · 2 hidden (ctrl+r)"](docs/screenshot-help.svg)
+
+</details>
 
 ### Filter syntax
 
@@ -106,6 +172,33 @@ negates; `foo:bar` with an unknown field name is an ordinary fuzzy term.
 | `ewar:web` | substring of the EWAR note |
 | `status:removed` | substring of the status; also lifts the default hiding of removed / unverified sites |
 
+### Examples
+
+| Question | Filter |
+| --- | --- |
+| Find a site from a few letters of its name (best match first) | `phi outp` |
+| What can I run in a frigate in a C3? | `space:c3 ship:frig` |
+| Low-danger data sites in lowsec | `space:low type:data danger:<=2` |
+| Highsec DED complexes rated Low danger or safer | `space:high type:ded danger:<=2` |
+| Every Guristas DED complex, 1/10 to 10/10 | `type:ded faction:guristas` |
+| Which gas sites spawn in a C5, and what guards them? | `type:gas space:c5` |
+| Everything rated High or Deadly in a C5 | `space:c5 danger:>=4` |
+| Relic sites outside nullsec | `type:relic !space:null` |
+| Ore anomalies in Pochven | `space:pochven type:ore` |
+| Ghost sites | `type:ghost` |
+| Sites that no longer spawn, kept for reference | `status:removed` |
+
+Sites whose Space is a plain `Wormhole` (the generic data and relic sites)
+match every wormhole class, so they show up in `space:c3` searches next to the
+C3-only sites.
+
+<details>
+<summary>Screenshot: <code>space:c3 type:relic</code></summary>
+
+![expo-catalog filtered with "space:c3 type:relic": the two C3-only Forgotten Frontier relic sites rated High sort above the generic Ruined relic sites rated Safe, with the detail panel for Forgotten Frontier Quarantine Outpost showing its Sleeper waves and EWAR](docs/screenshot-wormhole.svg)
+
+</details>
+
 ### Columns
 
 - **Name**: exact in-game site name.
@@ -127,6 +220,65 @@ negates; `foo:bar` with an unknown field name is an ordinary fuzzy term.
 The detail panel (below the table) shows the full record: type, scan group,
 whether it must be probed down, space, faction, rating, ship limit, EWAR,
 status, escalation, loot note, description, source URL and the enemy waves.
+
+## Troubleshooting
+
+**`expo-catalog: command not found`** (or "not recognized" on Windows)
+
+uv installs tool commands into its executable directory, usually
+`~/.local/bin` on macOS and Linux and `%USERPROFILE%\.local\bin` on Windows;
+`uv tool dir --bin` prints the one it uses. If that directory is not on your
+`PATH`, run `uv tool update-shell` once and open a new terminal.
+
+**`Git executable not found` while installing**
+
+uv needs Git to install from a `git+https://` URL. Install
+[Git](https://git-scm.com/downloads), check that `git --version` works in a new
+terminal, then run the install command again.
+
+**Colours look wrong, or the danger bars and borders are broken**
+
+expo-catalog is built on [Textual](https://textual.textualize.io), which uses
+true colour (16.7 million colours) where the terminal supports it.
+
+- macOS: the built-in Terminal.app is limited to 256 colours and can draw box
+  characters misaligned. Textual recommends iTerm2, Ghostty, Kitty or WezTerm
+  instead. If you stay with Terminal.app, the
+  [Textual FAQ](https://textual.textualize.io/FAQ/) suggests the Menlo Regular
+  font with character spacing 1 and line spacing 0.805.
+- The danger bar is drawn with the `▮` and `▯` characters. If they show up as
+  empty boxes or question marks, your terminal font lacks them; switch to a
+  font that has them.
+
+**Windows**
+
+Textual runs on Windows and recommends the new Windows Terminal. expo-catalog
+has no platform-specific code, but CI only tests on Linux, so Windows and macOS
+are not tested automatically. Please report anything that breaks.
+
+**`Database not found at … — run: uv run python -m scraper.build`** (exit status 1)
+
+The catalog file is missing. If you passed `--db PATH` or set
+`EXPO_CATALOG_DB`, check the path in the message. For an installed copy,
+reinstall it with `uv tool install --reinstall git+https://github.com/grimmy0/expo-catalog`;
+in a checkout, the command in the message rebuilds the database from
+`data/parsed_sites.json`.
+
+**`Cannot refresh: … is not a source checkout`** (exit status 2)
+
+`--refresh` rebuilds the bundled database in place, so it only works from a
+checkout: `uv run expo-catalog --refresh`, or an editable install
+(`uv tool install -e .`). An installed copy picks up new data with
+`uv tool upgrade expo-catalog`.
+
+**Still stuck?**
+
+Open a
+[bug report](https://github.com/grimmy0/expo-catalog/issues/new?template=bug_report.yml)
+with the output of `expo-catalog --version`, your OS and your terminal. For
+wrong or missing site data, use the
+[data correction](https://github.com/grimmy0/expo-catalog/issues/new?template=data_correction.yml)
+form.
 
 ## Data pipeline
 
@@ -251,8 +403,11 @@ expo-catalog/
 │   ├── wiki_state.json  # revision snapshot used by `scraper check`
 │   ├── wormholes.json
 │   └── raw/          # git-ignored wiki cache
-├── docs/
-│   └── screenshot.svg
+├── docs/                # README screenshots, rendered from the real app
+│   ├── screenshot.svg
+│   ├── screenshot-help.svg
+│   ├── screenshot-removed.svg
+│   └── screenshot-wormhole.svg
 ├── tests/
 ├── .github/
 │   ├── workflows/       # ci.yml, wiki-refresh.yml (weekly refresh PR)
