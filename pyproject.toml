@@ -2,14 +2,46 @@
 name = "expo-catalog"
 version = "0.1.0"
 description = "TUI catalog of every EVE Online cosmic signature and anomaly with fzf-style filtering"
+readme = "README.md"
 authors = [
     { name = "grimmy0", email = "6683944+grimmy0@users.noreply.github.com" }
+]
+# Code is MIT; the bundled catalog (src/expo_catalog/data/catalog.sqlite) is derived from the
+# EVE University wiki and is CC BY-SA 4.0.
+license = "MIT AND CC-BY-SA-4.0"
+license-files = ["LICENSE", "LICENSE-DATA"]
+keywords = [
+    "eve-online",
+    "eve",
+    "cosmic-signatures",
+    "anomalies",
+    "exploration",
+    "wormholes",
+    "tui",
+    "textual",
+    "fzf",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.15",
+    "Topic :: Games/Entertainment",
 ]
 requires-python = ">=3.15"
 dependencies = [
     "httpx>=0.28.1",
     "textual>=8.2.8",
 ]
+
+[project.urls]
+Homepage = "https://github.com/grimmy0/expo-catalog"
+Source = "https://github.com/grimmy0/expo-catalog"
+Issues = "https://github.com/grimmy0/expo-catalog/issues"
+Changelog = "https://github.com/grimmy0/expo-catalog/blob/main/CHANGELOG.md"
 
 [project.scripts]
 expo-catalog = "expo_catalog:main"
@@ -21,6 +53,7 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "pytest>=9.2.0",
+    "ruff>=0.17.5",
 ]
 
 [tool.ruff]
