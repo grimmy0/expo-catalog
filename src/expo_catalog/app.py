@@ -60,7 +60,8 @@ HELP_TEXT = (
     "faction:angel name:den ewar:web status:removed · !space:null negates\n"
     "↑/↓ or ctrl+k/ctrl+j move · PgUp/PgDn page · Enter toggles details\n"
     "ctrl+r shows/hides removed + unverified sites (hidden by default)\n"
-    "Esc clears the filter (or quits when empty) · ctrl+q quits · F1 / ? help"
+    "Esc clears the filter (or quits when empty) · ctrl+q quits · F1 / ? help\n"
+    "Data: EVE University wiki (CC BY-SA 4.0) · unofficial, not affiliated with CCP"
 )
 
 # danger 1..5 → green → red

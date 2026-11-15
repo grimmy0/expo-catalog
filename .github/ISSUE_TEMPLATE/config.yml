@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/grimmy0/expo-catalog/security/advisories/new
+    about: Please report security problems privately, not as a public issue.
+  - name: Wrong content on the EVE University wiki
+    url: https://wiki.eveuniversity.org
+    about: The catalog is built from the wiki; fix wiki errors at the source so everyone benefits.

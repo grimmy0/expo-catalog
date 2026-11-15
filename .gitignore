@@ -8,6 +8,24 @@ build/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local environment and secrets
+.env
+.env.*
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Wiki-refresh workflow scratch outputs
+check.json
+check.txt
+pr-body.md
 
 # Scratch / downloaded raw data
 .cache/
