@@ -7177,7 +7177,7 @@
     "raw_class": "Battleship",
     "count_min": 1,
     "count_max": 1,
-    "name": "Gist Cherubim",
+    "name": "Gist Sentry Operator",
     "tier": null,
     "hostile": true,
     "ewar": [],
@@ -7867,7 +7867,7 @@
     "section": "5th Pocket"
    }
   ],
-  "description": "The Angel Military Operations Complex is a DED rated cosmic signature that can be scanned using Core Probes in Angel infested regions of Null Sec space. It may also be received as an escalation from an Angel Port anomaly.",
+  "description": "The Angel Military Operations Complex is a DED rated cosmic signature that can be scanned using Core Probes in Angel infested regions of Null Sec space. It may also be received as an escalation from an Angel Port, Angel Forsaken Den, or Angel Forlorn Den anomaly. A high DPS ship is recommended to run this site so that it's in a reasonable time.",
   "escalations": [],
   "blue_loot_isk": null,
   "merge_target": null,
@@ -11441,7 +11441,7 @@
     "section": "Room 3"
    }
   ],
-  "description": "Angel's Red Light District is a DED Complex (rated 5/10), occupied by the Angel Cartel pirate faction. It can be found via exploration by probing in Highsec and Lowsec systems, or as an escalation from Angel Refuge or Angel Den.",
+  "description": "Angel's Red Light District is a DED Complex (rated 5/10), occupied by the Angel Cartel pirate faction. It can be found via exploration by probing in Highsec and Lowsec systems, or as an escalation from Angel Refuge or Angel Den. It's the only DED 5/10 that also comes from a Refuge. Dens and Refuges are extra easy to run quickly and it's therefore easy to farm this escalation.",
   "escalations": [],
   "blue_loot_isk": null,
   "merge_target": null,
@@ -65363,7 +65363,7 @@
     "section": "Second room"
    }
   ],
-  "description": "Independence is an Unrated Complex found in nullsec via exploration.",
+  "description": "Independence is an Unrated Complex found in nullsec via exploration. The site can be blitzed because the gates aren't locked and in the final room, you only have to destroy 4 battleships.",
   "escalations": [
    "The Drone Roulette"
   ],
@@ -80835,7 +80835,7 @@
     "section": "Second Pocket"
    }
   ],
-  "description": "Radiance is an Unrated Complex found in nullsec via exploration.",
+  "description": "Radiance is an Unrated Complex found in nullsec via exploration. It can be blitzed as the gates aren't locked and you can trigger the boss without clearing a significant part of the site. The triggers consist of a mixture of proximity triggers and just normal NPC destruction.",
   "escalations": [
    "Molting Season"
   ],
